@@ -390,7 +390,6 @@ public class Customer extends javax.swing.JFrame {
         CustomerTable.setRowHeight(40);
         CustomerTable.setSelectionBackground(new java.awt.Color(219, 229, 238));
         CustomerTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        CustomerTable.getTableHeader().setReorderingAllowed(false);
         CustomerTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CustomerTableMouseClicked(evt);
