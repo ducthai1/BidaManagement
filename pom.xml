@@ -18,11 +18,7 @@
             <artifactId>AbsoluteLayout</artifactId>
             <version>SNAPSHOT</version>
         </dependency>-->
-        <dependency>
-        <groupId>net.proteanit.sql</groupId>
-        <artifactId>rs2xml</artifactId>
-        <version>1.0.0</version> <!-- Thay phiên bản theo phiên bản cụ thể bạn đang sử dụng -->
-    </dependency>
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -35,4 +31,23 @@
         <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.mycompany.bidamanagement.BidaManagement</exec.mainClass>
     </properties>
+    <build>
+  <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.1.0</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <addClasspath>true</addClasspath>
+            <classpathPrefix>lib/</classpathPrefix>
+            <mainClass>com.mycompany.bidamanagement.Splash</mainClass>
+          </manifest>
+        </archive>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
 </project>

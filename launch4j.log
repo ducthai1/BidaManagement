@@ -1,0 +1,264 @@
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0
+
+
+Version:	3.50
+CmdLine:	D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	D:\Workspace\Work_desktop\desktop\BidaManagement\.
+Requires JDK:	Yes
+Requires 64-Bit: Yes
+Java min ver:	1.000.004
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Git\Git\cmd;D:\nodejs\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts;C:\Program Files\Redis\;C:\Program Files\MongoDB\Tools\100\bin;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\;C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps;D:\vscode\Microsoft VS Code\bin;C:\Users\HuyTA\AppData\Roaming\npm;C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin;C:\Program Files\Java\jdk-21\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	D:\Git\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	D:\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Redis\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\MongoDB\Tools\100\bin\javaw.exe (not found)
+Check launcher:	C:\xampp\php\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\ComposerSetup\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python39\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python310\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Programs\Python\Python311\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	D:\vscode\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Users\HuyTA\AppData\Roaming\Composer\vendor\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe (OK)
+Check javac:	C:\Program Files\Java\jdk-21\bin\javac.exe (OK)
+Version string: 1.021.000_001 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-21\bin\javaw.exe
+Launcher args:	-jar "D:\Workspace\Work_desktop\desktop\BidaManagement\bidaManagement.exe"
+Args length:	74/32768 chars
+Exit code:	0

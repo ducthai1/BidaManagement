@@ -492,7 +492,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="LogoutBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="477" max="32767" attributes="0"/>
                       <Component id="CusBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="CatBtn" min="-2" max="-2" attributes="0"/>
@@ -536,7 +536,7 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/cus25x25.png"/>
+                      <Image iconType="2" name="D:\Workspace\Work_desktop\BidaManagement\BidaManagement\src\main\java\com\mycompany\bidamanagement\Icon\cus25x25.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -586,7 +586,7 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/cate25x25.png"/>
+                      <Image iconType="2" name="D:\Workspace\Work_desktop\BidaManagement\BidaManagement\src\main\java\com\mycompany\bidamanagement\Icon\cate25x25.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -636,7 +636,7 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/pro25x25.jpeg"/>
+                      <Image iconType="2" name="D:\Workspace\Work_desktop\BidaManagement\BidaManagement\src\main\java\com\mycompany\bidamanagement\Icon\pro25x25.jpeg"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -681,7 +681,7 @@
                   <Properties>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/logout25x25.png"/>
+                      <Image iconType="2" name="D:\Workspace\Work_desktop\BidaManagement\BidaManagement\src\main\java\com\mycompany\bidamanagement\Icon\logout25x25.png"/>
                     </Property>
                   </Properties>
                 </Component>
