@@ -80,6 +80,15 @@ public class Customer extends javax.swing.JFrame {
         return Double.parseDouble(formattedNumber);
     }
     
+    private double parseDouble(String value) throws NumberFormatException {
+        try {
+            return Double.parseDouble(value);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Chuỗi không hợp lệ:" + value);
+            throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
+        }
+    }
+    
     public String doubleFormattedView(double number){
         DecimalFormat df = new DecimalFormat("#,##0.00");
         return df.format(number);
@@ -663,10 +672,14 @@ public class Customer extends javax.swing.JFrame {
         }
         else {
             try {
-                double TONGCHIVALUE = Double.parseDouble(TONGCHI.getText());
+                double TONGCHIVALUE = parseDouble(TONGCHI.getText());
                 if (TONGCHIVALUE < 0) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập tổng chi là một số dương lớn hơn hoặc bằng 0!");
-                } else {
+                } 
+                else if (SDT.getText().length() > 10 || SDT.getText().length() < 8) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại không nhỏ hơn 8 ký tự và không vượt quá 10 ký tự!");
+                }
+                else {
                     try {
                         PreparedStatement add = conn.prepareStatement("insert into customer values (?, ?, ?, ?, ?, ?)");
                         add.setInt(1, Integer.parseInt(MAKH.getText()));
@@ -674,7 +687,7 @@ public class Customer extends javax.swing.JFrame {
                         add.setString(3, GIOITINH.getSelectedItem().toString());
                         add.setString (4, SDT.getText());
                         add.setObject(5, MAGIOITHIEU);
-                        double roundedTongChi = roundDecimal(Double.parseDouble(TONGCHI.getText()), 2);
+                        double roundedTongChi = roundDecimal(parseDouble(TONGCHI.getText()), 2);
                         add.setDouble(6, roundedTongChi);
                         int row = add.executeUpdate();
                         if (row > 0) {
@@ -746,16 +759,20 @@ public class Customer extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnMouseClicked
 
     private void EditBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtnMouseClicked
-        double roundedTongChi = roundDecimal(Double.parseDouble(TONGCHI.getText()), 2);
+        double roundedTongChi = roundDecimal(parseDouble(TONGCHI.getText()), 2);
         if(MAKH.getText().isEmpty() || TENKH.getText().isEmpty() || SDT.getText().isEmpty() || TONGCHI.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Chọn khách hàng cần cập nhật thông tin");
         }
         else {
             try {
-                double TONGCHIVALUE = Double.parseDouble(TONGCHI.getText());
+                double TONGCHIVALUE = parseDouble(TONGCHI.getText());
                 if (TONGCHIVALUE < 0) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập tổng chi là một số dương lớn hơn hoặc bằng 0!");
-                } else {
+                } 
+                else if (SDT.getText().length() > 10 || SDT.getText().length() < 8) {
+                    JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại không nhỏ hơn 8 ký tự và không vượt quá 10 ký tự!");
+                }
+                else {
                     try{
                         conn = ConnectXamppMySQL.conn();
                         String Query = "UPDATE customer SET TENKH='"+TENKH.getText()+"'"+", SDT='"+SDT.getText()+"'"+", GIOITINH='"+GIOITINH.getSelectedItem().toString()+"'"+", MAGT='"+MAGT.getText()+"'"+", TONGCHI='"+roundedTongChi+"'"+" WHERE MAKH="+MAKH.getText();
@@ -766,8 +783,8 @@ public class Customer extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Cập nhật thông tin khách hàng thành công!");
                     }
                     catch(Exception e){
-                       e.printStackTrace();
                        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+                       e.printStackTrace();
                     } 
                 }
             } 
