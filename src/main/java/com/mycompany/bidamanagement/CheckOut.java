@@ -597,6 +597,9 @@ public class CheckOut extends javax.swing.JFrame {
         if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để thêm vào bill!");
         }
+        else if (parseInteger(PRODQTY.getText()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng sản phẩm muốn bán là số lớn hơn 0!");
+        }
         else if (AvailQty < parseInteger(PRODQTY.getText())){
             JOptionPane.showMessageDialog(this, "Trong kho không có đủ số lượng sản phẩm!");
         }
@@ -694,7 +697,7 @@ public class CheckOut extends javax.swing.JFrame {
                     rs.getString("PRODID"),
                     rs.getString("PRODNAME"),
                     rs.getInt("PRODQTY"),
-                    rs.getInt("PRODPRICE"),
+                    doubleFormattedView(rs.getDouble("PRODPRICE")),
                     rs.getString("PRODCAT")
                 };
                 model.addRow(row);
