@@ -6,10 +6,14 @@ package com.mycompany.bidamanagement;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -20,6 +24,8 @@ public class CheckOut extends javax.swing.JFrame {
     Connection conn;
     static Statement st = null;
     static ResultSet rs = null;
+    ArrayList<BillItem> billItems = new ArrayList<>();
+    BillItem billItem = new BillItem();
     
     public CheckOut() {
         initComponents();
@@ -79,7 +85,7 @@ public class CheckOut extends javax.swing.JFrame {
     
     public String doubleFormattedView(double number){
         DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number);
+        return df.format(number).replace(",", ".");
     }
     
     private double parseDouble(String value) throws NumberFormatException {
@@ -594,6 +600,7 @@ public class CheckOut extends javax.swing.JFrame {
     }//GEN-LAST:event_PRODQTYActionPerformed
     int i = 0;
     private void AddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBtnMouseClicked
+        Date currentDate = new Date();
         if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để thêm vào bill!");
         }
@@ -619,6 +626,14 @@ public class CheckOut extends javax.swing.JFrame {
                 }
                 TotalBillRender.setText("TỔNG CỘNG: "+doubleFormattedView(TotalBill));
                 AvailQty -= PRODUCTSELL;
+                // Tạo một đối tượng BillItem mới cho mỗi mục
+                BillItem newItem = new BillItem();
+                newItem.setProductName(PRODNAME.getText());
+                newItem.setQuantity(QTY);
+                newItem.setTotalPrice(Uprice);
+                newItem.setTotalBill(TotalPrice);
+                newItem.setOrderDate(currentDate);
+                billItems.add(newItem);
                 updateStock(PRODUCTSELL);
             }
         
@@ -630,7 +645,9 @@ public class CheckOut extends javax.swing.JFrame {
 
     private void printBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBtnMouseClicked
         try {
-            BillReview.print();
+//            BillReview.print();
+            PrintOrder printOrder = new PrintOrder();
+            printOrder.print(billItem, billItems);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -704,8 +721,7 @@ public class CheckOut extends javax.swing.JFrame {
             }
             PRODLIST.setModel(model);
         }
-        catch(Exception e){
-            e.printStackTrace();
+        catch(SQLException e){
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_filterBtnMouseClicked
@@ -756,6 +772,7 @@ public class CheckOut extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new CheckOut().setVisible(true);
             }
         });

@@ -115,6 +115,7 @@ public class Splash extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        System.setProperty("org.apache.logging.log4j.simplelog.StatusLogger.level", "TRACE");
         Splash Mysplash = new Splash();
         Mysplash.setVisible(true);
         try {

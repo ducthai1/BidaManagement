@@ -15,17 +15,19 @@ import javax.swing.JOptionPane;
  */
 public class ConnectXamppMySQL {
     public static Connection conn() {
+        Connection conn = null;  // Initialize the connection to null
         try {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        String url = "jdbc:mysql://localhost:3306/bidadatabase?zeroDateTimeBehavior=CONVERT_TO_NULL";
-        String username = "admin";
-        String password = "123456";
-        Connection conn = DriverManager.getConnection(url, username, password);
-        return conn;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/bidadatabase?zeroDateTimeBehavior=CONVERT_TO_NULL";
+            String username = "admin";
+            String password = "123456";
+            conn = DriverManager.getConnection(url, username, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            // Display a message to the user or log the exception
+            JOptionPane.showMessageDialog(null, "Error connecting to the database:\n" + e.getMessage());
+            e.printStackTrace();  // Log the exception (you may want to replace this with proper logging)
         }
-        catch (ClassNotFoundException|SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return null;
+
+        return conn;  // Return the connection (might be null if an error occurred)
     }
 }
