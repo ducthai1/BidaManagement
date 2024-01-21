@@ -31,7 +31,7 @@ public class PlayTable extends javax.swing.JFrame {
     }
 
     private void updateTimer() {
-        if (milliseconds > 56) {
+        if (milliseconds > 70) {
             milliseconds = 0;
             seconds++;
         }
