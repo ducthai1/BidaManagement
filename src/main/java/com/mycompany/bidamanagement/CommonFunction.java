@@ -19,7 +19,7 @@ public class CommonFunction {
 
     public static double parseDouble(String value) throws NumberFormatException {
         try {
-            return Double.parseDouble(value);
+            return Double.parseDouble(value.replace(",", "."));
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Chuỗi không hợp lệ:" + value);
             throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
