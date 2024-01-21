@@ -19,7 +19,7 @@ public class CommonFunction {
 
     public static double parseDouble(String value) throws NumberFormatException {
         try {
-            return Double.parseDouble(value.replace(",", "."));
+            return Double.parseDouble(value);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Chuỗi không hợp lệ:" + value);
             throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
@@ -27,8 +27,10 @@ public class CommonFunction {
     }
 
     public static String doubleFormattedView(double number) {
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number).replace(",", ".");
+         DecimalFormat df = new DecimalFormat("#,##0.00");
+            String formattedNumber = df.format(number);
+            // Loại bỏ dấu chấm và thay thế bằng không
+            return formattedNumber.replace(",", ".");
     }
     
     public static int parseInteger(String value) throws NumberFormatException {
