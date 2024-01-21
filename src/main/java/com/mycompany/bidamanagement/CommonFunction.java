@@ -29,7 +29,7 @@ public class CommonFunction {
     public static String doubleFormattedView(double number) {
          DecimalFormat df = new DecimalFormat("#,##0.00");
             String formattedNumber = df.format(number);
-            // Loại bỏ dấu chấm và thay thế bằng không
+            // Loại bỏ dấu phẩy và thay thế bằng chấm
             return formattedNumber.replace(",", ".");
     }
     

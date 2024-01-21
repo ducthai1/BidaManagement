@@ -31,7 +31,7 @@ public class PlayTable extends javax.swing.JFrame {
     }
 
     private void updateTimer() {
-        if (milliseconds > 740) {
+        if (milliseconds > 760) {
             milliseconds = 0;
             seconds++;
         }
@@ -240,6 +240,12 @@ public class PlayTable extends javax.swing.JFrame {
         LogoutBtn = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        PlayTableBtn = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        CheckOutBtn = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -2434,19 +2440,89 @@ public class PlayTable extends javax.swing.JFrame {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        PlayTableBtn.setBackground(new java.awt.Color(253, 169, 127));
+        PlayTableBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PlayTableBtnMouseClicked(evt);
+            }
+        });
+
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setIcon(new javax.swing.ImageIcon("/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/cus25x25.png")); // NOI18N
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel29.setText("BÀN CHƠI");
+
+        javax.swing.GroupLayout PlayTableBtnLayout = new javax.swing.GroupLayout(PlayTableBtn);
+        PlayTableBtn.setLayout(PlayTableBtnLayout);
+        PlayTableBtnLayout.setHorizontalGroup(
+            PlayTableBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PlayTableBtnLayout.createSequentialGroup()
+                .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+        );
+        PlayTableBtnLayout.setVerticalGroup(
+            PlayTableBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        CheckOutBtn.setBackground(new java.awt.Color(255, 255, 255));
+        CheckOutBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CheckOutBtnMouseClicked(evt);
+            }
+        });
+
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setIcon(new javax.swing.ImageIcon("/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/checkout25x25.png")); // NOI18N
+
+        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel31.setText("THANH TOÁN");
+
+        javax.swing.GroupLayout CheckOutBtnLayout = new javax.swing.GroupLayout(CheckOutBtn);
+        CheckOutBtn.setLayout(CheckOutBtnLayout);
+        CheckOutBtnLayout.setHorizontalGroup(
+            CheckOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CheckOutBtnLayout.createSequentialGroup()
+                .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+        );
+        CheckOutBtnLayout.setVerticalGroup(
+            CheckOutBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 85, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(PlayTableBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CheckOutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(310, 310, 310)
+                    .addComponent(PlayTableBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(CheckOutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(310, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -2713,6 +2789,16 @@ public class PlayTable extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
 
+    private void PlayTableBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayTableBtnMouseClicked
+        new PlayTable().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_PlayTableBtnMouseClicked
+
+    private void CheckOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckOutBtnMouseClicked
+        new CheckOut().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CheckOutBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2749,6 +2835,7 @@ public class PlayTable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel CheckOutBtn;
     private javax.swing.JLabel HourView;
     private javax.swing.JLabel HourView1;
     private javax.swing.JLabel HourView2;
@@ -2782,6 +2869,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel MinuteView5;
     private javax.swing.JLabel MinuteView6;
     private javax.swing.JLabel MinuteView7;
+    private javax.swing.JPanel PlayTableBtn;
     private javax.swing.JButton PrintBtn;
     private javax.swing.JButton PrintBtn1;
     private javax.swing.JButton PrintBtn2;
@@ -2852,7 +2940,11 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
