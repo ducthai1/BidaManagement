@@ -35,12 +35,12 @@ public class PlayTable extends javax.swing.JFrame {
             milliseconds = 0;
             seconds++;
         }
-        if (seconds > 60) {
+        if (seconds > 59) {
             milliseconds = 0;
             seconds = 0;
             minutes++;
         }
-        if (minutes > 60) {
+        if (minutes > 59) {
             milliseconds = 0;
             seconds = 0;
             minutes = 0;
