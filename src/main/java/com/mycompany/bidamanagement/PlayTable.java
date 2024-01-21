@@ -478,7 +478,7 @@ public class PlayTable extends javax.swing.JFrame {
 
         MillisecondView.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         MillisecondView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        MillisecondView.setText("000");
+        MillisecondView.setText("00");
         MillisecondView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
