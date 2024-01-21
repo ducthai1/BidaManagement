@@ -28,7 +28,7 @@ public class CommonFunction {
 
     public static String doubleFormattedView(double number) {
         DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number);
+        return df.format(number).replace(",", ".");
     }
     
     public static int parseInteger(String value) throws NumberFormatException {
