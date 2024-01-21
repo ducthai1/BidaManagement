@@ -466,6 +466,7 @@ public class PlayTable extends javax.swing.JFrame {
         HourView.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         HourView.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         HourView.setText("00 :");
+        HourView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         MinuteView.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         MinuteView.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
