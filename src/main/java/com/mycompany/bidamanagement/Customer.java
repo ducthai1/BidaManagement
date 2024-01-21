@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,7 +48,7 @@ public class Customer extends javax.swing.JFrame {
                     "0"+rs.getString("SDT"),
                     rs.getString("GIOITINH"),
                     rs.getObject("MAGT"),
-                    doubleFormattedView(rs.getDouble("TONGCHI"))
+                    CommonFunction.doubleFormattedView(rs.getDouble("TONGCHI"))
                 };
                 model.addRow(row);
             }
@@ -68,30 +67,6 @@ public class Customer extends javax.swing.JFrame {
         SDT.setText("");
         MAGT.setText("");
         TONGCHI.setText("0.00");
-    }
-    
-    public static double roundDecimal(double number, int decimalPlaces) {
-        // Định dạng cho số với số lẻ giới hạn
-        String pattern = "#." + new String(new char[decimalPlaces]).replace("\0", "#");
-        DecimalFormat decimalFormat = new DecimalFormat(pattern);
-
-        // Làm tròn và trả về giá trị
-        String formattedNumber = decimalFormat.format(number);
-        return Double.parseDouble(formattedNumber);
-    }
-    
-    private double parseDouble(String value) throws NumberFormatException {
-        try {
-            return Double.parseDouble(value);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Chuỗi không hợp lệ:" + value);
-            throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
-        }
-    }
-    
-    public String doubleFormattedView(double number){
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -672,7 +647,7 @@ public class Customer extends javax.swing.JFrame {
         }
         else {
             try {
-                double TONGCHIVALUE = parseDouble(TONGCHI.getText());
+                double TONGCHIVALUE = CommonFunction.parseDouble(TONGCHI.getText());
                 if (TONGCHIVALUE < 0) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập tổng chi là một số dương lớn hơn hoặc bằng 0!");
                 } 
@@ -687,7 +662,7 @@ public class Customer extends javax.swing.JFrame {
                         add.setString(3, GIOITINH.getSelectedItem().toString());
                         add.setString (4, SDT.getText());
                         add.setObject(5, MAGIOITHIEU);
-                        double roundedTongChi = roundDecimal(parseDouble(TONGCHI.getText()), 2);
+                        double roundedTongChi = CommonFunction.roundDecimal(CommonFunction.parseDouble(TONGCHI.getText()), 2);
                         add.setDouble(6, roundedTongChi);
                         int row = add.executeUpdate();
                         if (row > 0) {
@@ -759,13 +734,13 @@ public class Customer extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnMouseClicked
 
     private void EditBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtnMouseClicked
-        double roundedTongChi = roundDecimal(parseDouble(TONGCHI.getText()), 2);
+        double roundedTongChi = CommonFunction.roundDecimal(CommonFunction.parseDouble(TONGCHI.getText()), 2);
         if(MAKH.getText().isEmpty() || TENKH.getText().isEmpty() || SDT.getText().isEmpty() || TONGCHI.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Chọn khách hàng cần cập nhật thông tin");
         }
         else {
             try {
-                double TONGCHIVALUE = parseDouble(TONGCHI.getText());
+                double TONGCHIVALUE = CommonFunction.parseDouble(TONGCHI.getText());
                 if (TONGCHIVALUE < 0) {
                     JOptionPane.showMessageDialog(this, "Vui lòng nhập tổng chi là một số dương lớn hơn hoặc bằng 0!");
                 } 

@@ -40,12 +40,12 @@ public class PrintOrder {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     DecimalFormat formatter = new DecimalFormat("###,###,###0");
 //    File filefontTieuDe = new File("D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\font\\vuArialBold.ttf");
-    String fontPathBold = "D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\font\\vuArialBold.ttf"; // Replace with the path to your font file
+    String fontPathBold = "/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/font/vuArialBold.ttf"; // Replace with the path to your font file
 //    PdfFont fontTieuDe1 = PdfFontFactory.createFont(fontPathBold, "Identity-H", true);
 //    PdfFont fontTieuDe2 = PdfFontFactory.createFont(fontPathBold, "Identity-H", true);
 //    PdfFont fontTieuDe3 = PdfFontFactory.createFont(fontPathBold, "Identity-H", true);
 //    
-    String fontPath = "D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\font\\vuArial.ttf"; // Replace with the path to your font file
+    String fontPath = "/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/font/vuArial.ttf"; // Replace with the path to your font file
 //    PdfFont fontNoiDung1  = PdfFontFactory.createFont(fontPath, "Identity-H", true);
 //    PdfFont fonts[4]  = PdfFontFactory.createFont(fontPath, "Identity-H", true);
 //    PdfFont fontNoiDung3  = PdfFontFactory.createFont(fontPath, "Identity-H", true);
@@ -74,7 +74,7 @@ public class PrintOrder {
 
     public PrintOrder() {
         document = new XWPFDocument();
-        orderFile = new File("D:\\pdf\\order.pdf");
+        orderFile = new File("/Users/duc/Desktop/pdf/order.pdf");
     }
 
 //    public void print(int id) throws Exception {
@@ -295,12 +295,12 @@ public class PrintOrder {
         PdfFont[] fonts = createFonts();
         // Create a PdfDocument instance
         try ( 
-                PdfWriter writer = new PdfWriter("D:\\pdf\\order - " + dateFormatForFileName.format(new Date()) + ".pdf")) {
+                PdfWriter writer = new PdfWriter("/Users/duc/Desktop/pdf/order - " + dateFormatForFileName.format(new Date()) + ".pdf")) {
    
             PdfDocument pdfDocument = new PdfDocument(writer);
             
             try ( 
-                    Document document = new Document(pdfDocument, PageSize.A5)        
+                    Document document = new Document(pdfDocument, PageSize.A4)        
 //        File pdfFile = new File("D:\\pdf\\order - " + dateFormatForFileName.format(order.getOrderDate()) + ".pdf");
 //        PdfWriter pdfWriter = new PdfWriter(new FileOutputStream(pdfFile));
 //        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
@@ -313,7 +313,7 @@ public class PrintOrder {
             }
         }
         try {
-            File file = new File("D:\\pdf\\order - " + dateFormatForFileName.format(new Date()) + ".pdf");
+            File file = new File("/Users/duc/Desktop/pdf/order - " + dateFormatForFileName.format(new Date()) + ".pdf");
 
             if (!file.exists()) {
                 System.out.println("File does not exist at the specified path.");

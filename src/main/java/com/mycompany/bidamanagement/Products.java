@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,7 +44,7 @@ public class Products extends javax.swing.JFrame {
                     rs.getString("PRODID"),
                     rs.getString("PRODNAME"),
                     rs.getInt("PRODQTY"),
-                    doubleFormattedView(rs.getDouble("PRODPRICE")),
+                    CommonFunction.doubleFormattedView(rs.getDouble("PRODPRICE")),
                     rs.getString("PRODCAT")
                 };
                 model.addRow(row);
@@ -81,30 +80,6 @@ public class Products extends javax.swing.JFrame {
         PRODCAT.setSelectedIndex(0);
         PRODQTY.setText("");
         PRODPRICE.setText("0.00");
-    }
-
-    public static double roundDecimal(double number, int decimalPlaces) {
-        // Định dạng cho số với số lẻ giới hạn
-        String pattern = "#." + new String(new char[decimalPlaces]).replace("\0", "#");
-        DecimalFormat decimalFormat = new DecimalFormat(pattern);
-
-        // Làm tròn và trả về giá trị
-        String formattedNumber = decimalFormat.format(number);
-        return Double.parseDouble(formattedNumber);
-    }
-    
-    private double parseDouble(String value) throws NumberFormatException {
-        try {
-            return Double.parseDouble(value);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Chuỗi không hợp lệ:" + value);
-            throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
-        }
-    }
-    
-    public String doubleFormattedView(double number){
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number);
     }
     
     @SuppressWarnings("unchecked")
@@ -664,7 +639,7 @@ public class Products extends javax.swing.JFrame {
                     add.setString(1, PRODID.getText());
                     add.setString(2, PRODNAME.getText());
                     add.setInt(3, Integer.parseInt(PRODQTY.getText()));
-                    double roundedPRICE = roundDecimal(Double.parseDouble(PRODPRICE.getText()), 2);
+                    double roundedPRICE = CommonFunction.roundDecimal(Double.parseDouble(PRODPRICE.getText()), 2);
                     add.setDouble(4, roundedPRICE);
                     add.setString(5, PRODCAT.getSelectedItem().toString());
                     int row = add.executeUpdate();
@@ -721,8 +696,8 @@ public class Products extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtnMouseClicked
 
     private void EditBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtnMouseClicked
-        double priceValue = parseDouble(PRODPRICE.getText());
-        double roundedPRICE = roundDecimal(priceValue, 2);
+        double priceValue = CommonFunction.parseDouble(PRODPRICE.getText());
+        double roundedPRICE = CommonFunction.roundDecimal(priceValue, 2);
         if(PRODID.getText().isEmpty() || PRODNAME.getText().isEmpty() || PRODQTY.getText().isEmpty() || PRODPRICE.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Chọn sản phẩm cần cập nhật thông tin");
         }

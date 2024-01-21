@@ -8,10 +8,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -49,7 +47,7 @@ public class CheckOut extends javax.swing.JFrame {
                     rs.getString("PRODID"),
                     rs.getString("PRODNAME"),
                     rs.getInt("PRODQTY"),
-                    doubleFormattedView(rs.getDouble("PRODPRICE")),
+                    CommonFunction.doubleFormattedView(rs.getDouble("PRODPRICE")),
                     rs.getString("PRODCAT")
                 };
                 model.addRow(row);
@@ -81,29 +79,6 @@ public class CheckOut extends javax.swing.JFrame {
 //        String formattedNumber = decimalFormat.format(number);
         double scale = Math.pow(10, decimalPlaces);
         return Math.round(number * scale) / scale;
-    }
-    
-    public String doubleFormattedView(double number){
-        DecimalFormat df = new DecimalFormat("#,##0.00");
-        return df.format(number).replace(",", ".");
-    }
-    
-    private double parseDouble(String value) throws NumberFormatException {
-        try {
-            return Double.parseDouble(value);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Chuỗi không hợp lệ:" + value);
-            throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
-        }
-    }
-    
-    private int parseInteger(String value) throws NumberFormatException {
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Số lượng không hợp lệ (Số nguyên):" + value);
-            throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
-        }
     }
     
     public void getCategory() {
@@ -604,27 +579,27 @@ public class CheckOut extends javax.swing.JFrame {
         if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để thêm vào bill!");
         }
-        else if (parseInteger(PRODQTY.getText()) <= 0) {
+        else if (CommonFunction.parseInteger(PRODQTY.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng sản phẩm muốn bán là số lớn hơn 0!");
         }
-        else if (AvailQty < parseInteger(PRODQTY.getText())){
+        else if (AvailQty < CommonFunction.parseInteger(PRODQTY.getText())){
             JOptionPane.showMessageDialog(this, "Trong kho không có đủ số lượng sản phẩm!");
         }
         else{
             i++;
-            int QTY = parseInteger(PRODQTY.getText());
+            int QTY = CommonFunction.parseInteger(PRODQTY.getText());
             int PRODUCTSELL = QTY;
             TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
             TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
             
                 if(i == 1){
-                    BillReview.setText(BillReview.getText()+"                 ==========BIDA LUONG XUYEN==========\n\n"+"  STT    TÊN SẢN PHẨM           GIÁ            SỐ LƯỢNG                  TỔNG\n\n    "+i+"            "+PRODNAME.getText()+"             "+doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+doubleFormattedView(TotalPrice)+"\n\n");
+                    BillReview.setText(BillReview.getText()+"                 ==========BIDA LUONG XUYEN==========\n\n"+"  STT    TÊN SẢN PHẨM           GIÁ            SỐ LƯỢNG                  TỔNG\n\n    "+i+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n\n");
                 }
                 else{
-                    BillReview.setText(BillReview.getText()+"    "+i+"            "+PRODNAME.getText()+"             "+doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+doubleFormattedView(TotalPrice)+"\n\n");
+                    BillReview.setText(BillReview.getText()+"    "+i+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n\n");
 
                 }
-                TotalBillRender.setText("TỔNG CỘNG: "+doubleFormattedView(TotalBill));
+                TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(TotalBill));
                 AvailQty -= PRODUCTSELL;
                 // Tạo một đối tượng BillItem mới cho mỗi mục
                 BillItem newItem = new BillItem();
@@ -714,7 +689,7 @@ public class CheckOut extends javax.swing.JFrame {
                     rs.getString("PRODID"),
                     rs.getString("PRODNAME"),
                     rs.getInt("PRODQTY"),
-                    doubleFormattedView(rs.getDouble("PRODPRICE")),
+                    CommonFunction.doubleFormattedView(rs.getDouble("PRODPRICE")),
                     rs.getString("PRODCAT")
                 };
                 model.addRow(row);
