@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BillUI" language="groovy" pageWidth="584" pageHeight="800" columnWidth="564" leftMargin="10" rightMargin="10" topMargin="10" bottomMargin="10" uuid="a4678c81-038d-4ccb-9262-3f39cda68f23">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="CURRENT_DATE" class="java.lang.String"/>
+	<field name="TÊN SẢN PHẨM" class="java.lang.String"/>
+	<field name="ĐƠN GIÁ" class="java.lang.String"/>
+	<field name="SỐ LƯỢNG" class="java.lang.String"/>
+	<field name="THÀNH TIỀN" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="0" y="0" width="153" height="94" uuid="a116a958-e7ea-4150-b01c-ffe9db135b68"/>
+				<imageExpression><![CDATA["/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/logo100.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="153" y="0" width="411" height="32" uuid="e75fb921-96da-4dda-890a-3dd5356cacbe"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="26" isBold="true"/>
+					<paragraph leftIndent="20"/>
+				</textElement>
+				<text><![CDATA[BIDA CLUB FOX66]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="32" width="411" height="32" uuid="fa502b32-9470-4919-a3c7-8aec9a79cf1b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+					<paragraph leftIndent="20"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: 07 Nguyễn Văn Trỗi, Mỹ An, Tháp Mười, Đồng Tháp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="64" width="411" height="30" uuid="fdcc23d8-52c7-40a6-ae1b-28cc3c971038"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+					<paragraph leftIndent="20"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0337339399]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="564" height="45" uuid="91f2b3e4-0c6a-4cc6-be1b-eba929aa2ed5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HÓA ĐƠN]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="11" width="564" height="1" uuid="533060a5-7379-4c44-b0b7-e26e84ede6ac"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="200" y="56" width="364" height="39" uuid="aaf566ed-6864-44f6-ad73-53bfb08d90c7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CURRENT_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="56" width="200" height="39" uuid="4ea07e01-8cac-49f8-b19c-bf46bedf5824"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18" isBold="false"/>
+					<paragraph rightIndent="20"/>
+				</textElement>
+				<text><![CDATA[Ngày Tạo:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="33" uuid="9d734df2-a3fb-4845-85e5-e1f881e5d30b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Double"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TÊN SẢN PHẨM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="0" width="141" height="33" uuid="2949b81a-9050-469d-bc62-c759245436ac"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Double"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ĐƠN GIÁ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="141" height="33" uuid="dc596a4c-af5b-437c-8222-68a0385fe22b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Double"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SỐ LƯỢNG]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="423" y="0" width="141" height="33" uuid="9d816a16-a932-4b50-9bd9-6dfc062d87e1"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Double"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[THÀNH TIỀN]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="141" height="30" uuid="572cfd12-695c-471c-b9a1-0aef13445f86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="141" height="30" uuid="da3e0fe1-1351-4acc-9767-004829c50d85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="282" y="0" width="141" height="30" uuid="e470df0f-b8ab-40c1-9a22-14d89ce8db58"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTY}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="0" width="141" height="30" uuid="173aa72b-92ab-4b7d-935e-9bbc3b1ba299"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="564" height="2" uuid="4ef97c69-c319-4d81-9445-92d8f8ae6b5b"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="0" width="371" height="39" uuid="6c3e0656-c210-4a23-885c-83e82c7bbe29"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18" isBold="true"/>
+					<paragraph rightIndent="20"/>
+				</textElement>
+				<text><![CDATA[Tổng cộng:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="0" width="193" height="39" uuid="020dd0c3-f9ec-43a7-8dc3-f37c6a3cca55"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="18" isBold="true"/>
+					<paragraph rightIndent="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TOTALBILL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="564" height="38" uuid="6e05d358-b76a-4e93-b967-5c1042a7a366"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CẢM ƠN VÀ HẸN GẶP LẠI <3]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

@@ -25,9 +25,9 @@
             <version>8.0.17</version>
         </dependency>
         <dependency>
-            <groupId>org.jdesktop.layout</groupId>
-            <artifactId>org.jdesktop.layout</artifactId>
-            <version>1.4</version>
+            <groupId>net.sf.jasperreports.engine</groupId>
+            <artifactId>net.sf.jasperreports.engine</artifactId>
+            <version>6.20.5</version>
             <type>jar</type>
         </dependency>
         <dependency>
