@@ -24,10 +24,17 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.17</version>
         </dependency>
+<<<<<<< HEAD
 <!--        <dependency>
             <groupId>org.jdesktop.layout</groupId>
             <artifactId>org.jdesktop.layout</artifactId>
             <version>1.4</version>
+=======
+        <dependency>
+            <groupId>net.sf.jasperreports.engine</groupId>
+            <artifactId>net.sf.jasperreports.engine</artifactId>
+            <version>6.20.5</version>
+>>>>>>> 07ac5e5472cb1b8d0ca21079a9f11748d0e6cce4
             <type>jar</type>
         </dependency>-->
 <!--       <dependency>

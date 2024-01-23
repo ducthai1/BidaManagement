@@ -4,6 +4,7 @@
  */
 package com.mycompany.bidamanagement;
 
+import com.mycompany.bidamanagement.bill.ReportManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,6 +54,15 @@ public class CheckOut extends javax.swing.JFrame {
                 model.addRow(row);
             }
             PRODLIST.setModel(model);
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        try {
+            ReportManager.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
