@@ -7,6 +7,7 @@ package com.mycompany.bidamanagement;
 import com.mycompany.bidamanagement.bill.ReportManager;
 import com.mycompany.bidamanagement.printModel.FieldReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -140,6 +141,11 @@ public class CheckOut extends javax.swing.JFrame {
             Hashtable map = new Hashtable();
             JasperReport reportBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/reportBill.jrxml");
             map.put("INVOICEID", invoiceid);
+//            map.put("ImageParam", "src/main/java/com/mycompany/bidamanagement/Icon/productIcon50x50.jpeg");
+//            map.put("logo", ClassLoader.getSystemResourceAsStream("src/main/java/com/mycompany/bidamanagement/Icon/productIcon50x50.jpeg"));            map.put("logo", ClassLoader.getSystemResourceAsStream("src/main/java/com/mycompany/bidamanagement/Icon/productIcon50x50.jpeg"));
+//            map.put("logo", new FileInputStream("D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\Icon\\logoBida120.jpg"));            map.put("logo", new FileInputStream("D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\Icon\\logoBida120.jpg"));
+            map.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
+            
             JasperPrint print = JasperFillManager.fillReport(reportBill, map, conn); 
             JasperViewer.viewReport(print, false);
         }catch(Exception e) {
@@ -685,7 +691,6 @@ public class CheckOut extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PRODQTYActionPerformed
     int i = 0;
-    double totalBillValue = 0.0;
     private void AddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBtnMouseClicked
         Date currentDate = new Date();
         if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
@@ -723,21 +728,6 @@ public class CheckOut extends javax.swing.JFrame {
                 billItems.add(newItem);
                 updateStock(PRODUCTSELL);
             }
-        // Lấy chuỗi từ label TotalBillRender
-        String totalBillRenderText = TotalBillRender.getText();
-
-        // Loại bỏ các ký tự không phải số (chỉ giữ lại số và dấu chấm)
-        String numericString = totalBillRenderText.replaceAll("[^\\d.]", "");
-
-        // Chuyển đổi chuỗi thành giá trị số (double)
-        try {
-            totalBillValue = Double.parseDouble(numericString);
-            // Sử dụng giá trị totalBillValue theo nhu cầu của bạn
-            System.out.println("Total Bill Value: " + totalBillValue);
-        } catch (NumberFormatException e) {
-            // Xử lý trường hợp nếu chuỗi không chứa giá trị số hợp lệ
-            e.printStackTrace();
-        }
         
     }//GEN-LAST:event_AddBtnMouseClicked
 
@@ -753,7 +743,7 @@ public class CheckOut extends javax.swing.JFrame {
             // Thêm hóa đơn vào bảng "invoices"
             PreparedStatement addInvoice = conn.prepareStatement("INSERT INTO invoices (DATE, TOTAL_BILL) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
             addInvoice.setString(1, dateFormat.format(currentDate));
-            addInvoice.setDouble(2, totalBillValue);
+            addInvoice.setString(2, CommonFunction.doubleFormattedView(TotalBill));
 
             int affectedRows = addInvoice.executeUpdate();
 
