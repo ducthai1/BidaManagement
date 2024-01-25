@@ -4,19 +4,16 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="CURRENT_DATE" class="java.lang.String"/>
-	<field name="TÊN SẢN PHẨM" class="java.lang.String"/>
-	<field name="ĐƠN GIÁ" class="java.lang.String"/>
-	<field name="SỐ LƯỢNG" class="java.lang.String"/>
-	<field name="THÀNH TIỀN" class="java.lang.String"/>
+	<parameter name="TOTALBILL" class="java.lang.String"/>
+	<field name="productName" class="java.lang.String"/>
+	<field name="TotalPrice" class="java.lang.Double"/>
+	<field name="quantity" class="java.lang.Integer"/>
+	<field name="TotalBill" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="94" splitType="Stretch">
-			<image hAlign="Center" vAlign="Bottom">
-				<reportElement x="0" y="0" width="153" height="94" uuid="a116a958-e7ea-4150-b01c-ffe9db135b68"/>
-				<imageExpression><![CDATA["/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/logo100.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="153" y="0" width="411" height="32" uuid="e75fb921-96da-4dda-890a-3dd5356cacbe"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
@@ -58,13 +55,6 @@
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
-			<textField>
-				<reportElement x="200" y="56" width="364" height="39" uuid="aaf566ed-6864-44f6-ad73-53bfb08d90c7"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="18"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{CURRENT_DATE}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="0" y="56" width="200" height="39" uuid="4ea07e01-8cac-49f8-b19c-bf46bedf5824"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -73,85 +63,49 @@
 				</textElement>
 				<text><![CDATA[Ngày Tạo:]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="258" y="74" width="151" height="20" uuid="c276fe5f-6238-4837-b79e-7c8650efa15b"/>
+				<textFieldExpression><![CDATA[$P{CURRENT_DATE}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="33">
+		<band height="50">
 			<staticText>
-				<reportElement x="0" y="0" width="141" height="33" uuid="9d734df2-a3fb-4845-85e5-e1f881e5d30b"/>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Double"/>
-					<bottomPen lineWidth="1.0" lineStyle="Double"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TÊN SẢN PHẨM]]></text>
+				<reportElement x="0" y="0" width="141" height="20" uuid="377c9c01-94fc-409d-8677-1108a3bb36b9"/>
+				<text><![CDATA[productName]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="0" width="141" height="33" uuid="2949b81a-9050-469d-bc62-c759245436ac"/>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Double"/>
-					<bottomPen lineWidth="1.0" lineStyle="Double"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ĐƠN GIÁ]]></text>
+				<reportElement x="141" y="0" width="141" height="20" uuid="c51ced67-8754-4d7a-a8de-a34f1399ce4f"/>
+				<text><![CDATA[TotalPrice]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="282" y="0" width="141" height="33" uuid="dc596a4c-af5b-437c-8222-68a0385fe22b"/>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Double"/>
-					<bottomPen lineWidth="1.0" lineStyle="Double"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[SỐ LƯỢNG]]></text>
+				<reportElement x="282" y="0" width="141" height="20" uuid="e136fff0-e9bb-495b-ada8-2b0ee5c89391"/>
+				<text><![CDATA[quantity]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="423" y="0" width="141" height="33" uuid="9d816a16-a932-4b50-9bd9-6dfc062d87e1"/>
-				<box>
-					<topPen lineWidth="1.0" lineStyle="Double"/>
-					<bottomPen lineWidth="1.0" lineStyle="Double"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[THÀNH TIỀN]]></text>
+				<reportElement x="423" y="0" width="141" height="20" uuid="7c873ab3-7a69-4a9a-8377-304470733dd1"/>
+				<text><![CDATA[TotalBill]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="30" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="141" height="30" uuid="572cfd12-695c-471c-b9a1-0aef13445f86"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{PRO_NAME}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="141" height="20" uuid="20b66d34-d61f-41f9-b7d8-355022baa5d9"/>
+				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="141" y="0" width="141" height="30" uuid="da3e0fe1-1351-4acc-9767-004829c50d85"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
+				<reportElement x="141" y="0" width="141" height="20" uuid="4936a0d3-a402-477b-957c-9829a1473786"/>
+				<textFieldExpression><![CDATA[$F{TotalPrice}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="282" y="0" width="141" height="30" uuid="e470df0f-b8ab-40c1-9a22-14d89ce8db58"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{QTY}]]></textFieldExpression>
+				<reportElement x="282" y="0" width="141" height="20" uuid="eca9c958-35ec-4b9e-9443-918a2b6ccb49"/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="423" y="0" width="141" height="30" uuid="173aa72b-92ab-4b7d-935e-9bbc3b1ba299"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+				<reportElement x="423" y="0" width="141" height="20" uuid="9ab03bd1-8509-442b-8902-2329c8b0ee6d"/>
+				<textFieldExpression><![CDATA[$F{TotalBill}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -172,11 +126,7 @@
 				<text><![CDATA[Tổng cộng:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="371" y="0" width="193" height="39" uuid="020dd0c3-f9ec-43a7-8dc3-f37c6a3cca55"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="18" isBold="true"/>
-					<paragraph rightIndent="10"/>
-				</textElement>
+				<reportElement x="409" y="19" width="100" height="20" uuid="39f57fa2-e50f-49ea-8c19-bd3c9366458b"/>
 				<textFieldExpression><![CDATA[$P{TOTALBILL}]]></textFieldExpression>
 			</textField>
 		</band>

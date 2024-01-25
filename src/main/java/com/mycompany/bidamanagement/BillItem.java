@@ -4,6 +4,7 @@ import static com.mycompany.bidamanagement.CheckOut.roundDecimal;
 import java.util.Date;
 
 public class BillItem {
+
     private String productName;
     private int quantity;
     private double TotalPrice;

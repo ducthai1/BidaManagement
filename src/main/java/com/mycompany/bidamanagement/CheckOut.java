@@ -5,14 +5,26 @@
 package com.mycompany.bidamanagement;
 
 import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.printModel.FieldReportCheckout;
+import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.Set;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -62,7 +74,7 @@ public class CheckOut extends javax.swing.JFrame {
         }
         
         try {
-            ReportManager.getInstance().compileReport();
+            JasperReport reportBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/reportBill.jrxml");
         }
         catch(Exception e){
             e.printStackTrace();
@@ -120,6 +132,19 @@ public class CheckOut extends javax.swing.JFrame {
                e.printStackTrace();
                JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
             }
+    }
+    
+    public void printBill(int invoiceid) {
+        try {
+            System.out.println("invoiceId: " + invoiceid);
+            Hashtable map = new Hashtable();
+            JasperReport reportBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/reportBill.jrxml");
+            map.put("INVOICEID", invoiceid);
+            JasperPrint print = JasperFillManager.fillReport(reportBill, map, conn); 
+            JasperViewer.viewReport(print, false);
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     
@@ -660,6 +685,7 @@ public class CheckOut extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PRODQTYActionPerformed
     int i = 0;
+    double totalBillValue = 0.0;
     private void AddBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBtnMouseClicked
         Date currentDate = new Date();
         if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
@@ -697,6 +723,21 @@ public class CheckOut extends javax.swing.JFrame {
                 billItems.add(newItem);
                 updateStock(PRODUCTSELL);
             }
+        // Lấy chuỗi từ label TotalBillRender
+        String totalBillRenderText = TotalBillRender.getText();
+
+        // Loại bỏ các ký tự không phải số (chỉ giữ lại số và dấu chấm)
+        String numericString = totalBillRenderText.replaceAll("[^\\d.]", "");
+
+        // Chuyển đổi chuỗi thành giá trị số (double)
+        try {
+            totalBillValue = Double.parseDouble(numericString);
+            // Sử dụng giá trị totalBillValue theo nhu cầu của bạn
+            System.out.println("Total Bill Value: " + totalBillValue);
+        } catch (NumberFormatException e) {
+            // Xử lý trường hợp nếu chuỗi không chứa giá trị số hợp lệ
+            e.printStackTrace();
+        }
         
     }//GEN-LAST:event_AddBtnMouseClicked
 
@@ -705,15 +746,93 @@ public class CheckOut extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBtnActionPerformed
 
     private void printBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBtnMouseClicked
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        int invoiceId = -1;
         try {
-//            BillReview.print();
-            PrintOrder printOrder = new PrintOrder();
-            printOrder.print(billItem, billItems);
-        }
-        catch(Exception e){
+            // Thêm hóa đơn vào bảng "invoices"
+            PreparedStatement addInvoice = conn.prepareStatement("INSERT INTO invoices (DATE, TOTAL_BILL) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+            addInvoice.setString(1, dateFormat.format(currentDate));
+            addInvoice.setDouble(2, totalBillValue);
+
+            int affectedRows = addInvoice.executeUpdate();
+
+            if (affectedRows == 0) {
+                throw new SQLException("Thêm hóa đơn thất bại, không có bản ghi nào được tạo.");
+            }
+
+            // Lấy ID của hóa đơn vừa thêm vào
+//            ResultSet generatedKeys = addInvoice.getGeneratedKeys();
+//            int invoiceId = -1;
+//            if (generatedKeys.next()) {
+//                invoiceId = generatedKeys.getInt(1);
+//            } else {
+//                throw new SQLException("Thêm hóa đơn thất bại, không có ID được tạo.");
+//            }
+
+            // Lấy ID của hóa đơn vừa thêm vào
+            ResultSet result = addInvoice.executeQuery("SELECT LAST_INSERT_ID() as ID");
+//            int invoiceId = -1;
+            if (result.next()) {
+                invoiceId = result.getInt("ID");
+                System.out.println("invoiceId: " + invoiceId);
+            } else {
+                throw new SQLException("Thêm hóa đơn thất bại, không có ID được tạo.");
+            }
+
+            // Thêm chi tiết hóa đơn vào bảng "invoice_details"
+            for (BillItem billItem : billItems) {
+                PreparedStatement addInvoiceDetail = conn.prepareStatement("INSERT INTO invoice_details (INVOICEID, PRODNAME, QUANTITY, PRICE, TOTAL) VALUES (?, ?, ?, ?, ?)");
+                addInvoiceDetail.setInt(1, invoiceId);
+                addInvoiceDetail.setString(2, billItem.getProductName());
+                addInvoiceDetail.setInt(3, billItem.getQuantity());
+                addInvoiceDetail.setDouble(4, billItem.getTotalPrice());
+                addInvoiceDetail.setDouble(5, billItem.getTotalBill());
+
+                addInvoiceDetail.executeUpdate();
+            }
+
+//            JOptionPane.showMessageDialog(this, "Thêm hóa đơn và chi tiết hóa đơn thành công!");
+            conn.close();
+            SelectBill();
+//            resetInfo();
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        
+        printBill(invoiceId);
+
+//        double totalBill = 0.0;
+//        try {
+////            BillReview.print();
+////            PrintOrder printOrder = new PrintOrder();
+////            printOrder.print(billItem, billItems); 
+//              ReportManager.getInstance().compileReport();
+//              List<FieldReportCheckout> fields = new ArrayList<>();
+//              for (BillItem billItem : billItems) {
+//                FieldReportCheckout field = new FieldReportCheckout();
+//                field.setProductName(billItem.getProductName());
+//                field.setTotalPrice(billItem.getTotalPrice());
+//                field.setQuantity(billItem.getQuantity());
+//                field.setTotalBill(billItem.getTotalBill());
+//                totalBill += billItem.getTotalPrice() * billItem.getQuantity();
+//                fields.add(field);
+//                
+//                // Log each field
+//                System.out.println("ProductName: " + field.getProductName());
+//                System.out.println("TotalPrice: " + field.getTotalPrice());
+//                System.out.println("Quantity: " + field.getQuantity());
+//                System.out.println("TotalBill: " + field.getTotalBill());
+//               }
+//              ParameterReportCheckout dataprint = new ParameterReportCheckout(currentDate, fields, totalBill);
+//              ReportManager.getInstance().printReportPayment(dataprint);              
+//              
+//        }
+//        catch(Exception e){
+//            e.printStackTrace();
+//            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+//        }
     }//GEN-LAST:event_printBtnMouseClicked
 
     private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed

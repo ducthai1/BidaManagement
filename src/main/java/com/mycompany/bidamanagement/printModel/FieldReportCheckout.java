@@ -13,64 +13,55 @@ import java.util.Date;
  */
 public class FieldReportCheckout {
     private String productName;
-    private int quantity;
-    private double TotalPrice;
+    private double TotalPrice;    
+    private int quantity;    
     private double TotalBill;
-    private Date orderDate;
 
-    // Constructors, getters, and setters
-    public FieldReportCheckout() {
-
-    }
-    // Constructor
-    public FieldReportCheckout(String productName, int quantity, double TotalPrice, double TotalBill, Date orderDate) {
+    public FieldReportCheckout(String productName, double TotalPrice, int quantity, double TotalBill) {
         this.productName = productName;
-        this.quantity = quantity;
         this.TotalPrice = TotalPrice;
-        this.TotalBill = roundDecimal(TotalPrice * quantity, 2);
-        this.orderDate = orderDate;
-    }
-
-    // Getters and Setters
-    public String getProductName() {
-        return productName;
+        this.quantity = quantity;
+        this.TotalBill = TotalBill;
     }
 
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setTotalPrice(double TotalPrice) {
+        this.TotalPrice = TotalPrice;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
+    public void setTotalBill(double TotalBill) {
+        this.TotalBill = TotalBill;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
     public double getTotalPrice() {
         return TotalPrice;
     }
 
-    public void setTotalPrice(double TotalPrice) {
-        this.TotalPrice = TotalPrice;
+    public int getQuantity() {
+        return quantity;
     }
 
     public double getTotalBill() {
         return TotalBill;
     }
 
-    public void setTotalBill(double TotalBill) {
-        this.TotalBill = TotalBill;
-    }
+    
+    // Constructors, getters, and setters
+    public FieldReportCheckout() {
 
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
     
+ }
+
     
-}
