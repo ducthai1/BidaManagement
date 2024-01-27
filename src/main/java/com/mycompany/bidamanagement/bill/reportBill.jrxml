@@ -36,7 +36,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 	<title>
 		<band height="139" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="57" width="190" height="32" uuid="a9604c08-17ef-4741-aaea-6536db49faf4"/>
+				<reportElement x="0" y="57" width="188" height="32" uuid="a9604c08-17ef-4741-aaea-6536db49faf4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="14" isBold="true"/>
 					<paragraph leftIndent="20"/>
@@ -44,21 +44,21 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 				<text><![CDATA[BIDA CLUB FOX66]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="89" width="190" height="32" uuid="fe732120-dded-4d01-bdf4-1f223a8f8998"/>
+				<reportElement x="0" y="89" width="188" height="32" uuid="fe732120-dded-4d01-bdf4-1f223a8f8998"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<text><![CDATA[Địa chỉ: 07 Nguyễn Văn Trỗi, Mỹ An, Tháp Mười, Đồng Tháp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="121" width="190" height="18" uuid="3ce890e7-a8f2-4f7b-a8b5-2f662cb886aa"/>
+				<reportElement x="0" y="121" width="188" height="18" uuid="3ce890e7-a8f2-4f7b-a8b5-2f662cb886aa"/>
 				<textElement textAlignment="Left" verticalAlignment="Top">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<text><![CDATA[Điện thoại: 0337339399]]></text>
 			</staticText>
 			<image hAlign="Center">
-				<reportElement x="0" y="0" width="190" height="57" uuid="fa6d76e5-f554-445e-a924-f568fc6ae174"/>
+				<reportElement x="2" y="0" width="186" height="57" uuid="fa6d76e5-f554-445e-a924-f568fc6ae174"/>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
 		</band>
@@ -66,7 +66,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 	<pageHeader>
 		<band height="53" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="1" width="190" height="30" uuid="b53fd82e-331a-462a-be29-9c65a7dcd213"/>
+				<reportElement x="0" y="1" width="188" height="30" uuid="b53fd82e-331a-462a-be29-9c65a7dcd213"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 				</textElement>
@@ -86,7 +86,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 				<text><![CDATA[Ngày Tạo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="51" y="31" width="139" height="13" uuid="c0c1bc49-6f5d-4a77-bda0-927d31832b91"/>
+				<reportElement x="51" y="31" width="137" height="13" uuid="c0c1bc49-6f5d-4a77-bda0-927d31832b91"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
@@ -118,7 +118,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 				<text><![CDATA[Giá]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="0" width="49" height="20" uuid="74f17576-8186-438c-8a87-58d9ea5d0512"/>
+				<reportElement x="141" y="0" width="47" height="20" uuid="74f17576-8186-438c-8a87-58d9ea5d0512"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
@@ -150,7 +150,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="141" y="0" width="49" height="28" uuid="8e1f17d9-3636-48c2-bca2-a702df0f99ff"/>
+				<reportElement x="141" y="0" width="47" height="28" uuid="8e1f17d9-3636-48c2-bca2-a702df0f99ff"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
@@ -161,7 +161,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 	<pageFooter>
 		<band height="38" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="190" height="38" uuid="fa184c4c-d9aa-4aa9-acba-20fea6851ac1"/>
+				<reportElement x="0" y="0" width="188" height="38" uuid="fa184c4c-d9aa-4aa9-acba-20fea6851ac1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="true"/>
 				</textElement>
@@ -185,7 +185,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 				<text><![CDATA[Tổng cộng:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="12" width="90" height="27" uuid="7c42a12b-2c44-420f-a08c-64d30ce43eac"/>
+				<reportElement x="100" y="12" width="88" height="27" uuid="7c42a12b-2c44-420f-a08c-64d30ce43eac"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="10" isBold="true"/>
 				</textElement>

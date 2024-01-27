@@ -4,157 +4,61 @@
  */
 package com.mycompany.bidamanagement;
 
-import java.awt.Color;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Hashtable;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 /**
  *
  * @author duc
  */
 public class PlayTable extends javax.swing.JFrame {
+
+    static int milliseconds = 0;
+    static int seconds = 0;
+    static int minutes = 0;
+    static int hours = 0;
     
-    // Xử dụng lớp Singleton để lưu trữ biến inputData
-    private DataHolder dataHolder = DataHolder.getInstance();
+    static boolean state = false;
+    private Timer timer;
+    public PlayTable() {
+        initComponents();
+        timer = new Timer(1, e -> updateTimer());
+    }
     
     private String formatNumber(int number) {
         return (number < 10) ? "0" + number : String.valueOf(number);
     }
-    
-    public PlayTable() {
-        initComponents();
-        restoreInputData();
-    }
-    
-    private String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
-        double totalStartSeconds = startHour * 3600 + startMinute * 60 + startSecond;
-        double totalEndSeconds = endHour * 3600 + endMinute * 60 + endSecond;
 
-        double totalPlayedSeconds = totalEndSeconds - totalStartSeconds;
-
-        double hourPlay = totalPlayedSeconds / 3600;
-        double remainingSeconds = totalPlayedSeconds % 3600;
-        double minutePlay = remainingSeconds / 60;
-        double secondPlay = remainingSeconds % 60;
-
-        // 1 ban 40k/h tinh theo giay
-        double priceInSecond = 40.0 / 3600;
-        
-        // In ra màn hình kết quả
-        System.out.println("Hour Play: " + hourPlay);
-        System.out.println("Minute Play: " + minutePlay);
-        System.out.println("Second Play: " + secondPlay);
-        System.out.println("Total Second Play: " + totalPlayedSeconds);
-        
-        if(minutePlay < 30) {
-            totalPlayedSeconds += 1800;
+    private void updateTimer() {
+        if (milliseconds > 1) {
+            milliseconds = 0;
+            seconds++;
         }
-        
-        double tableFee = (double)totalPlayedSeconds * priceInSecond;
-        System.out.println("Table Fee: " + CommonFunction.roundDecimal(tableFee, 2));
-        return String.valueOf(CommonFunction.roundDecimal(tableFee, 2));
-    }
-    
-    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-    private void saveInputData() {
-        dataHolder.setInputDataSTART(TIMESTART.getText());
-        dataHolder.setInputDataEND(TIMEEND.getText());
-        dataHolder.setInputDataTable1Name(Table1Name.getText());
-        // Chuyển đổi màu sắc của Table1Name thành mã màu RGB và lưu vào DataHolder
-        Color color = Table1Name.getForeground();
-        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-        dataHolder.setInputColorDataTable1Name(colorAsString);
-        dataHolder.setStartBtnEnabled(StartBtn.isEnabled());
-        dataHolder.setStopBtnEnabled(StopBtn.isEnabled());
-        dataHolder.setPrintBtnEnabled(PrintBtn.isEnabled());
-        
-        dataHolder.setStartHour(startHour);
-        dataHolder.setStartMinute(startMinute);
-        dataHolder.setStartSecond(startSecond);
-        dataHolder.setEndHour(endHour);
-        dataHolder.setEndMinute(endMinute);
-        dataHolder.setEndSecond(endSecond);
-    }
-
-    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-    private void restoreInputData() {
-        TIMESTART.setText(dataHolder.getInputDataSTART());
-        TIMEEND.setText(dataHolder.getInputDataEND());
-        Table1Name.setText(dataHolder.getInputDataTable1Name());
-        
-        // Khôi phục màu sắc của Table1Name từ DataHolder
-        String colorAsString = dataHolder.getInputColorDataTable1Name();
-        String[] colorComponents = colorAsString.split(",");
-        if (colorComponents.length == 3) {
-            int red = Integer.parseInt(colorComponents[0]);
-            int green = Integer.parseInt(colorComponents[1]);
-            int blue = Integer.parseInt(colorComponents[2]);
-            Color color = new Color(red, green, blue);
-            Table1Name.setForeground(color);
+        if (seconds > 59) {
+            milliseconds = 0;
+            seconds = 0;
+            minutes++;
         }
-        StartBtn.setEnabled(dataHolder.isStartBtnEnabled());
-        StopBtn.setEnabled(dataHolder.isStopBtnEnabled());
-        PrintBtn.setEnabled(dataHolder.isPrintBtnEnabled());
-        
-        startHour = dataHolder.getStartHour();
-        startMinute = dataHolder.getStartMinute();
-        startSecond = dataHolder.getStartSecond();
-        endHour = dataHolder.getEndHour();
-        endMinute = dataHolder.getEndMinute();
-        endSecond = dataHolder.getEndSecond();
+        if (minutes > 59) {
+            milliseconds = 0;
+            seconds = 0;
+            minutes = 0;
+            hours++;
+        }
+
+        updateUI();
+
+        milliseconds++;
     }
 
-//    // Xử lý sự kiện khi chuyển qua trang khác
-//    private void switchToNextPage() {
-//        saveInputData();
-//        // Code để chuyển trang
-//    }
-//
-//    // Xử lý sự kiện khi quay lại trang ban đầu
-//    private void switchBackToPreviousPage() {
-//        restoreInputData();
-//        // Code để quay lại trang trước đó
-//    }
-    
-    private int startHour, startMinute, startSecond;
-    private int endHour, endMinute, endSecond;
-
-    public void printBill(String timestart, String timeend, String tableFee) {
-        try {
-            Hashtable map = new Hashtable();
-            JasperReport playTableBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/playTableBill.jrxml");
-//            map.put("DATE", currentDate);
-            map.put("STARTTIME", timestart);
-            map.put("ENDTIME", timeend);
-            map.put("TABLE_FEE", tableFee);
-            map.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
-            System.out.println( "start" +timestart + "end" + timeend +"Fee"+ tableFee);
-            JasperPrint print = JasperFillManager.fillReport(playTableBill, map); 
-            JasperViewer.viewReport(print, false);
-//        }catch(Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-            if (print.getPages().isEmpty()) {
-                        System.out.println("Báo cáo không có trang nào được tạo.");
-                    } else {
-                        JasperViewer.viewReport(print, false);
-                    }
-                } catch (JRException e) {
-                    System.out.println("Lỗi khi tạo hoặc hiển thị báo cáo: " + e.getMessage());
-                } catch (FileNotFoundException e) {
-                    System.out.println("Không tìm thấy file logo: " + e.getMessage());
-                }
+    private void updateUI() {
+        SwingUtilities.invokeLater(() -> {
+            MillisecondView.setText(formatNumber(milliseconds) + "");
+            SecondView.setText(formatNumber(seconds) + " :");
+            MinuteView.setText(formatNumber(minutes)+ " :");
+            HourView.setText(formatNumber(hours)+ " :");
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -174,18 +78,19 @@ public class PlayTable extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-        Table1Name = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         SDTKH = new javax.swing.JTextField();
-        jPanel15 = new javax.swing.JPanel();
         jPanel19 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        TIMESTART = new javax.swing.JTextField();
-        jPanel67 = new javax.swing.JPanel();
-        jLabel34 = new javax.swing.JLabel();
-        TIMEEND = new javax.swing.JTextField();
+        MANV = new javax.swing.JTextField();
+        jPanel15 = new javax.swing.JPanel();
+        HourView = new javax.swing.JLabel();
+        MinuteView = new javax.swing.JLabel();
+        SecondView = new javax.swing.JLabel();
+        MillisecondView = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         StartBtn = new javax.swing.JButton();
         StopBtn = new javax.swing.JButton();
@@ -461,24 +366,19 @@ public class PlayTable extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 204));
 
-        Table1Name.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Table1Name.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Table1Name.setText("BÀN 1");
-        Table1Name.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Table1NameMouseClicked(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("BÀN 1");
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
         jPanel13Layout.setHorizontalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Table1Name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Table1Name, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
@@ -510,33 +410,16 @@ public class PlayTable extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
-        jPanel14.setLayout(jPanel14Layout);
-        jPanel14Layout.setHorizontalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel14Layout.setVerticalGroup(
-            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-
-        jPanel15.setBackground(new java.awt.Color(102, 204, 0));
-
-        jPanel19.setBackground(new java.awt.Color(102, 204, 0));
+        jPanel19.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("GIỜ CHƠI");
+        jLabel5.setText("MÃ NV");
 
-        TIMESTART.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        TIMESTART.setEnabled(false);
-        TIMESTART.addActionListener(new java.awt.event.ActionListener() {
+        MANV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        MANV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TIMESTARTActionPerformed(evt);
+                MANVActionPerformed(evt);
             }
         });
 
@@ -547,7 +430,7 @@ public class PlayTable extends javax.swing.JFrame {
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TIMESTART, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(MANV, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel19Layout.setVerticalGroup(
@@ -557,58 +440,73 @@ public class PlayTable extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TIMESTART)
+                .addComponent(MANV)
                 .addContainerGap())
         );
 
-        jPanel67.setBackground(new java.awt.Color(102, 204, 0));
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel34.setText("GIỜ NGHỈ");
-
-        TIMEEND.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        TIMEEND.setEnabled(false);
-        TIMEEND.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TIMEENDActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel67Layout = new javax.swing.GroupLayout(jPanel67);
-        jPanel67.setLayout(jPanel67Layout);
-        jPanel67Layout.setHorizontalGroup(
-            jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel67Layout.createSequentialGroup()
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TIMEEND, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel67Layout.setVerticalGroup(
-            jPanel67Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel67Layout.createSequentialGroup()
-                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel67Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TIMEEND)
-                .addContainerGap())
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
+
+        jPanel15.setBackground(new java.awt.Color(102, 204, 0));
+
+        HourView.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        HourView.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        HourView.setText("00 :");
+        HourView.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        MinuteView.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        MinuteView.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        MinuteView.setText("00 :");
+
+        SecondView.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        SecondView.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        SecondView.setText("00 :");
+
+        MillisecondView.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        MillisecondView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        MillisecondView.setText("00");
+        MillisecondView.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel67, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(HourView, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MinuteView, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SecondView, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(MillisecondView, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel67, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SecondView, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MinuteView, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(HourView))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(MillisecondView, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -633,7 +531,6 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         StopBtn.setText("DỪNG LẠI");
         StopBtn.setBorder(null);
-        StopBtn.setEnabled(false);
         StopBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StopBtnActionPerformed(evt);
@@ -645,16 +542,14 @@ public class PlayTable extends javax.swing.JFrame {
         PrintBtn.setForeground(new java.awt.Color(255, 255, 255));
         PrintBtn.setText("IN HÓA ĐƠN");
         PrintBtn.setBorder(null);
-        PrintBtn.setEnabled(false);
         PrintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintBtnActionPerformed(evt);
             }
         });
 
-        ResetBtn.setBackground(new java.awt.Color(255, 51, 51));
+        ResetBtn.setBackground(new java.awt.Color(237, 237, 237));
         ResetBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        ResetBtn.setForeground(new java.awt.Color(255, 255, 255));
         ResetBtn.setText("RESET");
         ResetBtn.setBorder(null);
         ResetBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -707,9 +602,9 @@ public class PlayTable extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
+                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -2479,10 +2374,10 @@ public class PlayTable extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -2676,89 +2571,37 @@ public class PlayTable extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LogoutBtnMouseClicked
 
-    private void TIMESTARTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIMESTARTActionPerformed
-        
-    }//GEN-LAST:event_TIMESTARTActionPerformed
+    private void MANVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MANVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MANVActionPerformed
 
     private void StopBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StopBtnActionPerformed
-
-        Date currentDate2 = new Date();
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate2 = dateFormat2.format(currentDate2);
-        TIMEEND.setText(formattedDate2);
-        Table1Name.setText("BÀN 1 (ĐANG TÍNH TIỀN)");
-        Table1Name.setForeground(Color.YELLOW);
-        StopBtn.setEnabled(false);
-        PrintBtn.setEnabled(true);
-        
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate2);
-
-        endHour = cal.get(Calendar.HOUR_OF_DAY);
-        endMinute = cal.get(Calendar.MINUTE);
-        endSecond = cal.get(Calendar.SECOND);
-        
-        //Luu gia tri sau khi set moi bien
-        saveInputData();
+        state = false;
+        timer.stop();
     }//GEN-LAST:event_StopBtnActionPerformed
 
     private void PrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBtnActionPerformed
-        Date current = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formatDate = date.format(current);
-        String totalFee = calculateTimePlayTable(startHour, startMinute, startSecond, endHour, endMinute, endSecond);
-        printBill(TIMESTART.getText(), TIMEEND.getText(), totalFee);
-        PrintBtn.setEnabled(false);
-        Table1Name.setText("BÀN 1");
-        Table1Name.setForeground(Color.BLACK);
-        StartBtn.setEnabled(true);
-        StopBtn.setEnabled(false);
-        TIMESTART.setText("");
-        TIMEEND.setText("");
-        saveInputData();
-        System.out.println("Start time: " + startHour + ":" + startMinute + ":" + startSecond);
-        System.out.println("End time: " + endHour + ":" + endMinute + ":" + endSecond);
-        
-        
+        SDTKH.setText("Minute: "+ minutes + "Seconds: "+seconds);
     }//GEN-LAST:event_PrintBtnActionPerformed
-    
+    private Thread timerThread;
     private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
-        
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String formattedDate = dateFormat.format(currentDate);
-        TIMESTART.setText(formattedDate);
-        Table1Name.setText("BÀN 1 (ĐANG CHƠI)");
-        Table1Name.setForeground(Color.RED);
-        StartBtn.setEnabled(false);
-        StopBtn.setEnabled(true);
-        
-        
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(currentDate);
-
-        startHour = cal.get(Calendar.HOUR_OF_DAY);
-        startMinute = cal.get(Calendar.MINUTE);
-        startSecond = cal.get(Calendar.SECOND);
-        
-        saveInputData();
+        if (!state) {
+            state = true;
+            timer.start();
+        }
     }//GEN-LAST:event_StartBtnActionPerformed
 
     private void ResetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnActionPerformed
-          
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn reset bàn chơi không?", "RESET BÀN CHƠI", JOptionPane.YES_NO_OPTION);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            TIMESTART.setText("");
-            TIMEEND.setText("");
-            Table1Name.setText("BÀN 1");
-            Table1Name.setForeground(Color.BLACK);
-            StartBtn.setEnabled(true);
-            StopBtn.setEnabled(false);
-            PrintBtn.setEnabled(false);
-            saveInputData();
-        }
-          
+        timer.stop();
+        state = false;
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        milliseconds = 0;
+        MillisecondView.setText("000");
+        SecondView.setText(" 00 :");
+        MinuteView.setText(" 00 :");
+        HourView.setText(" 00 :");
     }//GEN-LAST:event_ResetBtnActionPerformed
 
     private void StartBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StartBtnMouseClicked
@@ -2946,21 +2789,14 @@ public class PlayTable extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowActivated
 
     private void PlayTableBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PlayTableBtnMouseClicked
-        
+        new PlayTable().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_PlayTableBtnMouseClicked
 
     private void CheckOutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CheckOutBtnMouseClicked
         new CheckOut().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_CheckOutBtnMouseClicked
-
-    private void TIMEENDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TIMEENDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TIMEENDActionPerformed
-
-    private void Table1NameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1NameMouseClicked
-//        restoreInputData();
-    }//GEN-LAST:event_Table1NameMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2999,6 +2835,7 @@ public class PlayTable extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CheckOutBtn;
+    private javax.swing.JLabel HourView;
     private javax.swing.JLabel HourView1;
     private javax.swing.JLabel HourView2;
     private javax.swing.JLabel HourView3;
@@ -3007,6 +2844,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel HourView6;
     private javax.swing.JLabel HourView7;
     private javax.swing.JPanel LogoutBtn;
+    private javax.swing.JTextField MANV;
     private javax.swing.JTextField MANV1;
     private javax.swing.JTextField MANV2;
     private javax.swing.JTextField MANV3;
@@ -3014,8 +2852,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JTextField MANV5;
     private javax.swing.JTextField MANV6;
     private javax.swing.JTextField MANV7;
-    private javax.swing.JTextField MANV8;
-    private javax.swing.JTextField MANV9;
+    private javax.swing.JLabel MillisecondView;
     private javax.swing.JLabel MillisecondView1;
     private javax.swing.JLabel MillisecondView2;
     private javax.swing.JLabel MillisecondView3;
@@ -3023,6 +2860,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel MillisecondView5;
     private javax.swing.JLabel MillisecondView6;
     private javax.swing.JLabel MillisecondView7;
+    private javax.swing.JLabel MinuteView;
     private javax.swing.JLabel MinuteView1;
     private javax.swing.JLabel MinuteView2;
     private javax.swing.JLabel MinuteView3;
@@ -3055,6 +2893,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JTextField SDTKH5;
     private javax.swing.JTextField SDTKH6;
     private javax.swing.JTextField SDTKH7;
+    private javax.swing.JLabel SecondView;
     private javax.swing.JLabel SecondView1;
     private javax.swing.JLabel SecondView2;
     private javax.swing.JLabel SecondView3;
@@ -3078,9 +2917,6 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JButton StopBtn5;
     private javax.swing.JButton StopBtn6;
     private javax.swing.JButton StopBtn7;
-    private javax.swing.JTextField TIMEEND;
-    private javax.swing.JTextField TIMESTART;
-    private javax.swing.JLabel Table1Name;
     private javax.swing.JLabel exitBtn;
     private javax.swing.JLabel exitBtn4;
     private javax.swing.JLabel jLabel1;
@@ -3094,6 +2930,7 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -3107,9 +2944,6 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -3175,11 +3009,8 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel60;
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
-    private javax.swing.JPanel jPanel63;
-    private javax.swing.JPanel jPanel64;
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
-    private javax.swing.JPanel jPanel67;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
