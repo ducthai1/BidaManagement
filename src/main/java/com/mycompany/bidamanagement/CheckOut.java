@@ -169,6 +169,7 @@ public class CheckOut extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         AddBtn = new javax.swing.JButton();
         ClearBtn = new javax.swing.JButton();
+        ResetBtn = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         PRODLIST = new javax.swing.JTable();
@@ -279,6 +280,17 @@ public class CheckOut extends javax.swing.JFrame {
             }
         });
 
+        ResetBtn.setBackground(new java.awt.Color(255, 0, 0));
+        ResetBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ResetBtn.setForeground(java.awt.Color.white);
+        ResetBtn.setText("RESET");
+        ResetBtn.setPreferredSize(new java.awt.Dimension(72, 23));
+        ResetBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResetBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -298,6 +310,10 @@ public class CheckOut extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(PRODNAME, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(11, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +330,9 @@ public class CheckOut extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
@@ -568,7 +586,6 @@ public class CheckOut extends javax.swing.JFrame {
         });
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setIcon(new javax.swing.ImageIcon("/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/cus25x25.png")); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 153, 255));
@@ -598,7 +615,6 @@ public class CheckOut extends javax.swing.JFrame {
         });
 
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon("/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/Icon/checkout25x25.png")); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -922,6 +938,16 @@ public class CheckOut extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CheckOutBtnMouseClicked
 
+    private void ResetBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResetBtnMouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn RESET hóa đơn thanh toán không?", "RESET THANH TOÁN", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            new CheckOut().setVisible(true);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_ResetBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -970,6 +996,7 @@ public class CheckOut extends javax.swing.JFrame {
     private javax.swing.JTextField PRODQTY;
     private javax.swing.JPanel PlayTableBtn;
     private javax.swing.JButton ReloadBtn;
+    private javax.swing.JButton ResetBtn;
     private javax.swing.JLabel TotalBillRender;
     private javax.swing.JLabel exitBtn;
     private javax.swing.JButton filterBtn;
