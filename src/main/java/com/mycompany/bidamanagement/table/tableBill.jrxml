@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="64"/>
-	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="tablelogo" class="java.io.InputStream"/>
 	<parameter name="DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
@@ -51,7 +51,7 @@
 			</line>
 			<image hAlign="Center" vAlign="Middle">
 				<reportElement x="0" y="0" width="190" height="57" uuid="7b4eded4-b38d-4b32-941a-dc9b270f1883"/>
-				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+				<imageExpression><![CDATA[$P{tablelogo}]]></imageExpression>
 			</image>
 		</band>
 	</title>
