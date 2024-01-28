@@ -70,6 +70,8 @@ package com.mycompany.bidamanagement.bill;
 //}
 
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import net.sf.jasperreports.engine.*;
 
 import javax.swing.*;
@@ -93,23 +95,24 @@ public class ReportManager {
 
     private ReportManager() {}
     
-    public void compileReport(String link) throws JRException {
+    public void compileReport() throws JRException {
         try {
             // Load the JRXML file as input stream
-            InputStream inputStream = getClass().getResourceAsStream(link);
+            String inputStream = "src/main/java/com/mycompany/bidamanagement/bill/tableBill.jrxml";
             if (inputStream == null) {
-                throw new JRException("Cannot load JRXML file from: " + link);
+                throw new JRException("Cannot load JRXML file from: " + inputStream);
             }
             // Compile the report
-            tableBill = JasperCompileManager.compileReport(getClass().getResourceAsStream(link));
+            tableBill = JasperCompileManager.compileReport(inputStream);
         } catch (JRException e) {
             throw new JRException("Failed to compile report: " + e.getMessage(), e);
         }
     }
 
-    public void printReportPayment(ParameterReportCheckout data) throws JRException {
+    public void printReportPayment(ParameterReportCheckout data) throws JRException, FileNotFoundException {
         try {
             Map<String, Object> parameters = new HashMap<>();
+            parameters.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
             parameters.put("DATE", data.getDATE());
             parameters.put("STARTTIME", data.getSTARTTIME());
             parameters.put("ENDTIME", data.getENDTIME());

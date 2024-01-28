@@ -40,7 +40,7 @@ public class PlayTable extends javax.swing.JFrame {
         initComponents();
         restoreInputData();
         try {
-            ReportManager.getInstance().compileReport("\\com\\mycompany\\bidamanagement\\bill\\tableBill.jrxml");
+            ReportManager.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
