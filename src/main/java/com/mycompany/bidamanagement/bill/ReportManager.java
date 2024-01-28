@@ -3,109 +3,131 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.bidamanagement.bill;
+//
+//import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.util.HashMap;
+//import java.util.Map;
+//import net.sf.jasperreports.engine.JRException;
+//import net.sf.jasperreports.engine.JasperCompileManager;
+//import net.sf.jasperreports.engine.JasperFillManager;
+//import net.sf.jasperreports.engine.JasperPrint;
+//import net.sf.jasperreports.engine.JasperReport;
+//import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+//import net.sf.jasperreports.engine.design.JasperDesign;
+//import net.sf.jasperreports.engine.xml.JRXmlLoader;
+//import net.sf.jasperreports.view.JasperViewer;
+//
+///**
+// *
+// * @author duc
+// */
+//public class ReportManager {
+//    private static ReportManager instance;
+//    
+//    private JasperReport tableBill;
+//    
+//    
+//    public static ReportManager getInstance() {
+//        if (instance == null) {
+//            instance = new ReportManager();
+//        }
+//        return instance;
+//    }
+//    
+//    private ReportManager () {
+//    }
+//    
+//    public void compileReport(String link) throws JRException {
+//            try {
+//                if (link != null) {
+//                    tableBill = JasperCompileManager.compileReport(getClass().getResourceAsStream(link));
+//                }
+//                else {
+//                    tableBill = JasperCompileManager.compileReport("/Users/duc/NetBeansProjects/BidaManagement/src/main/java/com/mycompany/bidamanagement/bill/tableBill.jrxml");
+//                }
+//            }
+//             catch (JRException e) {
+//                e.printStackTrace();
+//            }
+//    }
+//
+//    public void printReportPayment(ParameterReportCheckout data) throws JRException {
+//        Map para = new HashMap();
+//        para.put("DATE", data.getDATE());
+//        para.put("STARTTIME", data.getSTARTTIME());
+//        para.put("ENDTIME", data.getENDTIME());
+//        para.put("TABLE_FEE", data.getTABLE_FEE());
+//        JasperPrint print = JasperFillManager.fillReport(tableBill, para);
+//        view(print);
+//    }
+//    private void view(JasperPrint print) throws JRException {
+//        JasperViewer.viewReport(print, false);
+//    }   
+//}
 
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import net.sf.jasperreports.engine.*;
+
+import javax.swing.*;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-/**
- *
- * @author duc
- */
 public class ReportManager {
     private static ReportManager instance;
-    
-    private JasperReport BillUI;
-    
-    
+    private JasperReport tableBill;
+
     public static ReportManager getInstance() {
         if (instance == null) {
             instance = new ReportManager();
         }
         return instance;
     }
+
+    private ReportManager() {}
     
-    private ReportManager () {
-    }
-    
-    public void compileReport() throws JRException, IOException {
-//        BillUI = JasperCompileManager.compileReport(getClass().getResourceAsStream("/bill/BillUI.jrxml"));
-//        BillInvoice = JasperCompileManager.compileReport(getClass().getResourceAsStream("/bill/report_invoice.jrxml"));
-//        try {
-//                    // Use try-with-resources to close the input stream automatically
-//                    try (InputStream billUIStream = getClass().getResourceAsStream("/bill/BillUI.jrxml")) {
-//                        if (billUIStream != null) {
-//                            BillUI = JasperCompileManager.compileReport(billUIStream);
-//                        } else {
-//                            throw new JRException("Failed to load BillUI.jrxml. Resource not found.");
-//                        }
-//                    }
-//
-//                    // Uncomment the following code if you need to compile BillInvoice
-//                    // try (InputStream billInvoiceStream = getClass().getResourceAsStream("/bill/report_invoice.jrxml")) {
-//                    //     if (billInvoiceStream != null) {
-//                    //         BillInvoice = JasperCompileManager.compileReport(billInvoiceStream);
-//                    //     } else {
-//                    //         throw new JRException("Failed to load report_invoice.jrxml. Resource not found.");
-//                    //     }
-//                    // }
-//                } catch (JRException e) {
-//                    e.printStackTrace();
-//                    // Handle the exception as needed, log or show an error message
-//                }
-            try {
-            // Sử dụng FileInputStream cho đường dẫn tuyệt đối
-//            File billUIFile = new File("D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\bill\\BillUI.jrxml");
-            JasperDesign billUI = JRXmlLoader.load("D:\\Workspace\\Work_desktop\\desktop\\BidaManagement\\src\\main\\java\\com\\mycompany\\bidamanagement\\bill\\BillUI.jrxml");
-                if (billUI != null) {
-                    BillUI = JasperCompileManager.compileReport(billUI);
-                } else {
-                    throw new JRException("Failed to load BillUI.jrxml. Resource not found.");
+    public void compileReport(String link) throws JRException {
+        try {
+            // Load the JRXML file as input stream
+            InputStream inputStream = getClass().getResourceAsStream(link);
+            if (inputStream == null) {
+                throw new JRException("Cannot load JRXML file from: " + link);
             }
-            }
-             catch (JRException e) {
-                e.printStackTrace();
-            }
+            // Compile the report
+            tableBill = JasperCompileManager.compileReport(getClass().getResourceAsStream(link));
+        } catch (JRException e) {
+            throw new JRException("Failed to compile report: " + e.getMessage(), e);
+        }
     }
 
     public void printReportPayment(ParameterReportCheckout data) throws JRException {
-        Map para = new HashMap();
-        para.put("CURRENT_DATE", data.getCURRENT_DATE());
-//        para.put("PRO_NAME", data.getPRO_NAME());
-//        para.put("QTY", data.getQTY());
-//        para.put("PRICE", data.getPRICE());
-//        para.put("TOTAL", data.getTOTAL());
-        
-        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getFields());
-        para.put("TOTALBILL", data.getTOTALBILL());
-        JasperPrint print = JasperFillManager.fillReport(BillUI, para, dataSource);
-        view(print);
+        try {
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("DATE", data.getDATE());
+            parameters.put("STARTTIME", data.getSTARTTIME());
+            parameters.put("ENDTIME", data.getENDTIME());
+            parameters.put("TABLE_FEE", data.getTABLE_FEE());
+
+            // Fill the report
+            JasperPrint print = JasperFillManager.fillReport(tableBill, parameters);
+
+            // View the report
+            view(print);
+        } catch (JRException e) {
+            throw new JRException("Failed to print report: " + e.getMessage(), e);
+        }
     }
-//
-//    public void printReportInvoice(ParameterReportInvoice data) throws JRException {
-//        Map para = new HashMap();
-//        para.put("totalQty", data.getTotalQty());
-//        para.put("totalAmount", data.getTotalAmount());
-//        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getFields());
-//        JasperPrint print = JasperFillManager.fillReport(reportInvoice, para, dataSource);
-//        view(print);
-//    }
-//
+
     private void view(JasperPrint print) throws JRException {
+        // Display the report in a JasperViewer
         JasperViewer.viewReport(print, false);
     }
-//    
 }
+

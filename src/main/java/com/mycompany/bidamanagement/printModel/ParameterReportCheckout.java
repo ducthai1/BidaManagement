@@ -4,49 +4,58 @@
  */
 package com.mycompany.bidamanagement.printModel;
 
-import java.util.Date;
-import java.util.List;
-
 /**
  *
  * @author duc
  */
 public class ParameterReportCheckout {
-    
-    private Date CURRENT_DATE;
-    private double TOTALBILL;
-    private List<FieldReportCheckout> fields;
 
-    public void setCURRENT_DATE(Date CURRENT_DATE) {
-        this.CURRENT_DATE = CURRENT_DATE;
+    public String getDATE() {
+        return DATE;
     }
 
-    public void setTOTALBILL(double TOTALBILL) {
-        this.TOTALBILL = TOTALBILL;
+    public void setDATE(String DATE) {
+        this.DATE = DATE;
     }
 
-    public void setFields(List<FieldReportCheckout> fields) {
-        this.fields = fields;
+    public String getSTARTTIME() {
+        return STARTTIME;
     }
 
-    public Date getCURRENT_DATE() {
-        return CURRENT_DATE;
+    public void setSTARTTIME(String STARTTIME) {
+        this.STARTTIME = STARTTIME;
     }
 
-    public double getTOTALBILL() {
-        return TOTALBILL;
+    public String getENDTIME() {
+        return ENDTIME;
     }
 
-    public List<FieldReportCheckout> getFields() {
-        return fields;
+    public void setENDTIME(String ENDTIME) {
+        this.ENDTIME = ENDTIME;
+    }
+
+    public String getTABLE_FEE() {
+        return TABLE_FEE;
+    }
+
+    public void setTABLE_FEE(String TABLE_FEE) {
+        this.TABLE_FEE = TABLE_FEE;
+    }
+
+    public ParameterReportCheckout(String DATE, String STARTTIME, String ENDTIME, String TABLE_FEE) {
+        this.DATE = DATE;
+        this.STARTTIME = STARTTIME;
+        this.ENDTIME = ENDTIME;
+        this.TABLE_FEE = TABLE_FEE;
     }
 
     public ParameterReportCheckout() {
     }
+    
+    private String DATE;
+    private String STARTTIME;
+    private String ENDTIME;
+    private String TABLE_FEE;
 
-    public ParameterReportCheckout(Date CURRENT_DATE, List<FieldReportCheckout> fields, double TOTALBILL) {
-        this.CURRENT_DATE = CURRENT_DATE;
-        this.fields = fields;
-        this.TOTALBILL = TOTALBILL;    
-    }
+    
 }

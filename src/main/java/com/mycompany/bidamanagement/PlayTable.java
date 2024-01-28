@@ -4,9 +4,13 @@
  */
 package com.mycompany.bidamanagement;
 
+import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import java.awt.Color;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,6 +39,13 @@ public class PlayTable extends javax.swing.JFrame {
     public PlayTable() {
         initComponents();
         restoreInputData();
+        try {
+            ReportManager.getInstance().compileReport("\\com\\mycompany\\bidamanagement\\bill\\tableBill.jrxml");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
@@ -130,32 +141,47 @@ public class PlayTable extends javax.swing.JFrame {
     private int startHour, startMinute, startSecond;
     private int endHour, endMinute, endSecond;
 
-    public void printBill(String timestart, String timeend, String tableFee) {
+    public void printBill(String current, String timestart, String timeend, String tableFee) {
         try {
-            Hashtable map = new Hashtable();
-            JasperReport playTableBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/playTableBill.jrxml");
-//            map.put("DATE", currentDate);
-            map.put("STARTTIME", timestart);
-            map.put("ENDTIME", timeend);
-            map.put("TABLE_FEE", tableFee);
-            map.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
-            System.out.println( "start" +timestart + "end" + timeend +"Fee"+ tableFee);
-            JasperPrint print = JasperFillManager.fillReport(playTableBill, map); 
-            JasperViewer.viewReport(print, false);
-//        }catch(Exception e) {
-//            System.out.println(e.getMessage());
+            
+//            Hashtable map = new Hashtable();
+//            JasperReport playTableBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/tableBill.jrxml");
+//            map.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
+//            map.put("DATE", current);
+//            map.put("STARTTIME", timestart);
+//            map.put("ENDTIME", timeend);
+//            map.put("TABLE_FEE", tableFee);
+//            
+//            System.out.println( "start" +timestart + "end" + timeend +"Fee"+ tableFee);
+//            
+//            JasperPrint print = JasperFillManager.fillReport(playTableBill, map); 
+//            JasperViewer.viewReport(print, false);
+            
+//          if (print.getPages().isEmpty()) {
+//            System.out.println("Báo cáo không có trang nào được tạo.");
+//        } else {
+//            JasperViewer.viewReport(print, false);
 //        }
-            if (print.getPages().isEmpty()) {
-                        System.out.println("Báo cáo không có trang nào được tạo.");
-                    } else {
-                        JasperViewer.viewReport(print, false);
-                    }
-                } catch (JRException e) {
-                    System.out.println("Lỗi khi tạo hoặc hiển thị báo cáo: " + e.getMessage());
-                } catch (FileNotFoundException e) {
-                    System.out.println("Không tìm thấy file logo: " + e.getMessage());
-                }
+//    } catch (JRException e) {
+//        System.out.println("Lỗi khi tạo hoặc hiển thị báo cáo: " + e.getMessage());
+//    } catch (FileNotFoundException e) {
+//        System.out.println("Không tìm thấy file logo: " + e.getMessage());
+//    } finally {
+//        // Đóng InputStream sau khi sử dụng
+//        if (logoInputStream != null) {
+//            try {
+//                logoInputStream.close();
+//            } catch (IOException e) {
+//                System.out.println("Lỗi khi đóng InputStream: " + e.getMessage());
+//            }
+//        }
     }
+        
+    catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -2707,7 +2733,15 @@ public class PlayTable extends javax.swing.JFrame {
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String formatDate = date.format(current);
         String totalFee = calculateTimePlayTable(startHour, startMinute, startSecond, endHour, endMinute, endSecond);
-        printBill(TIMESTART.getText(), TIMEEND.getText(), totalFee);
+        try {
+            ParameterReportCheckout dataprint = new ParameterReportCheckout("123", "12", "123", "123");
+            ReportManager.getInstance().printReportPayment(dataprint);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        printBill(formatDate, TIMESTART.getText(), TIMEEND.getText(), totalFee);
         PrintBtn.setEnabled(false);
         Table1Name.setText("BÀN 1");
         Table1Name.setForeground(Color.BLACK);

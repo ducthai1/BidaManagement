@@ -75,7 +75,7 @@ public class CheckOut extends javax.swing.JFrame {
         }
         
 //        try {
-//            JasperReport reportBill = JasperCompileManager.compileReport("src/main/java/com/mycompany/bidamanagement/bill/reportBill.jrxml");
+//            ReportManager.getInstance().compileReport("src/main/java/com/mycompany/bidamanagement/bill/tableBill.jrxml");
 //        }
 //        catch(Exception e){
 //            e.printStackTrace();
