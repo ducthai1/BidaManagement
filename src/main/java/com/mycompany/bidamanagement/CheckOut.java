@@ -724,17 +724,20 @@ public class CheckOut extends javax.swing.JFrame {
             int PRODUCTSELL = QTY;
             TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
             TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
+            // Kiểm tra nếu sản phẩm đã tồn tại trong danh sách mua hàng
+            boolean productExists = false;
+            for (BillItem item : billItems) {
+                if (item.getProductName().equals(PRODNAME.getText())) {
+                    // Sản phẩm đã tồn tại, tăng số lượng
+                    item.setQuantity(item.getQuantity() + QTY);
+                    item.setTotalBill(item.getTotalBill() + TotalPrice);
+                    productExists = true;
+                    break;
+                }
+            }
             
-                if(i == 1){
-                    BillReview.setText(BillReview.getText()+"                 ==========BIDA LUONG XUYEN==========\n\n"+"  STT    TÊN SẢN PHẨM           GIÁ            SỐ LƯỢNG                  TỔNG\n\n    "+i+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n\n");
-                }
-                else{
-                    BillReview.setText(BillReview.getText()+"    "+i+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n\n");
-
-                }
-                TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(TotalBill));
-                AvailQty -= PRODUCTSELL;
-                // Tạo một đối tượng BillItem mới cho mỗi mục
+            if (!productExists) {
+                // Sản phẩm chưa tồn tại trong danh sách mua hàng, thêm mới
                 BillItem newItem = new BillItem();
                 newItem.setProductName(PRODNAME.getText());
                 newItem.setQuantity(QTY);
@@ -742,9 +745,23 @@ public class CheckOut extends javax.swing.JFrame {
                 newItem.setTotalBill(TotalPrice);
                 newItem.setOrderDate(currentDate);
                 billItems.add(newItem);
-                updateStock(PRODUCTSELL);
             }
-        
+            // Hiển thị thông tin trong TextArea
+            if (i == 1) {
+                BillReview.setText(BillReview.getText()+"\n"+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+
+                                   "              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n");
+            } else {
+                BillReview.setText(BillReview.getText()+"\n"+"            "+PRODNAME.getText()+"             "+
+                                   CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+
+                                   CommonFunction.doubleFormattedView(TotalPrice)+"\n");
+            }
+
+            TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(TotalBill));
+            AvailQty -= PRODUCTSELL;
+
+            // Cập nhật kho hàng
+            updateStock(PRODUCTSELL);        
+        }
     }//GEN-LAST:event_AddBtnMouseClicked
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
@@ -753,7 +770,7 @@ public class CheckOut extends javax.swing.JFrame {
 
     private void printBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBtnMouseClicked
         Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         int invoiceId = -1;
         try {
             // Thêm hóa đơn vào bảng "invoices"
@@ -808,7 +825,11 @@ public class CheckOut extends javax.swing.JFrame {
         }
         
         printBill(invoiceId);
-
+        TotalBill = 0.0;
+        TotalBillRender.setText("TỔNG CỘNG: 0.00");
+        PRODNAME.setText("");
+        PRODQTY.setText("");
+        BillReview.setText("");
 //        double totalBill = 0.0;
 //        try {
 ////            BillReview.print();

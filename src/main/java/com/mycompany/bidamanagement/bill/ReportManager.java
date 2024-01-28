@@ -98,7 +98,7 @@ public class ReportManager {
     public void compileReport() throws JRException {
         try {
             // Load the JRXML file as input stream
-            String inputStream = "src/main/java/com/mycompany/bidamanagement/bill/tableBill.jrxml";
+            String inputStream = "src/main/java/com/mycompany/bidamanagement/table/tableBill.jrxml";
             if (inputStream == null) {
                 throw new JRException("Cannot load JRXML file from: " + inputStream);
             }
@@ -112,14 +112,14 @@ public class ReportManager {
     public void printReportPayment(ParameterReportCheckout data) throws JRException, FileNotFoundException {
         try {
             Map<String, Object> parameters = new HashMap<>();
-            parameters.put("logo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
+            parameters.put("tablelogo", new FileInputStream("src/main/java/com/mycompany/bidamanagement/Icon/logoBida120.jpg"));
             parameters.put("DATE", data.getDATE());
             parameters.put("STARTTIME", data.getSTARTTIME());
             parameters.put("ENDTIME", data.getENDTIME());
             parameters.put("TABLE_FEE", data.getTABLE_FEE());
 
             // Fill the report
-            JasperPrint print = JasperFillManager.fillReport(tableBill, parameters);
+            JasperPrint print = JasperFillManager.fillReport(tableBill, parameters, new JREmptyDataSource());
 
             // View the report
             view(print);

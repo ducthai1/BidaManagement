@@ -558,7 +558,10 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("GIỜ CHƠI");
 
+        TIMESTART.setBackground(new java.awt.Color(248, 248, 248));
         TIMESTART.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TIMESTART.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TIMESTART.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         TIMESTART.setEnabled(false);
         TIMESTART.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -593,7 +596,10 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setText("GIỜ NGHỈ");
 
+        TIMEEND.setBackground(new java.awt.Color(248, 248, 248));
         TIMEEND.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        TIMEEND.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TIMEEND.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         TIMEEND.setEnabled(false);
         TIMEEND.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -2709,7 +2715,7 @@ public class PlayTable extends javax.swing.JFrame {
     private void StopBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StopBtnActionPerformed
 
         Date currentDate2 = new Date();
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
         String formattedDate2 = dateFormat2.format(currentDate2);
         TIMEEND.setText(formattedDate2);
         Table1Name.setText("BÀN 1 (ĐANG TÍNH TIỀN)");
@@ -2730,11 +2736,11 @@ public class PlayTable extends javax.swing.JFrame {
 
     private void PrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBtnActionPerformed
         Date current = new Date();
-        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat date = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatDate = date.format(current);
         String totalFee = calculateTimePlayTable(startHour, startMinute, startSecond, endHour, endMinute, endSecond);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout("123", "12", "123", "123");
+            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatDate, TIMESTART.getText(), TIMEEND.getText(), totalFee);
             ReportManager.getInstance().printReportPayment(dataprint);
         }
         catch(Exception e){
@@ -2759,7 +2765,7 @@ public class PlayTable extends javax.swing.JFrame {
     private void StartBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnActionPerformed
         
         Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         String formattedDate = dateFormat.format(currentDate);
         TIMESTART.setText(formattedDate);
         Table1Name.setText("BÀN 1 (ĐANG CHƠI)");
@@ -3048,8 +3054,6 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JTextField MANV5;
     private javax.swing.JTextField MANV6;
     private javax.swing.JTextField MANV7;
-    private javax.swing.JTextField MANV8;
-    private javax.swing.JTextField MANV9;
     private javax.swing.JLabel MillisecondView1;
     private javax.swing.JLabel MillisecondView2;
     private javax.swing.JLabel MillisecondView3;
@@ -3141,8 +3145,6 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -3209,8 +3211,6 @@ public class PlayTable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel60;
     private javax.swing.JPanel jPanel61;
     private javax.swing.JPanel jPanel62;
-    private javax.swing.JPanel jPanel63;
-    private javax.swing.JPanel jPanel64;
     private javax.swing.JPanel jPanel65;
     private javax.swing.JPanel jPanel66;
     private javax.swing.JPanel jPanel67;
