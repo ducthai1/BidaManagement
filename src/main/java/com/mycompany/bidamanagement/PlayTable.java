@@ -7,6 +7,10 @@ package com.mycompany.bidamanagement;
 import com.mycompany.bidamanagement.bill.ReportManager;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +21,8 @@ import javax.swing.JOptionPane;
  * @author duc
  */
 public class PlayTable extends javax.swing.JFrame {
+    
+    Connection conn;
     
     // Xử dụng lớp Singleton để lưu trữ biến inputData Table 1
     private DataHolderTable1 dataHolderTable1 = DataHolderTable1.getInstanceTable1();
@@ -853,7 +859,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel4.setText("SĐT KH");
 
         SDTKH1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH1.setEnabled(false);
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -1118,7 +1123,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel45.setText("SĐT KH");
 
         SDTKH6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH6.setEnabled(false);
 
         javax.swing.GroupLayout jPanel96Layout = new javax.swing.GroupLayout(jPanel96);
         jPanel96.setLayout(jPanel96Layout);
@@ -1383,7 +1387,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel42.setText("SĐT KH");
 
         SDTKH5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH5.setEnabled(false);
 
         javax.swing.GroupLayout jPanel89Layout = new javax.swing.GroupLayout(jPanel89);
         jPanel89.setLayout(jPanel89Layout);
@@ -1648,7 +1651,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel36.setText("SĐT KH");
 
         SDTKH3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH3.setEnabled(false);
 
         javax.swing.GroupLayout jPanel75Layout = new javax.swing.GroupLayout(jPanel75);
         jPanel75.setLayout(jPanel75Layout);
@@ -1913,7 +1915,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel32.setText("SĐT KH");
 
         SDTKH2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH2.setEnabled(false);
 
         javax.swing.GroupLayout jPanel68Layout = new javax.swing.GroupLayout(jPanel68);
         jPanel68.setLayout(jPanel68Layout);
@@ -2178,7 +2179,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel48.setText("SĐT KH");
 
         SDTKH7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH7.setEnabled(false);
 
         javax.swing.GroupLayout jPanel103Layout = new javax.swing.GroupLayout(jPanel103);
         jPanel103.setLayout(jPanel103Layout);
@@ -2443,7 +2443,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel39.setText("SĐT KH");
 
         SDTKH4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH4.setEnabled(false);
 
         javax.swing.GroupLayout jPanel82Layout = new javax.swing.GroupLayout(jPanel82);
         jPanel82.setLayout(jPanel82Layout);
@@ -2708,7 +2707,6 @@ public class PlayTable extends javax.swing.JFrame {
         jLabel51.setText("SĐT KH");
 
         SDTKH8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        SDTKH8.setEnabled(false);
 
         javax.swing.GroupLayout jPanel110Layout = new javax.swing.GroupLayout(jPanel110);
         jPanel110.setLayout(jPanel110Layout);
@@ -3197,28 +3195,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable1 = new Date();
         SimpleDateFormat datePrintTable1 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable1 = datePrintTable1.format(currentPrintTable1);
-        String totalFee = calculateTimePlayTable(startHourTable1, startMinuteTable1, startSecondTable1, endHourTable1, endMinuteTable1, endSecondTable1);
+        String totalFee1 = calculateTimePlayTable(startHourTable1, startMinuteTable1, startSecondTable1, endHourTable1, endMinuteTable1, endSecondTable1);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable1, TIMESTART1.getText(), TIMEEND1.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH1.getText());
+            addTableBill.setString(2, formatPrintTable1);
+            addTableBill.setString(3, TIMESTART1.getText());
+            addTableBill.setString(4, TIMEEND1.getText());
+            addTableBill.setString(5, totalFee1);
+            addTableBill.setInt(6, 1);
+            addTableBill.executeUpdate();
+            
+            ParameterReportCheckout dataprint1 = new ParameterReportCheckout(formatPrintTable1, TIMESTART1.getText(), TIMEEND1.getText(), totalFee1);
+            ReportManager.getInstance().printReportPayment(dataprint1);
+            
+            printBill(formatPrintTable1, TIMESTART1.getText(), TIMEEND1.getText(), totalFee1);
+            PrintBtnTable1.setEnabled(false);
+            NameTable1.setText("BÀN 1");
+            NameTable1.setForeground(Color.BLACK);
+            StartBtnTable1.setEnabled(true);
+            StopBtnTable1.setEnabled(false);
+            TIMESTART1.setText("");
+            TIMEEND1.setText("");
+            SDTKH1.setText("");
+            saveInputDataTable1();
+            System.out.println("Start time: " + startHourTable1 + ":" + startMinuteTable1 + ":" + startSecondTable1);
+            System.out.println("End time: " + endHourTable1 + ":" + endMinuteTable1 + ":" + endSecondTable1);
+            
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
-        printBill(formatPrintTable1, TIMESTART1.getText(), TIMEEND1.getText(), totalFee);
-        PrintBtnTable1.setEnabled(false);
-        NameTable1.setText("BÀN 1");
-        NameTable1.setForeground(Color.BLACK);
-        StartBtnTable1.setEnabled(true);
-        StopBtnTable1.setEnabled(false);
-        TIMESTART1.setText("");
-        TIMEEND1.setText("");
-        saveInputDataTable1();
-        System.out.println("Start time: " + startHourTable1 + ":" + startMinuteTable1 + ":" + startSecondTable1);
-        System.out.println("End time: " + endHourTable1 + ":" + endMinuteTable1 + ":" + endSecondTable1);
-        
-        
+        }   
     }//GEN-LAST:event_PrintBtnTable1ActionPerformed
     
     private void StartBtnTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartBtnTable1ActionPerformed
@@ -3349,26 +3359,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable2 = new Date();
         SimpleDateFormat datePrintTable2 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable2 = datePrintTable2.format(currentPrintTable2);
-        String totalFee = calculateTimePlayTable(startHourTable2, startMinuteTable2, startSecondTable2, endHourTable2, endMinuteTable2, endSecondTable2);
+        String totalFee2 = calculateTimePlayTable(startHourTable2, startMinuteTable2, startSecondTable2, endHourTable2, endMinuteTable2, endSecondTable2);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable2, TIMESTART2.getText(), TIMEEND2.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH2.getText());
+            addTableBill.setString(2, formatPrintTable2);
+            addTableBill.setString(3, TIMESTART2.getText());
+            addTableBill.setString(4, TIMEEND2.getText());
+            addTableBill.setString(5, totalFee2);
+            addTableBill.setInt(6, 2);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint2 = new ParameterReportCheckout(formatPrintTable2, TIMESTART2.getText(), TIMEEND2.getText(), totalFee2);
+            ReportManager.getInstance().printReportPayment(dataprint2);
+
+            printBill(formatPrintTable2, TIMESTART2.getText(), TIMEEND2.getText(), totalFee2);
+            PrintBtnTable2.setEnabled(false);
+            NameTable2.setText("BÀN 2");
+            NameTable2.setForeground(Color.BLACK);
+            StartBtnTable2.setEnabled(true);
+            StopBtnTable2.setEnabled(false);
+            TIMESTART2.setText("");
+            TIMEEND2.setText("");
+            SDTKH2.setText("");
+            saveInputDataTable2();
+            System.out.println("Start time: " + startHourTable2 + ":" + startMinuteTable2 + ":" + startSecondTable2);
+            System.out.println("End time: " + endHourTable2 + ":" + endMinuteTable2 + ":" + endSecondTable2);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable2, TIMESTART2.getText(), TIMEEND2.getText(), totalFee);
-        PrintBtnTable2.setEnabled(false);
-        NameTable2.setText("BÀN 2");
-        NameTable2.setForeground(Color.BLACK);
-        StartBtnTable2.setEnabled(true);
-        StopBtnTable2.setEnabled(false);
-        TIMESTART2.setText("");
-        TIMEEND2.setText("");
-        saveInputDataTable2();
-        System.out.println("Start time: " + startHourTable2 + ":" + startMinuteTable2 + ":" + startSecondTable2);
-        System.out.println("End time: " + endHourTable2 + ":" + endMinuteTable2 + ":" + endSecondTable2);
 
     }//GEN-LAST:event_PrintBtnTable2ActionPerformed
 
@@ -3452,26 +3476,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable3 = new Date();
         SimpleDateFormat datePrintTable3 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable3 = datePrintTable3.format(currentPrintTable3);
-        String totalFee = calculateTimePlayTable(startHourTable3, startMinuteTable3, startSecondTable3, endHourTable3, endMinuteTable3, endSecondTable3);
+        String totalFee3 = calculateTimePlayTable(startHourTable3, startMinuteTable3, startSecondTable3, endHourTable3, endMinuteTable3, endSecondTable3);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable3, TIMESTART3.getText(), TIMEEND3.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH3.getText());
+            addTableBill.setString(2, formatPrintTable3);
+            addTableBill.setString(3, TIMESTART3.getText());
+            addTableBill.setString(4, TIMEEND3.getText());
+            addTableBill.setString(5, totalFee3);
+            addTableBill.setInt(6, 3);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint3 = new ParameterReportCheckout(formatPrintTable3, TIMESTART3.getText(), TIMEEND3.getText(), totalFee3);
+            ReportManager.getInstance().printReportPayment(dataprint3);
+
+            printBill(formatPrintTable3, TIMESTART3.getText(), TIMEEND3.getText(), totalFee3);
+            PrintBtnTable3.setEnabled(false);
+            NameTable3.setText("BÀN 3");
+            NameTable3.setForeground(Color.BLACK);
+            StartBtnTable3.setEnabled(true);
+            StopBtnTable3.setEnabled(false);
+            TIMESTART3.setText("");
+            TIMEEND3.setText("");
+            SDTKH3.setText("");
+            saveInputDataTable3();
+            System.out.println("Start time: " + startHourTable3 + ":" + startMinuteTable3 + ":" + startSecondTable3);
+            System.out.println("End time: " + endHourTable3 + ":" + endMinuteTable3 + ":" + endSecondTable3);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable3, TIMESTART3.getText(), TIMEEND3.getText(), totalFee);
-        PrintBtnTable3.setEnabled(false);
-        NameTable3.setText("BÀN 3");
-        NameTable3.setForeground(Color.BLACK);
-        StartBtnTable3.setEnabled(true);
-        StopBtnTable3.setEnabled(false);
-        TIMESTART3.setText("");
-        TIMEEND3.setText("");
-        saveInputDataTable3();
-        System.out.println("Start time: " + startHourTable3 + ":" + startMinuteTable3 + ":" + startSecondTable3);
-        System.out.println("End time: " + endHourTable3 + ":" + endMinuteTable3 + ":" + endSecondTable3);
 
     }//GEN-LAST:event_PrintBtnTable3ActionPerformed
 
@@ -3555,26 +3593,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable4 = new Date();
         SimpleDateFormat datePrintTable4 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable4 = datePrintTable4.format(currentPrintTable4);
-        String totalFee = calculateTimePlayTable(startHourTable4, startMinuteTable4, startSecondTable4, endHourTable4, endMinuteTable4, endSecondTable4);
+        String totalFee4 = calculateTimePlayTable(startHourTable4, startMinuteTable4, startSecondTable4, endHourTable4, endMinuteTable4, endSecondTable4);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable4, TIMESTART4.getText(), TIMEEND4.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH4.getText());
+            addTableBill.setString(2, formatPrintTable4);
+            addTableBill.setString(3, TIMESTART4.getText());
+            addTableBill.setString(4, TIMEEND4.getText());
+            addTableBill.setString(5, totalFee4);
+            addTableBill.setInt(6, 4);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint4 = new ParameterReportCheckout(formatPrintTable4, TIMESTART4.getText(), TIMEEND4.getText(), totalFee4);
+            ReportManager.getInstance().printReportPayment(dataprint4);
+
+            printBill(formatPrintTable4, TIMESTART4.getText(), TIMEEND4.getText(), totalFee4);
+            PrintBtnTable4.setEnabled(false);
+            NameTable4.setText("BÀN 4");
+            NameTable4.setForeground(Color.BLACK);
+            StartBtnTable4.setEnabled(true);
+            StopBtnTable4.setEnabled(false);
+            TIMESTART4.setText("");
+            TIMEEND4.setText("");
+            SDTKH4.setText("");
+            saveInputDataTable4();
+            System.out.println("Start time: " + startHourTable4 + ":" + startMinuteTable4 + ":" + startSecondTable4);
+            System.out.println("End time: " + endHourTable4 + ":" + endMinuteTable4 + ":" + endSecondTable4);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable4, TIMESTART4.getText(), TIMEEND4.getText(), totalFee);
-        PrintBtnTable4.setEnabled(false);
-        NameTable4.setText("BÀN 4");
-        NameTable4.setForeground(Color.BLACK);
-        StartBtnTable4.setEnabled(true);
-        StopBtnTable4.setEnabled(false);
-        TIMESTART4.setText("");
-        TIMEEND4.setText("");
-        saveInputDataTable4();
-        System.out.println("Start time: " + startHourTable4 + ":" + startMinuteTable4 + ":" + startSecondTable4);
-        System.out.println("End time: " + endHourTable4 + ":" + endMinuteTable4 + ":" + endSecondTable4);
 
     }//GEN-LAST:event_PrintBtnTable4ActionPerformed
 
@@ -3658,27 +3710,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable5 = new Date();
         SimpleDateFormat datePrintTable5 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable5 = datePrintTable5.format(currentPrintTable5);
-        String totalFee = calculateTimePlayTable(startHourTable5, startMinuteTable5, startSecondTable5, endHourTable5, endMinuteTable5, endSecondTable5);
+        String totalFee5 = calculateTimePlayTable(startHourTable5, startMinuteTable5, startSecondTable5, endHourTable5, endMinuteTable5, endSecondTable5);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable5, TIMESTART5.getText(), TIMEEND5.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH5.getText());
+            addTableBill.setString(2, formatPrintTable5);
+            addTableBill.setString(3, TIMESTART5.getText());
+            addTableBill.setString(4, TIMEEND5.getText());
+            addTableBill.setString(5, totalFee5);
+            addTableBill.setInt(6, 5);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint5 = new ParameterReportCheckout(formatPrintTable5, TIMESTART5.getText(), TIMEEND5.getText(), totalFee5);
+            ReportManager.getInstance().printReportPayment(dataprint5);
+
+            printBill(formatPrintTable5, TIMESTART5.getText(), TIMEEND5.getText(), totalFee5);
+            PrintBtnTable5.setEnabled(false);
+            NameTable5.setText("BÀN 5");
+            NameTable5.setForeground(Color.BLACK);
+            StartBtnTable5.setEnabled(true);
+            StopBtnTable5.setEnabled(false);
+            TIMESTART5.setText("");
+            TIMEEND5.setText("");
+            SDTKH5.setText("");
+            saveInputDataTable5();
+            System.out.println("Start time: " + startHourTable5 + ":" + startMinuteTable5 + ":" + startSecondTable5);
+            System.out.println("End time: " + endHourTable5 + ":" + endMinuteTable5 + ":" + endSecondTable5);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable5, TIMESTART5.getText(), TIMEEND5.getText(), totalFee);
-        PrintBtnTable5.setEnabled(false);
-        NameTable5.setText("BÀN 5");
-        NameTable5.setForeground(Color.BLACK);
-        StartBtnTable5.setEnabled(true);
-        StopBtnTable5.setEnabled(false);
-        TIMESTART5.setText("");
-        TIMEEND5.setText("");
-        saveInputDataTable5();
-        System.out.println("Start time: " + startHourTable5 + ":" + startMinuteTable5 + ":" + startSecondTable5);
-        System.out.println("End time: " + endHourTable5 + ":" + endMinuteTable5 + ":" + endSecondTable5);
-
     }//GEN-LAST:event_PrintBtnTable5ActionPerformed
 
     private void ResetBtnTable5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnTable5ActionPerformed
@@ -3761,27 +3826,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable6 = new Date();
         SimpleDateFormat datePrintTable6 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable6 = datePrintTable6.format(currentPrintTable6);
-        String totalFee = calculateTimePlayTable(startHourTable6, startMinuteTable6, startSecondTable6, endHourTable6, endMinuteTable6, endSecondTable6);
+        String totalFee6 = calculateTimePlayTable(startHourTable6, startMinuteTable6, startSecondTable6, endHourTable6, endMinuteTable6, endSecondTable6);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH6.getText());
+            addTableBill.setString(2, formatPrintTable6);
+            addTableBill.setString(3, TIMESTART6.getText());
+            addTableBill.setString(4, TIMEEND6.getText());
+            addTableBill.setString(5, totalFee6);
+            addTableBill.setInt(6, 6);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint6 = new ParameterReportCheckout(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), totalFee6);
+            ReportManager.getInstance().printReportPayment(dataprint6);
+
+            printBill(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), totalFee6);
+            PrintBtnTable6.setEnabled(false);
+            NameTable6.setText("BÀN 6");
+            NameTable6.setForeground(Color.BLACK);
+            StartBtnTable6.setEnabled(true);
+            StopBtnTable6.setEnabled(false);
+            TIMESTART6.setText("");
+            TIMEEND6.setText("");
+            SDTKH6.setText("");
+            saveInputDataTable6();
+            System.out.println("Start time: " + startHourTable6 + ":" + startMinuteTable6 + ":" + startSecondTable6);
+            System.out.println("End time: " + endHourTable6 + ":" + endMinuteTable6 + ":" + endSecondTable6);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), totalFee);
-        PrintBtnTable6.setEnabled(false);
-        NameTable6.setText("BÀN 6");
-        NameTable6.setForeground(Color.BLACK);
-        StartBtnTable6.setEnabled(true);
-        StopBtnTable6.setEnabled(false);
-        TIMESTART6.setText("");
-        TIMEEND6.setText("");
-        saveInputDataTable6();
-        System.out.println("Start time: " + startHourTable6 + ":" + startMinuteTable6 + ":" + startSecondTable6);
-        System.out.println("End time: " + endHourTable6 + ":" + endMinuteTable6 + ":" + endSecondTable6);
-
     }//GEN-LAST:event_PrintBtnTable6ActionPerformed
 
     private void ResetBtnTable6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnTable6ActionPerformed
@@ -3864,27 +3942,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable7 = new Date();
         SimpleDateFormat datePrintTable7 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable7 = datePrintTable7.format(currentPrintTable7);
-        String totalFee = calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
+        String totalFee7 = calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH7.getText());
+            addTableBill.setString(2, formatPrintTable7);
+            addTableBill.setString(3, TIMESTART7.getText());
+            addTableBill.setString(4, TIMEEND7.getText());
+            addTableBill.setString(5, totalFee7);
+            addTableBill.setInt(6, 7);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint7 = new ParameterReportCheckout(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee7);
+            ReportManager.getInstance().printReportPayment(dataprint7);
+
+            printBill(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee7);
+            PrintBtnTable7.setEnabled(false);
+            NameTable7.setText("BÀN 7");
+            NameTable7.setForeground(Color.BLACK);
+            StartBtnTable7.setEnabled(true);
+            StopBtnTable7.setEnabled(false);
+            TIMESTART7.setText("");
+            TIMEEND7.setText("");
+            SDTKH7.setText("");
+            saveInputDataTable7();
+            System.out.println("Start time: " + startHourTable7 + ":" + startMinuteTable7 + ":" + startSecondTable7);
+            System.out.println("End time: " + endHourTable7 + ":" + endMinuteTable7 + ":" + endSecondTable7);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee);
-        PrintBtnTable7.setEnabled(false);
-        NameTable7.setText("BÀN 7");
-        NameTable7.setForeground(Color.BLACK);
-        StartBtnTable7.setEnabled(true);
-        StopBtnTable7.setEnabled(false);
-        TIMESTART7.setText("");
-        TIMEEND7.setText("");
-        saveInputDataTable7();
-        System.out.println("Start time: " + startHourTable7 + ":" + startMinuteTable7 + ":" + startSecondTable7);
-        System.out.println("End time: " + endHourTable7 + ":" + endMinuteTable7 + ":" + endSecondTable7);
-
     }//GEN-LAST:event_PrintBtnTable7ActionPerformed
 
     private void ResetBtnTable7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnTable7ActionPerformed
@@ -3967,27 +4058,40 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable8 = new Date();
         SimpleDateFormat datePrintTable8 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable8 = datePrintTable8.format(currentPrintTable8);
-        String totalFee = calculateTimePlayTable(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
+        String totalFee8 = calculateTimePlayTable(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
         try {
-            ParameterReportCheckout dataprint = new ParameterReportCheckout(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee);
-            ReportManager.getInstance().printReportPayment(dataprint);
+            // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
+            conn = ConnectXamppMySQL.conn();
+            PreparedStatement addTableBill = conn.prepareStatement("INSERT INTO tablebills (SDT, DATE, STARTTIME, ENDTIME, TABLE_FEE, MABAN) VALUES (?, ?, ?, ?, ?, ?)");
+            addTableBill.setString(1, SDTKH8.getText());
+            addTableBill.setString(2, formatPrintTable8);
+            addTableBill.setString(3, TIMESTART8.getText());
+            addTableBill.setString(4, TIMEEND8.getText());
+            addTableBill.setString(5, totalFee8);
+            addTableBill.setInt(6, 8);
+            addTableBill.executeUpdate();
+
+            ParameterReportCheckout dataprint8 = new ParameterReportCheckout(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee8);
+            ReportManager.getInstance().printReportPayment(dataprint8);
+
+            printBill(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee8);
+            PrintBtnTable8.setEnabled(false);
+            NameTable8.setText("BÀN 8");
+            NameTable8.setForeground(Color.BLACK);
+            StartBtnTable8.setEnabled(true);
+            StopBtnTable8.setEnabled(false);
+            TIMESTART8.setText("");
+            TIMEEND8.setText("");
+            SDTKH8.setText("");
+            saveInputDataTable8();
+            System.out.println("Start time: " + startHourTable8 + ":" + startMinuteTable8 + ":" + startSecondTable8);
+            System.out.println("End time: " + endHourTable8 + ":" + endMinuteTable8 + ":" + endSecondTable8);
+
         }
         catch(Exception e){
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        printBill(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee);
-        PrintBtnTable8.setEnabled(false);
-        NameTable8.setText("BÀN 8");
-        NameTable8.setForeground(Color.BLACK);
-        StartBtnTable8.setEnabled(true);
-        StopBtnTable8.setEnabled(false);
-        TIMESTART8.setText("");
-        TIMEEND8.setText("");
-        saveInputDataTable8();
-        System.out.println("Start time: " + startHourTable8 + ":" + startMinuteTable8 + ":" + startSecondTable8);
-        System.out.println("End time: " + endHourTable8 + ":" + endMinuteTable8 + ":" + endSecondTable8);
-
     }//GEN-LAST:event_PrintBtnTable8ActionPerformed
 
     private void ResetBtnTable8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnTable8ActionPerformed
