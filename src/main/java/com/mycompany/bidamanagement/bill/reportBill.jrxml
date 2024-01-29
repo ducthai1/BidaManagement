@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="200" pageHeight="550" columnWidth="190" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="89856285-9c2e-4a07-a24b-6d42856c46fd">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="32"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="INVOICEID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -41,7 +41,7 @@ WHERE i.INVOICEID = idt.INVOICEID and i.INVOICEID = $P{INVOICEID};]]>
 					<font fontName="Tahoma" size="14" isBold="true"/>
 					<paragraph leftIndent="20"/>
 				</textElement>
-				<text><![CDATA[BIDA CLUB FOX66]]></text>
+				<text><![CDATA[FOX BILLIARDS CLUB]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="89" width="190" height="32" uuid="fe732120-dded-4d01-bdf4-1f223a8f8998"/>

@@ -27,7 +27,7 @@
 					<font fontName="Tahoma" size="14" isBold="true"/>
 					<paragraph leftIndent="20"/>
 				</textElement>
-				<text><![CDATA[BIDA CLUB FOX66]]></text>
+				<text><![CDATA[FOX BILLIARDS CLUB]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="89" width="190" height="32" uuid="7118cd75-16f9-40ef-9d35-13ae99a5d99b"/>
