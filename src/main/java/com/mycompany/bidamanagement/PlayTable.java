@@ -22,25 +22,48 @@ public class PlayTable extends javax.swing.JFrame {
     private DataHolderTable1 dataHolderTable1 = DataHolderTable1.getInstanceTable1();
     private int startHourTable1, startMinuteTable1, startSecondTable1;
     private int endHourTable1, endMinuteTable1, endSecondTable1;
+    
+    private DataHolderTable2 dataHolderTable2 = DataHolderTable2.getInstanceTable2();
     private int startHourTable2, startMinuteTable2, startSecondTable2;
     private int endHourTable2, endMinuteTable2, endSecondTable2;
+    
+    private DataHolderTable3 dataHolderTable3 = DataHolderTable3.getInstanceTable3();
     private int startHourTable3, startMinuteTable3, startSecondTable3;
     private int endHourTable3, endMinuteTable3, endSecondTable3;
+    
+    private DataHolderTable4 dataHolderTable4 = DataHolderTable4.getInstanceTable4();
     private int startHourTable4, startMinuteTable4, startSecondTable4;
     private int endHourTable4, endMinuteTable4, endSecondTable4;
+    
+    private DataHolderTable5 dataHolderTable5 = DataHolderTable5.getInstanceTable5();
     private int startHourTable5, startMinuteTable5, startSecondTable5;
     private int endHourTable5, endMinuteTable5, endSecondTable5;
+    
+    private DataHolderTable6 dataHolderTable6 = DataHolderTable6.getInstanceTable6();
     private int startHourTable6, startMinuteTable6, startSecondTable6;
     private int endHourTable6, endMinuteTable6, endSecondTable6;
+    
+    private DataHolderTable7 dataHolderTable7 = DataHolderTable7.getInstanceTable7();
     private int startHourTable7, startMinuteTable7, startSecondTable7;
     private int endHourTable7, endMinuteTable7, endSecondTable7;
+    
+    private DataHolderTable8 dataHolderTable8 = DataHolderTable8.getInstanceTable8();
     private int startHourTable8, startMinuteTable8, startSecondTable8;
     private int endHourTable8, endMinuteTable8, endSecondTable8;
 
     
     public PlayTable() {
         initComponents();
-        restoreInputDataTable();
+        
+
+        restoreInputDataTable1();
+        restoreInputDataTable2();
+        restoreInputDataTable3();
+        restoreInputDataTable4();
+        restoreInputDataTable5();
+        restoreInputDataTable6();
+        restoreInputDataTable7();
+        restoreInputDataTable8();
         try {
             ReportManager.getInstance().compileReport();
         }
@@ -48,6 +71,43 @@ public class PlayTable extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
+        if ("".equals(NameTable1.getText())) {
+            NameTable1.setText("BÀN 1");
+        }
+        
+        if ("".equals(NameTable1.getText())) {
+            NameTable1.setText("BÀN 1");
+        }
+
+        if ("".equals(NameTable2.getText())) {
+            NameTable2.setText("BÀN 2");
+        }
+
+        if ("".equals(NameTable3.getText())) {
+            NameTable3.setText("BÀN 3");
+        }
+
+        if ("".equals(NameTable4.getText())) {
+            NameTable4.setText("BÀN 4");
+        }
+
+        if ("".equals(NameTable5.getText())) {
+            NameTable5.setText("BÀN 5");
+        }
+
+        if ("".equals(NameTable6.getText())) {
+            NameTable6.setText("BÀN 6");
+        }
+
+        if ("".equals(NameTable7.getText())) {
+            NameTable7.setText("BÀN 7");
+        }
+
+        if ("".equals(NameTable8.getText())) {
+            NameTable8.setText("BÀN 8");
+        }
+
+        
     }
     
     private String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
@@ -80,7 +140,7 @@ public class PlayTable extends javax.swing.JFrame {
     }
     
     // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-    private void saveInputDataTable() {
+    private void saveInputDataTable1() {
         dataHolderTable1.setInputDataSTARTTable1(TIMESTART1.getText());
         dataHolderTable1.setInputDataENDTable1(TIMEEND1.getText());
         dataHolderTable1.setInputDataNameTable1(NameTable1.getText());
@@ -99,132 +159,10 @@ public class PlayTable extends javax.swing.JFrame {
         dataHolderTable1.setEndMinuteTable1(endMinuteTable1);
         dataHolderTable1.setEndSecondTable1(endSecondTable1);
         
-        dataHolderTable1.setInputDataSTARTTable2(TIMESTART2.getText());
-        dataHolderTable1.setInputDataENDTable2(TIMEEND2.getText());
-        dataHolderTable1.setInputDataNameTable2(NameTable2.getText());
-        // Chuyển đổi màu sắc của Table2Name thành mã màu RGB và lưu vào DataHolder
-        Color color2 = NameTable2.getForeground();
-        String colorAsString2 = String.format("%d,%d,%d", color2.getRed(), color2.getGreen(), color2.getBlue());
-        dataHolderTable1.setInputColorDataNameTable2(colorAsString2);
-        dataHolderTable1.setStartBtnEnabledTable2(StartBtnTable2.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable2(StopBtnTable2.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable2(PrintBtnTable2.isEnabled());
-
-        dataHolderTable1.setStartHourTable2(startHourTable2);
-        dataHolderTable1.setStartMinuteTable2(startMinuteTable2);
-        dataHolderTable1.setStartSecondTable2(startSecondTable2);
-        dataHolderTable1.setEndHourTable2(endHourTable2);
-        dataHolderTable1.setEndMinuteTable2(endMinuteTable2);
-        dataHolderTable1.setEndSecondTable2(endSecondTable2);
-        
-        dataHolderTable1.setInputDataSTARTTable3(TIMESTART3.getText());
-        dataHolderTable1.setInputDataENDTable3(TIMEEND3.getText());
-        dataHolderTable1.setInputDataNameTable3(NameTable3.getText());
-        // Chuyển đổi màu sắc của Table3Name thành mã màu RGB và lưu vào DataHolder
-        Color color3 = NameTable3.getForeground();
-        String colorAsString3 = String.format("%d,%d,%d", color3.getRed(), color3.getGreen(), color3.getBlue());
-        dataHolderTable1.setInputColorDataNameTable3(colorAsString3);
-        dataHolderTable1.setStartBtnEnabledTable3(StartBtnTable3.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable3(StopBtnTable3.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable3(PrintBtnTable3.isEnabled());
-
-        dataHolderTable1.setStartHourTable3(startHourTable3);
-        dataHolderTable1.setStartMinuteTable3(startMinuteTable3);
-        dataHolderTable1.setStartSecondTable3(startSecondTable3);
-        dataHolderTable1.setEndHourTable3(endHourTable3);
-        dataHolderTable1.setEndMinuteTable3(endMinuteTable3);
-        dataHolderTable1.setEndSecondTable3(endSecondTable3);
-        
-        dataHolderTable1.setInputDataSTARTTable4(TIMESTART4.getText());
-        dataHolderTable1.setInputDataENDTable4(TIMEEND4.getText());
-        dataHolderTable1.setInputDataNameTable4(NameTable4.getText());
-        Color color4 = NameTable4.getForeground();
-        String colorAsString4 = String.format("%d,%d,%d", color4.getRed(), color4.getGreen(), color4.getBlue());
-        dataHolderTable1.setInputColorDataNameTable4(colorAsString4);
-        dataHolderTable1.setStartBtnEnabledTable4(StartBtnTable4.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable4(StopBtnTable4.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable4(PrintBtnTable4.isEnabled());
-
-        dataHolderTable1.setStartHourTable4(startHourTable4);
-        dataHolderTable1.setStartMinuteTable4(startMinuteTable4);
-        dataHolderTable1.setStartSecondTable4(startSecondTable4);
-        dataHolderTable1.setEndHourTable4(endHourTable4);
-        dataHolderTable1.setEndMinuteTable4(endMinuteTable4);
-        dataHolderTable1.setEndSecondTable4(endSecondTable4);
-        
-        dataHolderTable1.setInputDataSTARTTable5(TIMESTART5.getText());
-        dataHolderTable1.setInputDataENDTable5(TIMEEND5.getText());
-        dataHolderTable1.setInputDataNameTable5(NameTable5.getText());
-        Color color5 = NameTable5.getForeground();
-        String colorAsString5 = String.format("%d,%d,%d", color5.getRed(), color5.getGreen(), color5.getBlue());
-        dataHolderTable1.setInputColorDataNameTable5(colorAsString5);
-        dataHolderTable1.setStartBtnEnabledTable5(StartBtnTable5.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable5(StopBtnTable5.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable5(PrintBtnTable5.isEnabled());
-
-        dataHolderTable1.setStartHourTable5(startHourTable5);
-        dataHolderTable1.setStartMinuteTable5(startMinuteTable5);
-        dataHolderTable1.setStartSecondTable5(startSecondTable5);
-        dataHolderTable1.setEndHourTable5(endHourTable5);
-        dataHolderTable1.setEndMinuteTable5(endMinuteTable5);
-        dataHolderTable1.setEndSecondTable5(endSecondTable5);
-
-        dataHolderTable1.setInputDataSTARTTable6(TIMESTART6.getText());
-        dataHolderTable1.setInputDataENDTable6(TIMEEND6.getText());
-        dataHolderTable1.setInputDataNameTable6(NameTable6.getText());
-        Color color6 = NameTable6.getForeground();
-        String colorAsString6 = String.format("%d,%d,%d", color6.getRed(), color6.getGreen(), color6.getBlue());
-        dataHolderTable1.setInputColorDataNameTable6(colorAsString6);
-        dataHolderTable1.setStartBtnEnabledTable6(StartBtnTable6.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable6(StopBtnTable6.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable6(PrintBtnTable6.isEnabled());
-
-        dataHolderTable1.setStartHourTable6(startHourTable6);
-        dataHolderTable1.setStartMinuteTable6(startMinuteTable6);
-        dataHolderTable1.setStartSecondTable6(startSecondTable6);
-        dataHolderTable1.setEndHourTable6(endHourTable6);
-        dataHolderTable1.setEndMinuteTable6(endMinuteTable6);
-        dataHolderTable1.setEndSecondTable6(endSecondTable6);
-
-        
-        dataHolderTable1.setInputDataSTARTTable7(TIMESTART7.getText());
-        dataHolderTable1.setInputDataENDTable7(TIMEEND7.getText());
-        dataHolderTable1.setInputDataNameTable7(NameTable7.getText());
-        Color color7 = NameTable7.getForeground();
-        String colorAsString7 = String.format("%d,%d,%d", color7.getRed(), color7.getGreen(), color7.getBlue());
-        dataHolderTable1.setInputColorDataNameTable7(colorAsString7);
-        dataHolderTable1.setStartBtnEnabledTable7(StartBtnTable7.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable7(StopBtnTable7.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable7(PrintBtnTable7.isEnabled());
-
-        dataHolderTable1.setStartHourTable7(startHourTable7);
-        dataHolderTable1.setStartMinuteTable7(startMinuteTable7);
-        dataHolderTable1.setStartSecondTable7(startSecondTable7);
-        dataHolderTable1.setEndHourTable7(endHourTable7);
-        dataHolderTable1.setEndMinuteTable7(endMinuteTable7);
-        dataHolderTable1.setEndSecondTable7(endSecondTable7);
-
-        dataHolderTable1.setInputDataSTARTTable8(TIMESTART8.getText());
-        dataHolderTable1.setInputDataENDTable8(TIMEEND8.getText());
-        dataHolderTable1.setInputDataNameTable8(NameTable8.getText());
-        Color color8 = NameTable8.getForeground();
-        String colorAsString8 = String.format("%d,%d,%d", color8.getRed(), color8.getGreen(), color8.getBlue());
-        dataHolderTable1.setInputColorDataNameTable8(colorAsString8);
-        dataHolderTable1.setStartBtnEnabledTable8(StartBtnTable8.isEnabled());
-        dataHolderTable1.setStopBtnEnabledTable8(StopBtnTable8.isEnabled());
-        dataHolderTable1.setPrintBtnEnabledTable8(PrintBtnTable8.isEnabled());
-
-        dataHolderTable1.setStartHourTable8(startHourTable8);
-        dataHolderTable1.setStartMinuteTable8(startMinuteTable8);
-        dataHolderTable1.setStartSecondTable8(startSecondTable8);
-        dataHolderTable1.setEndHourTable8(endHourTable8);
-        dataHolderTable1.setEndMinuteTable8(endMinuteTable8);
-        dataHolderTable1.setEndSecondTable8(endSecondTable8);
-
     }
 
     // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-    private void restoreInputDataTable() {
+    private void restoreInputDataTable1() {
         TIMESTART1.setText(dataHolderTable1.getInputDataSTARTTable1());
         TIMEEND1.setText(dataHolderTable1.getInputDataENDTable1());
         NameTable1.setText(dataHolderTable1.getInputDataNameTable1());
@@ -250,534 +188,356 @@ public class PlayTable extends javax.swing.JFrame {
         endMinuteTable1 = dataHolderTable1.getEndMinuteTable1();
         endSecondTable1 = dataHolderTable1.getEndSecondTable1();
         
-        
-        
-        TIMESTART2.setText(dataHolderTable1.getInputDataSTARTTable2());
-        TIMEEND2.setText(dataHolderTable1.getInputDataENDTable2());
-        NameTable2.setText(dataHolderTable1.getInputDataNameTable2());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString2 = dataHolderTable1.getInputColorDataNameTable2();
-        String[] colorComponents2 = colorAsString2.split(",");
-        if (colorComponents2.length == 3) {
-            int red = Integer.parseInt(colorComponents2[0]);
-            int green = Integer.parseInt(colorComponents2[1]);
-            int blue = Integer.parseInt(colorComponents2[2]);
-            Color color2 = new Color(red, green, blue);
-            NameTable2.setForeground(color2);
-        }
-        StartBtnTable2.setEnabled(dataHolderTable1.isStartBtnEnabledTable2());
-        StopBtnTable2.setEnabled(dataHolderTable1.isStopBtnEnabledTable2());
-        PrintBtnTable2.setEnabled(dataHolderTable1.isPrintBtnEnabledTable2());
-
-        startHourTable2 = dataHolderTable1.getStartHourTable2();
-        startMinuteTable2 = dataHolderTable1.getStartMinuteTable2();
-        startSecondTable2 = dataHolderTable1.getStartSecondTable2();
-        endHourTable2 = dataHolderTable1.getEndHourTable2();
-        endMinuteTable2 = dataHolderTable1.getEndMinuteTable2();
-        endSecondTable2 = dataHolderTable1.getEndSecondTable2();
-
-        TIMESTART3.setText(dataHolderTable1.getInputDataSTARTTable3());
-        TIMEEND3.setText(dataHolderTable1.getInputDataENDTable3());
-        NameTable3.setText(dataHolderTable1.getInputDataNameTable3());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString3 = dataHolderTable1.getInputColorDataNameTable3();
-        String[] colorComponents3 = colorAsString3.split(",");
-        if (colorComponents3.length == 3) {
-            int red = Integer.parseInt(colorComponents3[0]);
-            int green = Integer.parseInt(colorComponents3[1]);
-            int blue = Integer.parseInt(colorComponents3[2]);
-            Color color3 = new Color(red, green, blue);
-            NameTable3.setForeground(color3);
-        }
-        StartBtnTable3.setEnabled(dataHolderTable1.isStartBtnEnabledTable3());
-        StopBtnTable3.setEnabled(dataHolderTable1.isStopBtnEnabledTable3());
-        PrintBtnTable3.setEnabled(dataHolderTable1.isPrintBtnEnabledTable3());
-
-        startHourTable3 = dataHolderTable1.getStartHourTable3();
-        startMinuteTable3 = dataHolderTable1.getStartMinuteTable3();
-        startSecondTable3 = dataHolderTable1.getStartSecondTable3();
-        endHourTable3 = dataHolderTable1.getEndHourTable3();
-        endMinuteTable3 = dataHolderTable1.getEndMinuteTable3();
-        endSecondTable3 = dataHolderTable1.getEndSecondTable3();
-
-        // Thay đổi từ bảng 1 sang bảng 4
-        TIMESTART4.setText(dataHolderTable1.getInputDataSTARTTable4());
-        TIMEEND4.setText(dataHolderTable1.getInputDataENDTable4());
-        NameTable4.setText(dataHolderTable1.getInputDataNameTable4());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString4 = dataHolderTable1.getInputColorDataNameTable4();
-        String[] colorComponents4 = colorAsString4.split(",");
-        if (colorComponents4.length == 3) {
-            int red = Integer.parseInt(colorComponents4[0]);
-            int green = Integer.parseInt(colorComponents4[1]);
-            int blue = Integer.parseInt(colorComponents4[2]);
-            Color color4 = new Color(red, green, blue);
-            NameTable4.setForeground(color4);
-        }
-        StartBtnTable4.setEnabled(dataHolderTable1.isStartBtnEnabledTable4());
-        StopBtnTable4.setEnabled(dataHolderTable1.isStopBtnEnabledTable4());
-        PrintBtnTable4.setEnabled(dataHolderTable1.isPrintBtnEnabledTable4());
-
-        startHourTable4 = dataHolderTable1.getStartHourTable4();
-        startMinuteTable4 = dataHolderTable1.getStartMinuteTable4();
-        startSecondTable4 = dataHolderTable1.getStartSecondTable4();
-        endHourTable4 = dataHolderTable1.getEndHourTable4();
-        endMinuteTable4 = dataHolderTable1.getEndMinuteTable4();
-        endSecondTable4 = dataHolderTable1.getEndSecondTable4();
-
-        // Thay đổi từ bảng 1 sang bảng 5
-        TIMESTART5.setText(dataHolderTable1.getInputDataSTARTTable5());
-        TIMEEND5.setText(dataHolderTable1.getInputDataENDTable5());
-        NameTable5.setText(dataHolderTable1.getInputDataNameTable5());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString5 = dataHolderTable1.getInputColorDataNameTable5();
-        String[] colorComponents5 = colorAsString5.split(",");
-        if (colorComponents5.length == 3) {
-            int red = Integer.parseInt(colorComponents5[0]);
-            int green = Integer.parseInt(colorComponents5[1]);
-            int blue = Integer.parseInt(colorComponents5[2]);
-            Color color5 = new Color(red, green, blue);
-            NameTable5.setForeground(color5);
-        }
-        StartBtnTable5.setEnabled(dataHolderTable1.isStartBtnEnabledTable5());
-        StopBtnTable5.setEnabled(dataHolderTable1.isStopBtnEnabledTable5());
-        PrintBtnTable5.setEnabled(dataHolderTable1.isPrintBtnEnabledTable5());
-
-        startHourTable5 = dataHolderTable1.getStartHourTable5();
-        startMinuteTable5 = dataHolderTable1.getStartMinuteTable5();
-        startSecondTable5 = dataHolderTable1.getStartSecondTable5();
-        endHourTable5 = dataHolderTable1.getEndHourTable5();
-        endMinuteTable5 = dataHolderTable1.getEndMinuteTable5();
-        endSecondTable5 = dataHolderTable1.getEndSecondTable5();
-
-        // Thay đổi từ bảng 1 sang bảng 6
-        TIMESTART6.setText(dataHolderTable1.getInputDataSTARTTable6());
-        TIMEEND6.setText(dataHolderTable1.getInputDataENDTable6());
-        NameTable6.setText(dataHolderTable1.getInputDataNameTable6());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString6 = dataHolderTable1.getInputColorDataNameTable6();
-        String[] colorComponents6 = colorAsString6.split(",");
-        if (colorComponents6.length == 3) {
-            int red = Integer.parseInt(colorComponents6[0]);
-            int green = Integer.parseInt(colorComponents6[1]);
-            int blue = Integer.parseInt(colorComponents6[2]);
-            Color color6 = new Color(red, green, blue);
-            NameTable6.setForeground(color6);
-        }
-        StartBtnTable6.setEnabled(dataHolderTable1.isStartBtnEnabledTable6());
-        StopBtnTable6.setEnabled(dataHolderTable1.isStopBtnEnabledTable6());
-        PrintBtnTable6.setEnabled(dataHolderTable1.isPrintBtnEnabledTable6());
-
-        startHourTable6 = dataHolderTable1.getStartHourTable6();
-        startMinuteTable6 = dataHolderTable1.getStartMinuteTable6();
-        startSecondTable6 = dataHolderTable1.getStartSecondTable6();
-        endHourTable6 = dataHolderTable1.getEndHourTable6();
-        endMinuteTable6 = dataHolderTable1.getEndMinuteTable6();
-        endSecondTable6 = dataHolderTable1.getEndSecondTable6();
-
-        // Thay đổi từ bảng 1 sang bảng 7
-        TIMESTART7.setText(dataHolderTable1.getInputDataSTARTTable7());
-        TIMEEND7.setText(dataHolderTable1.getInputDataENDTable7());
-        NameTable7.setText(dataHolderTable1.getInputDataNameTable7());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString7 = dataHolderTable1.getInputColorDataNameTable7();
-        String[] colorComponents7 = colorAsString7.split(",");
-        if (colorComponents7.length == 3) {
-            int red = Integer.parseInt(colorComponents7[0]);
-            int green = Integer.parseInt(colorComponents7[1]);
-            int blue = Integer.parseInt(colorComponents7[2]);
-            Color color7 = new Color(red, green, blue);
-            NameTable7.setForeground(color7);
-        }
-        StartBtnTable7.setEnabled(dataHolderTable1.isStartBtnEnabledTable7());
-        StopBtnTable7.setEnabled(dataHolderTable1.isStopBtnEnabledTable7());
-        PrintBtnTable7.setEnabled(dataHolderTable1.isPrintBtnEnabledTable7());
-
-        startHourTable7 = dataHolderTable1.getStartHourTable7();
-        startMinuteTable7 = dataHolderTable1.getStartMinuteTable7();
-        startSecondTable7 = dataHolderTable1.getStartSecondTable7();
-        endHourTable7 = dataHolderTable1.getEndHourTable7();
-        endMinuteTable7 = dataHolderTable1.getEndMinuteTable7();
-        endSecondTable7 = dataHolderTable1.getEndSecondTable7();
-
-        // Thay đổi từ bảng 1 sang bảng 8
-        TIMESTART8.setText(dataHolderTable1.getInputDataSTARTTable8());
-        TIMEEND8.setText(dataHolderTable1.getInputDataENDTable8());
-        NameTable8.setText(dataHolderTable1.getInputDataNameTable8());
-
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString8 = dataHolderTable1.getInputColorDataNameTable8();
-        String[] colorComponents8 = colorAsString8.split(",");
-        if (colorComponents8.length == 3) {
-            int red = Integer.parseInt(colorComponents8[0]);
-            int green = Integer.parseInt(colorComponents8[1]);
-            int blue = Integer.parseInt(colorComponents8[2]);
-            Color color8 = new Color(red, green, blue);
-            NameTable8.setForeground(color8);
-        }
-        StartBtnTable8.setEnabled(dataHolderTable1.isStartBtnEnabledTable8());
-        StopBtnTable8.setEnabled(dataHolderTable1.isStopBtnEnabledTable8());
-        PrintBtnTable8.setEnabled(dataHolderTable1.isPrintBtnEnabledTable8());
-
-        startHourTable8 = dataHolderTable1.getStartHourTable8();
-        startMinuteTable8 = dataHolderTable1.getStartMinuteTable8();
-        startSecondTable8 = dataHolderTable1.getStartSecondTable8();
-        endHourTable8 = dataHolderTable1.getEndHourTable8();
-        endMinuteTable8 = dataHolderTable1.getEndMinuteTable8();
-        endSecondTable8 = dataHolderTable1.getEndSecondTable8();
-
-
-        
     }
     
+    
     // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable2() {
-//        dataHolderTable1.setInputDataSTARTTable2(TIMESTART2.getText());
-//        dataHolderTable1.setInputDataENDTable2(TIMEEND2.getText());
-//        dataHolderTable1.setInputDataNameTable2(NameTable2.getText());
-//        // Chuyển đổi màu sắc của Table2Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable2.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable2(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable2(StartBtnTable2.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable2(StopBtnTable2.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable2(PrintBtnTable2.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable2(startHourTable2);
-//        dataHolderTable1.setStartMinuteTable2(startMinuteTable2);
-//        dataHolderTable1.setStartSecondTable2(startSecondTable2);
-//        dataHolderTable1.setEndHourTable2(endHourTable2);
-//        dataHolderTable1.setEndMinuteTable2(endMinuteTable2);
-//        dataHolderTable1.setEndSecondTable2(endSecondTable2);
-//    }
+    private void saveInputDataTable2() {
+        dataHolderTable2.setInputDataSTARTTable2(TIMESTART2.getText());
+        dataHolderTable2.setInputDataENDTable2(TIMEEND2.getText());
+        dataHolderTable2.setInputDataNameTable2(NameTable2.getText());
+        // Chuyển đổi màu sắc của Table2Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable2.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable2.setInputColorDataNameTable2(colorAsString);
+        dataHolderTable2.setStartBtnEnabledTable2(StartBtnTable2.isEnabled());
+        dataHolderTable2.setStopBtnEnabledTable2(StopBtnTable2.isEnabled());
+        dataHolderTable2.setPrintBtnEnabledTable2(PrintBtnTable2.isEnabled());
+
+        dataHolderTable2.setStartHourTable2(startHourTable2);
+        dataHolderTable2.setStartMinuteTable2(startMinuteTable2);
+        dataHolderTable2.setStartSecondTable2(startSecondTable2);
+        dataHolderTable2.setEndHourTable2(endHourTable2);
+        dataHolderTable2.setEndMinuteTable2(endMinuteTable2);
+        dataHolderTable2.setEndSecondTable2(endSecondTable2);
+    }
 
     // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable2() {
-//        TIMESTART2.setText(dataHolderTable1.getInputDataSTARTTable2());
-//        TIMEEND2.setText(dataHolderTable1.getInputDataENDTable2());
-//        NameTable2.setText(dataHolderTable1.getInputDataNameTable2());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable2();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable2.setForeground(color);
-//        }
-//        StartBtnTable2.setEnabled(dataHolderTable1.isStartBtnEnabledTable2());
-//        StopBtnTable2.setEnabled(dataHolderTable1.isStopBtnEnabledTable2());
-//        PrintBtnTable2.setEnabled(dataHolderTable1.isPrintBtnEnabledTable2());
-//
-//        startHourTable2 = dataHolderTable1.getStartHourTable2();
-//        startMinuteTable2 = dataHolderTable1.getStartMinuteTable2();
-//        startSecondTable2 = dataHolderTable1.getStartSecondTable2();
-//        endHourTable2 = dataHolderTable1.getEndHourTable2();
-//        endMinuteTable2 = dataHolderTable1.getEndMinuteTable2();
-//        endSecondTable2 = dataHolderTable1.getEndSecondTable2();
-//    }
+    private void restoreInputDataTable2() {
+        TIMESTART2.setText(dataHolderTable2.getInputDataSTARTTable2());
+        TIMEEND2.setText(dataHolderTable2.getInputDataENDTable2());
+        NameTable2.setText(dataHolderTable2.getInputDataNameTable2());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable2.getInputColorDataNameTable2();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable2.setForeground(color);
+        }
+        StartBtnTable2.setEnabled(dataHolderTable2.isStartBtnEnabledTable2());
+        StopBtnTable2.setEnabled(dataHolderTable2.isStopBtnEnabledTable2());
+        PrintBtnTable2.setEnabled(dataHolderTable2.isPrintBtnEnabledTable2());
+
+        startHourTable2 = dataHolderTable2.getStartHourTable2();
+        startMinuteTable2 = dataHolderTable2.getStartMinuteTable2();
+        startSecondTable2 = dataHolderTable2.getStartSecondTable2();
+        endHourTable2 = dataHolderTable2.getEndHourTable2();
+        endMinuteTable2 = dataHolderTable2.getEndMinuteTable2();
+        endSecondTable2 = dataHolderTable2.getEndSecondTable2();
+    }
 
     // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable3() {
-//        dataHolderTable1.setInputDataSTARTTable3(TIMESTART3.getText());
-//        dataHolderTable1.setInputDataENDTable3(TIMEEND3.getText());
-//        dataHolderTable1.setInputDataNameTable3(NameTable3.getText());
-//        // Chuyển đổi màu sắc của Table3Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable3.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable3(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable3(StartBtnTable3.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable3(StopBtnTable3.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable3(PrintBtnTable3.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable3(startHourTable3);
-//        dataHolderTable1.setStartMinuteTable3(startMinuteTable3);
-//        dataHolderTable1.setStartSecondTable3(startSecondTable3);
-//        dataHolderTable1.setEndHourTable3(endHourTable3);
-//        dataHolderTable1.setEndMinuteTable3(endMinuteTable3);
-//        dataHolderTable1.setEndSecondTable3(endSecondTable3);
-//    }
+    private void saveInputDataTable3() {
+        dataHolderTable3.setInputDataSTARTTable3(TIMESTART3.getText());
+        dataHolderTable3.setInputDataENDTable3(TIMEEND3.getText());
+        dataHolderTable3.setInputDataNameTable3(NameTable3.getText());
+        // Chuyển đổi màu sắc của Table3Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable3.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable3.setInputColorDataNameTable3(colorAsString);
+        dataHolderTable3.setStartBtnEnabledTable3(StartBtnTable3.isEnabled());
+        dataHolderTable3.setStopBtnEnabledTable3(StopBtnTable3.isEnabled());
+        dataHolderTable3.setPrintBtnEnabledTable3(PrintBtnTable3.isEnabled());
+
+        dataHolderTable3.setStartHourTable3(startHourTable3);
+        dataHolderTable3.setStartMinuteTable3(startMinuteTable3);
+        dataHolderTable3.setStartSecondTable3(startSecondTable3);
+        dataHolderTable3.setEndHourTable3(endHourTable3);
+        dataHolderTable3.setEndMinuteTable3(endMinuteTable3);
+        dataHolderTable3.setEndSecondTable3(endSecondTable3);
+    }
 
     // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable3() {
-//        TIMESTART3.setText(dataHolderTable1.getInputDataSTARTTable3());
-//        TIMEEND3.setText(dataHolderTable1.getInputDataENDTable3());
-//        NameTable3.setText(dataHolderTable1.getInputDataNameTable3());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable3();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable3.setForeground(color);
-//        }
-//        StartBtnTable3.setEnabled(dataHolderTable1.isStartBtnEnabledTable3());
-//        StopBtnTable3.setEnabled(dataHolderTable1.isStopBtnEnabledTable3());
-//        PrintBtnTable3.setEnabled(dataHolderTable1.isPrintBtnEnabledTable3());
-//
-//        startHourTable3 = dataHolderTable1.getStartHourTable3();
-//        startMinuteTable3 = dataHolderTable1.getStartMinuteTable3();
-//        startSecondTable3 = dataHolderTable1.getStartSecondTable3();
-//        endHourTable3 = dataHolderTable1.getEndHourTable3();
-//        endMinuteTable3 = dataHolderTable1.getEndMinuteTable3();
-//        endSecondTable3 = dataHolderTable1.getEndSecondTable3();
-//    }
-//    
-//    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable4() {
-//        dataHolderTable1.setInputDataSTARTTable4(TIMESTART4.getText());
-//        dataHolderTable1.setInputDataENDTable4(TIMEEND4.getText());
-//        dataHolderTable1.setInputDataNameTable4(NameTable4.getText());
-//        // Chuyển đổi màu sắc của Table4Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable4.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable4(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable4(StartBtnTable4.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable4(StopBtnTable4.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable4(PrintBtnTable4.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable4(startHourTable4);
-//        dataHolderTable1.setStartMinuteTable4(startMinuteTable4);
-//        dataHolderTable1.setStartSecondTable4(startSecondTable4);
-//        dataHolderTable1.setEndHourTable4(endHourTable4);
-//        dataHolderTable1.setEndMinuteTable4(endMinuteTable4);
-//        dataHolderTable1.setEndSecondTable4(endSecondTable4);
-//    }
-//
-//    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable4() {
-//        TIMESTART4.setText(dataHolderTable1.getInputDataSTARTTable4());
-//        TIMEEND4.setText(dataHolderTable1.getInputDataENDTable4());
-//        NameTable4.setText(dataHolderTable1.getInputDataNameTable4());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable4();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable4.setForeground(color);
-//        }
-//        StartBtnTable4.setEnabled(dataHolderTable1.isStartBtnEnabledTable4());
-//        StopBtnTable4.setEnabled(dataHolderTable1.isStopBtnEnabledTable4());
-//        PrintBtnTable4.setEnabled(dataHolderTable1.isPrintBtnEnabledTable4());
-//
-//        startHourTable4 = dataHolderTable1.getStartHourTable4();
-//        startMinuteTable4 = dataHolderTable1.getStartMinuteTable4();
-//        startSecondTable4 = dataHolderTable1.getStartSecondTable4();
-//        endHourTable4 = dataHolderTable1.getEndHourTable4();
-//        endMinuteTable4 = dataHolderTable1.getEndMinuteTable4();
-//        endSecondTable4 = dataHolderTable1.getEndSecondTable4();
-//    }
-//
-//    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable5() {
-//        dataHolderTable1.setInputDataSTARTTable5(TIMESTART5.getText());
-//        dataHolderTable1.setInputDataENDTable5(TIMEEND5.getText());
-//        dataHolderTable1.setInputDataNameTable5(NameTable5.getText());
-//        // Chuyển đổi màu sắc của Table5Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable5.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable5(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable5(StartBtnTable5.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable5(StopBtnTable5.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable5(PrintBtnTable5.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable5(startHourTable5);
-//        dataHolderTable1.setStartMinuteTable5(startMinuteTable5);
-//        dataHolderTable1.setStartSecondTable5(startSecondTable5);
-//        dataHolderTable1.setEndHourTable5(endHourTable5);
-//        dataHolderTable1.setEndMinuteTable5(endMinuteTable5);
-//        dataHolderTable1.setEndSecondTable5(endSecondTable5);
-//    }
-//
-//    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable5() {
-//        TIMESTART5.setText(dataHolderTable1.getInputDataSTARTTable5());
-//        TIMEEND5.setText(dataHolderTable1.getInputDataENDTable5());
-//        NameTable5.setText(dataHolderTable1.getInputDataNameTable5());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable5();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable5.setForeground(color);
-//        }
-//        StartBtnTable5.setEnabled(dataHolderTable1.isStartBtnEnabledTable5());
-//        StopBtnTable5.setEnabled(dataHolderTable1.isStopBtnEnabledTable5());
-//        PrintBtnTable5.setEnabled(dataHolderTable1.isPrintBtnEnabledTable5());
-//
-//        startHourTable5 = dataHolderTable1.getStartHourTable5();
-//        startMinuteTable5 = dataHolderTable1.getStartMinuteTable5();
-//        startSecondTable5 = dataHolderTable1.getStartSecondTable5();
-//        endHourTable5 = dataHolderTable1.getEndHourTable5();
-//        endMinuteTable5 = dataHolderTable1.getEndMinuteTable5();
-//        endSecondTable5 = dataHolderTable1.getEndSecondTable5();
-//    }
-//
-//    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable6() {
-//        dataHolderTable1.setInputDataSTARTTable6(TIMESTART6.getText());
-//        dataHolderTable1.setInputDataENDTable6(TIMEEND6.getText());
-//        dataHolderTable1.setInputDataNameTable6(NameTable6.getText());
-//        // Chuyển đổi màu sắc của Table6Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable6.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable6(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable6(StartBtnTable6.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable6(StopBtnTable6.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable6(PrintBtnTable6.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable6(startHourTable6);
-//        dataHolderTable1.setStartMinuteTable6(startMinuteTable6);
-//        dataHolderTable1.setStartSecondTable6(startSecondTable6);
-//        dataHolderTable1.setEndHourTable6(endHourTable6);
-//        dataHolderTable1.setEndMinuteTable6(endMinuteTable6);
-//        dataHolderTable1.setEndSecondTable6(endSecondTable6);
-//    }
-//
-//    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable6() {
-//        TIMESTART6.setText(dataHolderTable1.getInputDataSTARTTable6());
-//        TIMEEND6.setText(dataHolderTable1.getInputDataENDTable6());
-//        NameTable6.setText(dataHolderTable1.getInputDataNameTable6());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable6();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable6.setForeground(color);
-//        }
-//        StartBtnTable6.setEnabled(dataHolderTable1.isStartBtnEnabledTable6());
-//        StopBtnTable6.setEnabled(dataHolderTable1.isStopBtnEnabledTable6());
-//        PrintBtnTable6.setEnabled(dataHolderTable1.isPrintBtnEnabledTable6());
-//
-//        startHourTable6 = dataHolderTable1.getStartHourTable6();
-//        startMinuteTable6 = dataHolderTable1.getStartMinuteTable6();
-//        startSecondTable6 = dataHolderTable1.getStartSecondTable6();
-//        endHourTable6 = dataHolderTable1.getEndHourTable6();
-//        endMinuteTable6 = dataHolderTable1.getEndMinuteTable6();
-//        endSecondTable6 = dataHolderTable1.getEndSecondTable6();
-//    }
-//
-//    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable7() {
-//        dataHolderTable1.setInputDataSTARTTable7(TIMESTART7.getText());
-//        dataHolderTable1.setInputDataENDTable7(TIMEEND7.getText());
-//        dataHolderTable1.setInputDataNameTable7(NameTable7.getText());
-//        // Chuyển đổi màu sắc của Table7Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable7.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable7(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable7(StartBtnTable7.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable7(StopBtnTable7.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable7(PrintBtnTable7.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable7(startHourTable7);
-//        dataHolderTable1.setStartMinuteTable7(startMinuteTable7);
-//        dataHolderTable1.setStartSecondTable7(startSecondTable7);
-//        dataHolderTable1.setEndHourTable7(endHourTable7);
-//        dataHolderTable1.setEndMinuteTable7(endMinuteTable7);
-//        dataHolderTable1.setEndSecondTable7(endSecondTable7);
-//    }
-//
-//    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable7() {
-//        TIMESTART7.setText(dataHolderTable1.getInputDataSTARTTable7());
-//        TIMEEND7.setText(dataHolderTable1.getInputDataENDTable7());
-//        NameTable7.setText(dataHolderTable1.getInputDataNameTable7());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable7();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable7.setForeground(color);
-//        }
-//        StartBtnTable7.setEnabled(dataHolderTable1.isStartBtnEnabledTable7());
-//        StopBtnTable7.setEnabled(dataHolderTable1.isStopBtnEnabledTable7());
-//        PrintBtnTable7.setEnabled(dataHolderTable1.isPrintBtnEnabledTable7());
-//
-//        startHourTable7 = dataHolderTable1.getStartHourTable7();
-//        startMinuteTable7 = dataHolderTable1.getStartMinuteTable7();
-//        startSecondTable7 = dataHolderTable1.getStartSecondTable7();
-//        endHourTable7 = dataHolderTable1.getEndHourTable7();
-//        endMinuteTable7 = dataHolderTable1.getEndMinuteTable7();
-//        endSecondTable7 = dataHolderTable1.getEndSecondTable7();
-//    }
-//
-//    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
-//    private void saveInputDataTable8() {
-//        dataHolderTable1.setInputDataSTARTTable8(TIMESTART8.getText());
-//        dataHolderTable1.setInputDataENDTable8(TIMEEND8.getText());
-//        dataHolderTable1.setInputDataNameTable8(NameTable8.getText());
-//        // Chuyển đổi màu sắc của Table8Name thành mã màu RGB và lưu vào DataHolder
-//        Color color = NameTable8.getForeground();
-//        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-//        dataHolderTable1.setInputColorDataNameTable8(colorAsString);
-//        dataHolderTable1.setStartBtnEnabledTable8(StartBtnTable8.isEnabled());
-//        dataHolderTable1.setStopBtnEnabledTable8(StopBtnTable8.isEnabled());
-//        dataHolderTable1.setPrintBtnEnabledTable8(PrintBtnTable8.isEnabled());
-//
-//        dataHolderTable1.setStartHourTable8(startHourTable8);
-//        dataHolderTable1.setStartMinuteTable8(startMinuteTable8);
-//        dataHolderTable1.setStartSecondTable8(startSecondTable8);
-//        dataHolderTable1.setEndHourTable8(endHourTable8);
-//        dataHolderTable1.setEndMinuteTable8(endMinuteTable8);
-//        dataHolderTable1.setEndSecondTable8(endSecondTable8);
-//    }
-//
-//    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-//    private void restoreInputDataTable8() {
-//        TIMESTART8.setText(dataHolderTable1.getInputDataSTARTTable8());
-//        TIMEEND8.setText(dataHolderTable1.getInputDataENDTable8());
-//        NameTable8.setText(dataHolderTable1.getInputDataNameTable8());
-//
-//        // Khôi phục màu sắc của NameTable từ DataHolder
-//        String colorAsString = dataHolderTable1.getInputColorDataNameTable8();
-//        String[] colorComponents = colorAsString.split(",");
-//        if (colorComponents.length == 3) {
-//            int red = Integer.parseInt(colorComponents[0]);
-//            int green = Integer.parseInt(colorComponents[1]);
-//            int blue = Integer.parseInt(colorComponents[2]);
-//            Color color = new Color(red, green, blue);
-//            NameTable8.setForeground(color);
-//        }
-//        StartBtnTable8.setEnabled(dataHolderTable1.isStartBtnEnabledTable8());
-//        StopBtnTable8.setEnabled(dataHolderTable1.isStopBtnEnabledTable8());
-//        PrintBtnTable8.setEnabled(dataHolderTable1.isPrintBtnEnabledTable8());
-//
-//        startHourTable8 = dataHolderTable1.getStartHourTable8();
-//        startMinuteTable8 = dataHolderTable1.getStartMinuteTable8();
-//        startSecondTable8 = dataHolderTable1.getStartSecondTable8();
-//        endHourTable8 = dataHolderTable1.getEndHourTable8();
-//        endMinuteTable8 = dataHolderTable1.getEndMinuteTable8();
-//        endSecondTable8 = dataHolderTable1.getEndSecondTable8();
-//    }
+    private void restoreInputDataTable3() {
+        TIMESTART3.setText(dataHolderTable3.getInputDataSTARTTable3());
+        TIMEEND3.setText(dataHolderTable3.getInputDataENDTable3());
+        NameTable3.setText(dataHolderTable3.getInputDataNameTable3());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable3.getInputColorDataNameTable3();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable3.setForeground(color);
+        }
+        StartBtnTable3.setEnabled(dataHolderTable3.isStartBtnEnabledTable3());
+        StopBtnTable3.setEnabled(dataHolderTable3.isStopBtnEnabledTable3());
+        PrintBtnTable3.setEnabled(dataHolderTable3.isPrintBtnEnabledTable3());
+
+        startHourTable3 = dataHolderTable3.getStartHourTable3();
+        startMinuteTable3 = dataHolderTable3.getStartMinuteTable3();
+        startSecondTable3 = dataHolderTable3.getStartSecondTable3();
+        endHourTable3 = dataHolderTable3.getEndHourTable3();
+        endMinuteTable3 = dataHolderTable3.getEndMinuteTable3();
+        endSecondTable3 = dataHolderTable3.getEndSecondTable3();
+    }
+
+
+    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
+    private void saveInputDataTable4() {
+        dataHolderTable4.setInputDataSTARTTable4(TIMESTART4.getText());
+        dataHolderTable4.setInputDataENDTable4(TIMEEND4.getText());
+        dataHolderTable4.setInputDataNameTable4(NameTable4.getText());
+        // Chuyển đổi màu sắc của Table4Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable4.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable4.setInputColorDataNameTable4(colorAsString);
+        dataHolderTable4.setStartBtnEnabledTable4(StartBtnTable4.isEnabled());
+        dataHolderTable4.setStopBtnEnabledTable4(StopBtnTable4.isEnabled());
+        dataHolderTable4.setPrintBtnEnabledTable4(PrintBtnTable4.isEnabled());
+
+        dataHolderTable4.setStartHourTable4(startHourTable4);
+        dataHolderTable4.setStartMinuteTable4(startMinuteTable4);
+        dataHolderTable4.setStartSecondTable4(startSecondTable4);
+        dataHolderTable4.setEndHourTable4(endHourTable4);
+        dataHolderTable4.setEndMinuteTable4(endMinuteTable4);
+        dataHolderTable4.setEndSecondTable4(endSecondTable4);
+    }
+
+    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
+    private void restoreInputDataTable4() {
+        TIMESTART4.setText(dataHolderTable4.getInputDataSTARTTable4());
+        TIMEEND4.setText(dataHolderTable4.getInputDataENDTable4());
+        NameTable4.setText(dataHolderTable4.getInputDataNameTable4());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable4.getInputColorDataNameTable4();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable4.setForeground(color);
+        }
+        StartBtnTable4.setEnabled(dataHolderTable4.isStartBtnEnabledTable4());
+        StopBtnTable4.setEnabled(dataHolderTable4.isStopBtnEnabledTable4());
+        PrintBtnTable4.setEnabled(dataHolderTable4.isPrintBtnEnabledTable4());
+
+        startHourTable4 = dataHolderTable4.getStartHourTable4();
+        startMinuteTable4 = dataHolderTable4.getStartMinuteTable4();
+        startSecondTable4 = dataHolderTable4.getStartSecondTable4();
+        endHourTable4 = dataHolderTable4.getEndHourTable4();
+        endMinuteTable4 = dataHolderTable4.getEndMinuteTable4();
+        endSecondTable4 = dataHolderTable4.getEndSecondTable4();
+    }
+
+
+    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
+    private void saveInputDataTable5() {
+        dataHolderTable5.setInputDataSTARTTable5(TIMESTART5.getText());
+        dataHolderTable5.setInputDataENDTable5(TIMEEND5.getText());
+        dataHolderTable5.setInputDataNameTable5(NameTable5.getText());
+        // Chuyển đổi màu sắc của Table5Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable5.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable5.setInputColorDataNameTable5(colorAsString);
+        dataHolderTable5.setStartBtnEnabledTable5(StartBtnTable5.isEnabled());
+        dataHolderTable5.setStopBtnEnabledTable5(StopBtnTable5.isEnabled());
+        dataHolderTable5.setPrintBtnEnabledTable5(PrintBtnTable5.isEnabled());
+
+        dataHolderTable5.setStartHourTable5(startHourTable5);
+        dataHolderTable5.setStartMinuteTable5(startMinuteTable5);
+        dataHolderTable5.setStartSecondTable5(startSecondTable5);
+        dataHolderTable5.setEndHourTable5(endHourTable5);
+        dataHolderTable5.setEndMinuteTable5(endMinuteTable5);
+        dataHolderTable5.setEndSecondTable5(endSecondTable5);
+    }
+
+    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
+    private void restoreInputDataTable5() {
+        TIMESTART5.setText(dataHolderTable5.getInputDataSTARTTable5());
+        TIMEEND5.setText(dataHolderTable5.getInputDataENDTable5());
+        NameTable5.setText(dataHolderTable5.getInputDataNameTable5());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable5.getInputColorDataNameTable5();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable5.setForeground(color);
+        }
+        StartBtnTable5.setEnabled(dataHolderTable5.isStartBtnEnabledTable5());
+        StopBtnTable5.setEnabled(dataHolderTable5.isStopBtnEnabledTable5());
+        PrintBtnTable5.setEnabled(dataHolderTable5.isPrintBtnEnabledTable5());
+
+        startHourTable5 = dataHolderTable5.getStartHourTable5();
+        startMinuteTable5 = dataHolderTable5.getStartMinuteTable5();
+        startSecondTable5 = dataHolderTable5.getStartSecondTable5();
+        endHourTable5 = dataHolderTable5.getEndHourTable5();
+        endMinuteTable5 = dataHolderTable5.getEndMinuteTable5();
+        endSecondTable5 = dataHolderTable5.getEndSecondTable5();
+    }
+
+
+    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
+    private void saveInputDataTable6() {
+        dataHolderTable6.setInputDataSTARTTable6(TIMESTART6.getText());
+        dataHolderTable6.setInputDataENDTable6(TIMEEND6.getText());
+        dataHolderTable6.setInputDataNameTable6(NameTable6.getText());
+        // Chuyển đổi màu sắc của Table6Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable6.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable6.setInputColorDataNameTable6(colorAsString);
+        dataHolderTable6.setStartBtnEnabledTable6(StartBtnTable6.isEnabled());
+        dataHolderTable6.setStopBtnEnabledTable6(StopBtnTable6.isEnabled());
+        dataHolderTable6.setPrintBtnEnabledTable6(PrintBtnTable6.isEnabled());
+
+        dataHolderTable6.setStartHourTable6(startHourTable6);
+        dataHolderTable6.setStartMinuteTable6(startMinuteTable6);
+        dataHolderTable6.setStartSecondTable6(startSecondTable6);
+        dataHolderTable6.setEndHourTable6(endHourTable6);
+        dataHolderTable6.setEndMinuteTable6(endMinuteTable6);
+        dataHolderTable6.setEndSecondTable6(endSecondTable6);
+    }
+
+    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
+    private void restoreInputDataTable6() {
+        TIMESTART6.setText(dataHolderTable6.getInputDataSTARTTable6());
+        TIMEEND6.setText(dataHolderTable6.getInputDataENDTable6());
+        NameTable6.setText(dataHolderTable6.getInputDataNameTable6());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable6.getInputColorDataNameTable6();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable6.setForeground(color);
+        }
+        StartBtnTable6.setEnabled(dataHolderTable6.isStartBtnEnabledTable6());
+        StopBtnTable6.setEnabled(dataHolderTable6.isStopBtnEnabledTable6());
+        PrintBtnTable6.setEnabled(dataHolderTable6.isPrintBtnEnabledTable6());
+
+        startHourTable6 = dataHolderTable6.getStartHourTable6();
+        startMinuteTable6 = dataHolderTable6.getStartMinuteTable6();
+        startSecondTable6 = dataHolderTable6.getStartSecondTable6();
+        endHourTable6 = dataHolderTable6.getEndHourTable6();
+        endMinuteTable6 = dataHolderTable6.getEndMinuteTable6();
+        endSecondTable6 = dataHolderTable6.getEndSecondTable6();
+    }
+
+
+    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
+    private void saveInputDataTable7() {
+        dataHolderTable7.setInputDataSTARTTable7(TIMESTART7.getText());
+        dataHolderTable7.setInputDataENDTable7(TIMEEND7.getText());
+        dataHolderTable7.setInputDataNameTable7(NameTable7.getText());
+        // Chuyển đổi màu sắc của Table7Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable7.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable7.setInputColorDataNameTable7(colorAsString);
+        dataHolderTable7.setStartBtnEnabledTable7(StartBtnTable7.isEnabled());
+        dataHolderTable7.setStopBtnEnabledTable7(StopBtnTable7.isEnabled());
+        dataHolderTable7.setPrintBtnEnabledTable7(PrintBtnTable7.isEnabled());
+
+        dataHolderTable7.setStartHourTable7(startHourTable7);
+        dataHolderTable7.setStartMinuteTable7(startMinuteTable7);
+        dataHolderTable7.setStartSecondTable7(startSecondTable7);
+        dataHolderTable7.setEndHourTable7(endHourTable7);
+        dataHolderTable7.setEndMinuteTable7(endMinuteTable7);
+        dataHolderTable7.setEndSecondTable7(endSecondTable7);
+    }
+
+    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
+    private void restoreInputDataTable7() {
+        TIMESTART7.setText(dataHolderTable7.getInputDataSTARTTable7());
+        TIMEEND7.setText(dataHolderTable7.getInputDataENDTable7());
+        NameTable7.setText(dataHolderTable7.getInputDataNameTable7());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable7.getInputColorDataNameTable7();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable7.setForeground(color);
+        }
+        StartBtnTable7.setEnabled(dataHolderTable7.isStartBtnEnabledTable7());
+        StopBtnTable7.setEnabled(dataHolderTable7.isStopBtnEnabledTable7());
+        PrintBtnTable7.setEnabled(dataHolderTable7.isPrintBtnEnabledTable7());
+
+        startHourTable7 = dataHolderTable7.getStartHourTable7();
+        startMinuteTable7 = dataHolderTable7.getStartMinuteTable7();
+        startSecondTable7 = dataHolderTable7.getStartSecondTable7();
+        endHourTable7 = dataHolderTable7.getEndHourTable7();
+        endMinuteTable7 = dataHolderTable7.getEndMinuteTable7();
+        endSecondTable7 = dataHolderTable7.getEndSecondTable7();
+    }
+
+
+    // Phương thức để lưu trữ dữ liệu khi người dùng nhập vào ô input
+    private void saveInputDataTable8() {
+        dataHolderTable8.setInputDataSTARTTable8(TIMESTART8.getText());
+        dataHolderTable8.setInputDataENDTable8(TIMEEND8.getText());
+        dataHolderTable8.setInputDataNameTable8(NameTable8.getText());
+        // Chuyển đổi màu sắc của Table8Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable8.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable8.setInputColorDataNameTable8(colorAsString);
+        dataHolderTable8.setStartBtnEnabledTable8(StartBtnTable8.isEnabled());
+        dataHolderTable8.setStopBtnEnabledTable8(StopBtnTable8.isEnabled());
+        dataHolderTable8.setPrintBtnEnabledTable8(PrintBtnTable8.isEnabled());
+
+        dataHolderTable8.setStartHourTable8(startHourTable8);
+        dataHolderTable8.setStartMinuteTable8(startMinuteTable8);
+        dataHolderTable8.setStartSecondTable8(startSecondTable8);
+        dataHolderTable8.setEndHourTable8(endHourTable8);
+        dataHolderTable8.setEndMinuteTable8(endMinuteTable8);
+        dataHolderTable8.setEndSecondTable8(endSecondTable8);
+    }
+
+    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
+    private void restoreInputDataTable8() {
+        TIMESTART8.setText(dataHolderTable8.getInputDataSTARTTable8());
+        TIMEEND8.setText(dataHolderTable8.getInputDataENDTable8());
+        NameTable8.setText(dataHolderTable8.getInputDataNameTable8());
+
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString = dataHolderTable8.getInputColorDataNameTable8();
+        String[] colorComponents = colorAsString.split(",");
+        if (colorComponents.length == 3) {
+            int red = Integer.parseInt(colorComponents[0]);
+            int green = Integer.parseInt(colorComponents[1]);
+            int blue = Integer.parseInt(colorComponents[2]);
+            Color color = new Color(red, green, blue);
+            NameTable8.setForeground(color);
+        }
+        StartBtnTable8.setEnabled(dataHolderTable8.isStartBtnEnabledTable8());
+        StopBtnTable8.setEnabled(dataHolderTable8.isStopBtnEnabledTable8());
+        PrintBtnTable8.setEnabled(dataHolderTable8.isPrintBtnEnabledTable8());
+
+        startHourTable8 = dataHolderTable8.getStartHourTable8();
+        startMinuteTable8 = dataHolderTable8.getStartMinuteTable8();
+        startSecondTable8 = dataHolderTable8.getStartSecondTable8();
+        endHourTable8 = dataHolderTable8.getEndHourTable8();
+        endMinuteTable8 = dataHolderTable8.getEndMinuteTable8();
+        endSecondTable8 = dataHolderTable8.getEndSecondTable8();
+    }
 
 
     public void printBill(String current, String timestart, String timeend, String tableFee) {
@@ -3430,7 +3190,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable1 = cal.get(Calendar.SECOND);
         
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable1();
     }//GEN-LAST:event_StopBtnTable1ActionPerformed
 
     private void PrintBtnTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBtnTable1ActionPerformed
@@ -3454,7 +3214,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable1.setEnabled(false);
         TIMESTART1.setText("");
         TIMEEND1.setText("");
-        saveInputDataTable();
+        saveInputDataTable1();
         System.out.println("Start time: " + startHourTable1 + ":" + startMinuteTable1 + ":" + startSecondTable1);
         System.out.println("End time: " + endHourTable1 + ":" + endMinuteTable1 + ":" + endSecondTable1);
         
@@ -3480,7 +3240,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable1 = cal.get(Calendar.MINUTE);
         startSecondTable1 = cal.get(Calendar.SECOND);
         
-        saveInputDataTable();
+        saveInputDataTable1();
     }//GEN-LAST:event_StartBtnTable1ActionPerformed
 
     private void ResetBtnTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnTable1ActionPerformed
@@ -3495,7 +3255,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable1.setEnabled(true);
             StopBtnTable1.setEnabled(false);
             PrintBtnTable1.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable1();
         }
           
     }//GEN-LAST:event_ResetBtnTable1ActionPerformed
@@ -3559,7 +3319,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable2 = cal.get(Calendar.MINUTE);
         startSecondTable2 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable2();
 
     }//GEN-LAST:event_StartBtnTable2ActionPerformed
 
@@ -3581,7 +3341,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable2 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable2();
 
     }//GEN-LAST:event_StopBtnTable2ActionPerformed
 
@@ -3606,7 +3366,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable2.setEnabled(false);
         TIMESTART2.setText("");
         TIMEEND2.setText("");
-        saveInputDataTable();
+        saveInputDataTable2();
         System.out.println("Start time: " + startHourTable2 + ":" + startMinuteTable2 + ":" + startSecondTable2);
         System.out.println("End time: " + endHourTable2 + ":" + endMinuteTable2 + ":" + endSecondTable2);
 
@@ -3623,7 +3383,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable2.setEnabled(true);
             StopBtnTable2.setEnabled(false);
             PrintBtnTable2.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable2();
         }
 
     }//GEN-LAST:event_ResetBtnTable2ActionPerformed
@@ -3662,7 +3422,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable3 = cal.get(Calendar.MINUTE);
         startSecondTable3 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable3();
 
     }//GEN-LAST:event_StartBtnTable3ActionPerformed
 
@@ -3684,7 +3444,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable3 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable3();
 
     }//GEN-LAST:event_StopBtnTable3ActionPerformed
 
@@ -3709,7 +3469,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable3.setEnabled(false);
         TIMESTART3.setText("");
         TIMEEND3.setText("");
-        saveInputDataTable();
+        saveInputDataTable3();
         System.out.println("Start time: " + startHourTable3 + ":" + startMinuteTable3 + ":" + startSecondTable3);
         System.out.println("End time: " + endHourTable3 + ":" + endMinuteTable3 + ":" + endSecondTable3);
 
@@ -3726,7 +3486,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable3.setEnabled(true);
             StopBtnTable3.setEnabled(false);
             PrintBtnTable3.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable3();
         }
 
     }//GEN-LAST:event_ResetBtnTable3ActionPerformed
@@ -3765,7 +3525,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable4 = cal.get(Calendar.MINUTE);
         startSecondTable4 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable4();
 
     }//GEN-LAST:event_StartBtnTable4ActionPerformed
 
@@ -3787,7 +3547,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable4 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable4();
 
     }//GEN-LAST:event_StopBtnTable4ActionPerformed
 
@@ -3812,7 +3572,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable4.setEnabled(false);
         TIMESTART4.setText("");
         TIMEEND4.setText("");
-        saveInputDataTable();
+        saveInputDataTable4();
         System.out.println("Start time: " + startHourTable4 + ":" + startMinuteTable4 + ":" + startSecondTable4);
         System.out.println("End time: " + endHourTable4 + ":" + endMinuteTable4 + ":" + endSecondTable4);
 
@@ -3829,7 +3589,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable4.setEnabled(true);
             StopBtnTable4.setEnabled(false);
             PrintBtnTable4.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable4();
         }
 
     }//GEN-LAST:event_ResetBtnTable4ActionPerformed
@@ -3868,7 +3628,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable5 = cal.get(Calendar.MINUTE);
         startSecondTable5 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable5();
 
     }//GEN-LAST:event_StartBtnTable5ActionPerformed
 
@@ -3890,7 +3650,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable5 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable5();
 
     }//GEN-LAST:event_StopBtnTable5ActionPerformed
 
@@ -3915,7 +3675,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable5.setEnabled(false);
         TIMESTART5.setText("");
         TIMEEND5.setText("");
-        saveInputDataTable();
+        saveInputDataTable5();
         System.out.println("Start time: " + startHourTable5 + ":" + startMinuteTable5 + ":" + startSecondTable5);
         System.out.println("End time: " + endHourTable5 + ":" + endMinuteTable5 + ":" + endSecondTable5);
 
@@ -3932,7 +3692,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable5.setEnabled(true);
             StopBtnTable5.setEnabled(false);
             PrintBtnTable5.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable5();
         }
 
     }//GEN-LAST:event_ResetBtnTable5ActionPerformed
@@ -3971,7 +3731,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable6 = cal.get(Calendar.MINUTE);
         startSecondTable6 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable6();
 
     }//GEN-LAST:event_StartBtnTable6ActionPerformed
 
@@ -3993,7 +3753,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable6 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable6();
 
     }//GEN-LAST:event_StopBtnTable6ActionPerformed
 
@@ -4018,7 +3778,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable6.setEnabled(false);
         TIMESTART6.setText("");
         TIMEEND6.setText("");
-        saveInputDataTable();
+        saveInputDataTable6();
         System.out.println("Start time: " + startHourTable6 + ":" + startMinuteTable6 + ":" + startSecondTable6);
         System.out.println("End time: " + endHourTable6 + ":" + endMinuteTable6 + ":" + endSecondTable6);
 
@@ -4035,7 +3795,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable6.setEnabled(true);
             StopBtnTable6.setEnabled(false);
             PrintBtnTable6.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable6();
         }
 
     }//GEN-LAST:event_ResetBtnTable6ActionPerformed
@@ -4074,7 +3834,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable7 = cal.get(Calendar.MINUTE);
         startSecondTable7 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable7();
 
     }//GEN-LAST:event_StartBtnTable7ActionPerformed
 
@@ -4096,7 +3856,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable7 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable7();
 
     }//GEN-LAST:event_StopBtnTable7ActionPerformed
 
@@ -4121,7 +3881,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable7.setEnabled(false);
         TIMESTART7.setText("");
         TIMEEND7.setText("");
-        saveInputDataTable();
+        saveInputDataTable7();
         System.out.println("Start time: " + startHourTable7 + ":" + startMinuteTable7 + ":" + startSecondTable7);
         System.out.println("End time: " + endHourTable7 + ":" + endMinuteTable7 + ":" + endSecondTable7);
 
@@ -4138,7 +3898,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable7.setEnabled(true);
             StopBtnTable7.setEnabled(false);
             PrintBtnTable7.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable7();
         }
 
     }//GEN-LAST:event_ResetBtnTable7ActionPerformed
@@ -4177,7 +3937,7 @@ public class PlayTable extends javax.swing.JFrame {
         startMinuteTable8 = cal.get(Calendar.MINUTE);
         startSecondTable8 = cal.get(Calendar.SECOND);
 
-        saveInputDataTable();
+        saveInputDataTable8();
 
     }//GEN-LAST:event_StartBtnTable8ActionPerformed
 
@@ -4199,7 +3959,7 @@ public class PlayTable extends javax.swing.JFrame {
         endSecondTable8 = cal.get(Calendar.SECOND);
 
         //Luu gia tri sau khi set moi bien
-        saveInputDataTable();
+        saveInputDataTable8();
 
     }//GEN-LAST:event_StopBtnTable8ActionPerformed
 
@@ -4224,7 +3984,7 @@ public class PlayTable extends javax.swing.JFrame {
         StopBtnTable8.setEnabled(false);
         TIMESTART8.setText("");
         TIMEEND8.setText("");
-        saveInputDataTable();
+        saveInputDataTable8();
         System.out.println("Start time: " + startHourTable8 + ":" + startMinuteTable8 + ":" + startSecondTable8);
         System.out.println("End time: " + endHourTable8 + ":" + endMinuteTable8 + ":" + endSecondTable8);
 
@@ -4241,7 +4001,7 @@ public class PlayTable extends javax.swing.JFrame {
             StartBtnTable8.setEnabled(true);
             StopBtnTable8.setEnabled(false);
             PrintBtnTable8.setEnabled(false);
-            saveInputDataTable();
+            saveInputDataTable8();
         }
 
     }//GEN-LAST:event_ResetBtnTable8ActionPerformed
