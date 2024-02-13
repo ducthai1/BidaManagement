@@ -128,7 +128,7 @@ public class PlayTable extends javax.swing.JFrame {
         double secondPlay = remainingSeconds % 60;
 
         // 1 ban 40k/h tinh theo giay
-        double priceInSecond = 40.0 / 3600;
+        double priceInSecond = 35.0 / 3600;
         
         // In ra màn hình kết quả
         System.out.println("Hour Play: " + hourPlay);
@@ -137,7 +137,7 @@ public class PlayTable extends javax.swing.JFrame {
         System.out.println("Total Second Play: " + totalPlayedSeconds);
         
         if(minutePlay < 30) {
-            totalPlayedSeconds += 1800;
+            totalPlayedSeconds += 2058;
         }
         
         double tableFee = (double)totalPlayedSeconds * priceInSecond;
