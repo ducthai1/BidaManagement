@@ -136,10 +136,6 @@ public class PlayTable extends javax.swing.JFrame {
         System.out.println("Second Play: " + secondPlay);
         System.out.println("Total Second Play: " + totalPlayedSeconds);
         
-        if(minutePlay < 30) {
-            totalPlayedSeconds += 2058;
-        }
-        
         double tableFee = (double)totalPlayedSeconds * priceInSecond;
         System.out.println("Table Fee: " + CommonFunction.roundDecimal(tableFee, 2));
         return String.valueOf(CommonFunction.roundDecimal(tableFee, 2));
