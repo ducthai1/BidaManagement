@@ -16,9 +16,11 @@ public class DataHolderTable2 {
     private String inputDataSTARTTable2;
     private String inputDataENDTable2;
     private String inputDataNameTable2;
+    private String inputDataName2;
     
     // Luu trang thai ten table
     private String inputColorDataNameTable2;
+    private String inputColorDataName2;
     
     // Luu trang thai cac button
     private boolean startBtnEnabledTable2 = true;
@@ -35,6 +37,8 @@ public class DataHolderTable2 {
         inputDataENDTable2 = "";
         inputDataNameTable2 = "";
         inputColorDataNameTable2 = "";
+        inputDataName2 = "";
+        inputColorDataName2 = "";
     }
     
     public static synchronized DataHolderTable2 getInstanceTable2() {
@@ -73,6 +77,22 @@ public class DataHolderTable2 {
     }
 
     public void setInputColorDataNameTable2(String inputColorDatanameTable2) {
+        this.inputColorDataNameTable2 = inputColorDatanameTable2;
+    }
+    
+    public String getInputDataName2() {
+        return inputDataNameTable2;
+    }
+
+    public void setInputDataName2(String inputDataname2) {
+        this.inputDataNameTable2 = inputDataname2;
+    }
+    
+    public String getInputColorDataName2() {
+        return inputColorDataNameTable2;
+    }
+
+    public void setInputColorDataName2(String inputColorDatanameTable2) {
         this.inputColorDataNameTable2 = inputColorDatanameTable2;
     }
     
@@ -149,6 +169,17 @@ public class DataHolderTable2 {
     public void setEndSecondTable2(int endSecondTable2) {
         this.endSecondTable2 = endSecondTable2;
     }
+    
+    private boolean addBtnEnableTable2 = false;
+
+    public boolean isAddBtnEnabledTable2() {
+        return addBtnEnableTable2;
+    }
+
+    public void setAddBtnEnabledTable2(boolean AddBtnEnableTable2) {
+        this.addBtnEnableTable2 = AddBtnEnableTable2;
+    }
+
 }
 
 

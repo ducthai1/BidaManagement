@@ -323,7 +323,7 @@ public class Login extends javax.swing.JFrame {
                 st = conn.createStatement();
                 rs = st.executeQuery(Query);
                 if(rs.next()){
-                    new CheckOut().setVisible(true);
+                    new Table1AndCheckOut().setVisible(true);
                     this.dispose();
                 }
                 else {

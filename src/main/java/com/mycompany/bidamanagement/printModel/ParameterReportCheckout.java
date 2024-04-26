@@ -41,6 +41,7 @@ public class ParameterReportCheckout {
     public void setTABLE_FEE(String TABLE_FEE) {
         this.TABLE_FEE = TABLE_FEE;
     }
+    
 
     public ParameterReportCheckout(String DATE, String STARTTIME, String ENDTIME, String TABLE_FEE) {
         this.DATE = DATE;
@@ -56,6 +57,5 @@ public class ParameterReportCheckout {
     private String STARTTIME;
     private String ENDTIME;
     private String TABLE_FEE;
-
     
 }

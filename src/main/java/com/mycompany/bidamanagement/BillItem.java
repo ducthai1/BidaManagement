@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class BillItem {
 
+    private static BillItem instanceBillItem;
     private String productName;
     private int quantity;
     private double TotalPrice;
@@ -22,6 +23,13 @@ public class BillItem {
         this.TotalPrice = TotalPrice;
         this.TotalBill = roundDecimal(TotalPrice * quantity, 2);
         this.orderDate = orderDate;
+    }
+    
+    public static synchronized BillItem getInstanceBillItem() {
+        if (instanceBillItem == null) {
+            instanceBillItem = new BillItem();
+        }
+        return instanceBillItem;
     }
 
     // Getters and Setters
