@@ -136,31 +136,6 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
             }
     }
     
-    private String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
-        double totalStartSeconds = startHour * 3600 + startMinute * 60 + startSecond;
-        double totalEndSeconds = endHour * 3600 + endMinute * 60 + endSecond;
-
-        double totalPlayedSeconds = totalEndSeconds - totalStartSeconds;
-
-        double hourPlay = totalPlayedSeconds / 3600;
-        double remainingSeconds = totalPlayedSeconds % 3600;
-        double minutePlay = remainingSeconds / 60;
-        double secondPlay = remainingSeconds % 60;
-
-        // 1 ban 40k/h tinh theo giay
-        double priceInSecond = 35.0 / 3600;
-        
-        // In ra màn hình kết quả
-        System.out.println("Hour Play: " + hourPlay);
-        System.out.println("Minute Play: " + minutePlay);
-        System.out.println("Second Play: " + secondPlay);
-        System.out.println("Total Second Play: " + totalPlayedSeconds);
-        
-        double tableFee = (double)totalPlayedSeconds * priceInSecond;
-        System.out.println("Table Fee: " + CommonFunction.roundDecimal(tableFee, 2));
-        return String.valueOf(CommonFunction.roundDecimal(tableFee, 2));
-    }
-    
     private void restoreInputDataTable1() {
         Name1.setText(dataHolderTable1.getInputDataName1());
         // Khôi phục màu sắc của NameTable từ DataHolder
@@ -1377,6 +1352,8 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
             int PRODUCTSELL = QTY;
             TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
             TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
+            
+            saveBillPriceTable7 = TotalBill;
             // Kiểm tra nếu sản phẩm đã tồn tại trong danh sách mua hàng
             boolean productExists = false;
             for (BillItem item : billItems) {
@@ -1427,7 +1404,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
                         addInvoiceDetail.setString(2, PRODNAME.getText());
                         addInvoiceDetail.setInt(3, Integer.parseInt(PRODQTY.getText()));
                         addInvoiceDetail.setDouble(4, Uprice);
-                        addInvoiceDetail.setDouble(5, TotalBill);
+                        addInvoiceDetail.setDouble(5, TotalPrice);
                         addInvoiceDetail.executeUpdate();
                         updateTotalBill();
                     } else {
@@ -1489,7 +1466,6 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
             // Cập nhật kho hàng
             updateStock(PRODUCTSELL);
-            saveBillPriceTable7 = saveBillPriceTable7 + TotalBill;
             checkTrueBillDetailTable7 = true;
             saveBillTable7();
         }
@@ -1580,7 +1556,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable7 = new Date();
         SimpleDateFormat datePrintTable7 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable7 = datePrintTable7.format(currentPrintTable7);
-        String totalFee7 = calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
+        String totalFee7 = CommonFunction.calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
         Double totalFeeBill = Double.parseDouble(totalFee7) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+totalFee7 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1666,6 +1642,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
             saveBillPriceTable7 = 0.0;
             TotalBillRender.setText("TỔNG CỘNG: 0.00");
+            TotalBill = 0.0;
             saveBillTable7();
 
         }

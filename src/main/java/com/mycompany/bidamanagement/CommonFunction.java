@@ -41,4 +41,38 @@ public class CommonFunction {
             throw new NumberFormatException("Chuỗi không hợp lệ: " + value);
         }
     }
+    
+    public static String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
+        final int SECONDS_IN_HOUR = 3600;
+        final int SECONDS_IN_MINUTE = 60;
+        final double PRICE_PER_HOUR = 35.0;
+    
+        // Kiểm tra tính hợp lệ của thời gian đầu vào
+        if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 || startSecond < 0 || startSecond > 59 ||
+                endHour < 0 || endHour > 23 || endMinute < 0 || endMinute > 59 || endSecond < 0 || endSecond > 59) {
+            return "Thời gian đầu vào không hợp lệ";
+        }
+    
+        // Chuyển thời gian thành giây
+        long startTimeInSeconds = startHour * SECONDS_IN_HOUR + startMinute * SECONDS_IN_MINUTE + startSecond;
+        long endTimeInSeconds = endHour * SECONDS_IN_HOUR + endMinute * SECONDS_IN_MINUTE + endSecond;
+    
+        // Xử lý trường hợp thời gian kết thúc qua ngày hôm sau
+        if (endTimeInSeconds < startTimeInSeconds) {
+            endTimeInSeconds += 24 * 3600; // Thêm 24 giờ nếu kết thúc qua ngày hôm sau
+        }
+    
+        // Tính thời gian chơi trong giờ, phút và giây
+        long totalPlayedSeconds = endTimeInSeconds - startTimeInSeconds;
+        int playedHours = (int)(totalPlayedSeconds / SECONDS_IN_HOUR);
+        int remainingSeconds = (int)(totalPlayedSeconds % SECONDS_IN_HOUR);
+        int playedMinutes = remainingSeconds / SECONDS_IN_MINUTE;
+        int playedSeconds = remainingSeconds % SECONDS_IN_MINUTE;
+    
+        // Tính tiền
+        double totalPlayedHours = playedHours + (double)playedMinutes / 60 + (double)playedSeconds / 3600;
+        double tableFee = totalPlayedHours * PRICE_PER_HOUR;
+    
+        return String.valueOf(roundDecimal(tableFee, 2));
+    }
 }

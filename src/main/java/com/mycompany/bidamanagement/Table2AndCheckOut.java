@@ -134,31 +134,6 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
             }
     }
     
-    private String calculateTimePlayTable(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
-        double totalStartSeconds = startHour * 3600 + startMinute * 60 + startSecond;
-        double totalEndSeconds = endHour * 3600 + endMinute * 60 + endSecond;
-
-        double totalPlayedSeconds = totalEndSeconds - totalStartSeconds;
-
-        double hourPlay = totalPlayedSeconds / 3600;
-        double remainingSeconds = totalPlayedSeconds % 3600;
-        double minutePlay = remainingSeconds / 60;
-        double secondPlay = remainingSeconds % 60;
-
-        // 1 ban 40k/h tinh theo giay
-        double priceInSecond = 35.0 / 3600;
-        
-        // In ra màn hình kết quả
-        System.out.println("Hour Play: " + hourPlay);
-        System.out.println("Minute Play: " + minutePlay);
-        System.out.println("Second Play: " + secondPlay);
-        System.out.println("Total Second Play: " + totalPlayedSeconds);
-        
-        double tableFee = (double)totalPlayedSeconds * priceInSecond;
-        System.out.println("Table Fee: " + CommonFunction.roundDecimal(tableFee, 2));
-        return String.valueOf(CommonFunction.roundDecimal(tableFee, 2));
-    }
-    
     private void restoreInputDataTable1() {
         Name1.setText(dataHolderTable1.getInputDataName1());
         // Khôi phục màu sắc của NameTable từ DataHolder
@@ -452,7 +427,7 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
         invoiceIdTable2 = billTable2.getInvoiceIdTable2();
         soLanBamAddTable2 = billTable2.getSoLanBamAddTable2();
         TotalBill = billTable2.getSaveBillPriceTable2();
-        TotalBillRender.setText("TỔNG CỘNG: " + CommonFunction.doubleFormattedView(TotalBill));
+        TotalBillRender.setText("TỔNG CỘNG: " + CommonFunction.doubleFormattedView(billTable2.getSaveBillPriceTable2()));
     }
 
     @SuppressWarnings("unchecked")
@@ -1391,6 +1366,8 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
             int PRODUCTSELL = QTY;
             TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
             TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
+            
+            saveBillPriceTable2 = TotalBill;
             // Kiểm tra nếu sản phẩm đã tồn tại trong danh sách mua hàng
             boolean productExists = false;
             for (BillItem item : billItems) {
@@ -1441,7 +1418,7 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
                         addInvoiceDetail.setString(2, PRODNAME.getText());
                         addInvoiceDetail.setInt(3, Integer.parseInt(PRODQTY.getText()));
                         addInvoiceDetail.setDouble(4, Uprice);
-                        addInvoiceDetail.setDouble(5, TotalBill);
+                        addInvoiceDetail.setDouble(5, TotalPrice);
                         addInvoiceDetail.executeUpdate();
                         updateTotalBill();
                     } else {
@@ -1503,7 +1480,7 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
 
             // Cập nhật kho hàng
             updateStock(PRODUCTSELL);
-            saveBillPriceTable2 = saveBillPriceTable2 + TotalBill;
+            
             checkTrueBillDetailTable2 = true;
             saveBillTable2();
         }
@@ -1593,7 +1570,7 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable2 = new Date();
         SimpleDateFormat datePrintTable2 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable2 = datePrintTable2.format(currentPrintTable2);
-        String totalFee2 = calculateTimePlayTable(startHourTable2, startMinuteTable2, startSecondTable2, endHourTable2, endMinuteTable2, endSecondTable2);
+        String totalFee2 = CommonFunction.calculateTimePlayTable(startHourTable2, startMinuteTable2, startSecondTable2, endHourTable2, endMinuteTable2, endSecondTable2);
         Double totalFeeBill = Double.parseDouble(totalFee2) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+totalFee2 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1680,6 +1657,7 @@ public class Table2AndCheckOut extends javax.swing.JFrame {
 
             saveBillPriceTable2 = 0.0;
             TotalBillRender.setText("TỔNG CỘNG: 0.00");
+            TotalBill = 0.0;
             saveBillTable2();
 
         }
