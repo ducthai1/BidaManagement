@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tableBill" language="groovy" pageWidth="200" pageHeight="550" columnWidth="190" leftMargin="5" rightMargin="5" topMargin="5" bottomMargin="5" uuid="511fac35-2a54-4157-a135-a35226e1e6c1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="65"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="tablelogo" class="java.io.InputStream"/>
 	<parameter name="DATE" class="java.lang.String">
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
@@ -19,6 +19,7 @@
 	<parameter name="INVOICEID" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="TOTAL_BILL_FEE" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select i.DATE, i.TOTAL_BILL, idt.PRODNAME, idt.QUANTITY, idt.PRICE, idt.TOTAL
                             FROM invoices i, invoice_details idt 
@@ -121,14 +122,14 @@
 				<text><![CDATA[SL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="0" width="41" height="20" uuid="2a1d3844-c33f-4b3a-882e-43610904cc03"/>
+				<reportElement x="100" y="0" width="45" height="20" uuid="2a1d3844-c33f-4b3a-882e-43610904cc03"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Giá]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="141" y="0" width="49" height="20" uuid="0f462d6c-796a-4ca8-86b5-699be49af592"/>
+				<reportElement x="145" y="0" width="45" height="20" uuid="0f462d6c-796a-4ca8-86b5-699be49af592"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
@@ -153,14 +154,14 @@
 				<textFieldExpression><![CDATA[$F{QUANTITY}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="100" y="0" width="41" height="28" uuid="4d1a4cbf-04d5-45d0-a1ee-bfefdb2f44ba"/>
+				<reportElement x="100" y="0" width="45" height="28" uuid="4d1a4cbf-04d5-45d0-a1ee-bfefdb2f44ba"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{PRICE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="141" y="0" width="49" height="28" uuid="49390629-6d53-4b93-a2b8-2e6d1a56fc8e"/>
+				<reportElement x="145" y="0" width="45" height="28" uuid="49390629-6d53-4b93-a2b8-2e6d1a56fc8e"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
@@ -184,11 +185,11 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="127" y="15" width="63" height="27" uuid="27e6d13c-fc49-43b3-b357-c7a35d7175b4"/>
+				<reportElement x="127" y="15" width="63" height="27" uuid="443b1963-05d1-412b-9826-5aacd5cab809"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{TABLE_FEE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{TOTAL_BILL_FEE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
@@ -212,47 +213,61 @@
 	<summary>
 		<band height="56" splitType="Stretch">
 			<staticText>
-				<reportElement x="164" y="0" width="26" height="28" uuid="e365bd8d-a56f-44e9-b6c5-4f20fa3a6c3b"/>
+				<reportElement x="145" y="0" width="45" height="28" uuid="e365bd8d-a56f-44e9-b6c5-4f20fa3a6c3b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Giá]]></text>
+				<text><![CDATA[Tổng]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="72" height="28" uuid="482bf263-e1f9-4053-aa99-7db36ca18883"/>
+				<reportElement x="0" y="0" width="60" height="28" uuid="482bf263-e1f9-4053-aa99-7db36ca18883"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Giờ bắt đầu]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="72" y="0" width="93" height="28" uuid="5c871661-629e-4324-9cb4-a49898cd2953"/>
+				<reportElement x="60" y="0" width="60" height="28" uuid="5c871661-629e-4324-9cb4-a49898cd2953"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Giờ kết thúc]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="164" y="28" width="26" height="28" uuid="2c3574d7-e6cc-4af4-83a5-764e64150ec2"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[35.00]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="0" y="28" width="72" height="28" uuid="52531cdc-aafc-4ce9-ad77-1616c793c5cb"/>
+				<reportElement x="0" y="28" width="60" height="28" uuid="52531cdc-aafc-4ce9-ad77-1616c793c5cb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{STARTTIME}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="72" y="28" width="92" height="28" uuid="66f3b4d1-912f-40f1-b130-ca50c90f5aac"/>
+				<reportElement x="60" y="27" width="60" height="28" uuid="66f3b4d1-912f-40f1-b130-ca50c90f5aac"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{ENDTIME}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="145" y="28" width="45" height="27" uuid="cc87e631-73f1-47d6-815f-e45879589db5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TABLE_FEE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="27" width="25" height="28" uuid="8e7931aa-ec0d-4f13-98bf-06418fa7d144"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[35.00]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="25" height="27" uuid="fce29ee1-9812-453d-8221-3bc18c41b4fd"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giá/h]]></text>
+			</staticText>
 		</band>
 	</summary>
 </jasperReport>

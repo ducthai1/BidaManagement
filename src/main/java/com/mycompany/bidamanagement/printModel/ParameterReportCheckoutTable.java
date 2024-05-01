@@ -50,13 +50,22 @@ public class ParameterReportCheckoutTable {
         this.INVOICE_ID = INVOICE_ID;
     }
     
+    public String getTOTAL_BILL_FEE() {
+        return TOTAL_BILL_FEE;
+    }
+    
+    public void setTOTAL_TABLE_FEE (String TOTAL_BILL_FEE) {
+        this.TOTAL_BILL_FEE = TOTAL_BILL_FEE;
+    }
+    
 
-    public ParameterReportCheckoutTable(String DATE, String STARTTIME, String ENDTIME, String TABLE_FEE, int INVOICE_ID) {
+    public ParameterReportCheckoutTable(String DATE, String STARTTIME, String ENDTIME, String TABLE_FEE, int INVOICE_ID, String TOTAL_BILL_FEE) {
         this.DATE = DATE;
         this.STARTTIME = STARTTIME;
         this.ENDTIME = ENDTIME;
         this.TABLE_FEE = TABLE_FEE;
         this.INVOICE_ID = INVOICE_ID;
+        this.TOTAL_BILL_FEE = TOTAL_BILL_FEE;
     }
 
     public ParameterReportCheckoutTable() {
@@ -66,6 +75,7 @@ public class ParameterReportCheckoutTable {
     private String STARTTIME;
     private String ENDTIME;
     private String TABLE_FEE;
+    private String TOTAL_BILL_FEE;
     private int INVOICE_ID;
 
     

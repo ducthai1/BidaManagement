@@ -102,7 +102,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Giá]]></text>
+				<text><![CDATA[Giá/h]]></text>
 			</staticText>
 		</band>
 	</columnHeader>

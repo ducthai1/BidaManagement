@@ -128,7 +128,7 @@ public class Table6AndCheckOut extends javax.swing.JFrame {
                 if (rowsUpdated > 0) {
 //                    JOptionPane.showMessageDialog(this, "Cập nhật hóa đơn thành công!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "Không có hóa đơn nào được cập nhật!");
+//                    JOptionPane.showMessageDialog(this, "Không có hóa đơn nào được cập nhật!");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -1555,10 +1555,10 @@ public class Table6AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable6 = new Date();
         SimpleDateFormat datePrintTable6 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable6 = datePrintTable6.format(currentPrintTable6);
-        String totalFee6 = CommonFunction.calculateTimePlayTable(startHourTable6, startMinuteTable6, startSecondTable6, endHourTable6, endMinuteTable6, endSecondTable6);
-        Double totalFeeBill = Double.parseDouble(totalFee6) + TotalBill;
+        String TableFee6 = CommonFunction.calculateTimePlayTable(startHourTable6, startMinuteTable6, startSecondTable6, endHourTable6, endMinuteTable6, endSecondTable6);
+        Double totalFeeBill = Double.parseDouble(TableFee6) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
-        System.out.println("totalfee: "+totalFee6 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
+        System.out.println("totalfee: "+TableFee6 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
         try {
             // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
             conn = ConnectXamppMySQL.conn();
@@ -1567,16 +1567,16 @@ public class Table6AndCheckOut extends javax.swing.JFrame {
             addTableBill.setString(2, formatPrintTable6);
             addTableBill.setString(3, TIMESTART6.getText());
             addTableBill.setString(4, TIMEEND6.getText());
-            addTableBill.setString(5, totalFee6);
+            addTableBill.setString(5, TableFee6);
             addTableBill.setInt(6, 6);
             addTableBill.executeUpdate();
 
             if(soLanBamAddTable6 > 0) {
-                ParameterReportCheckoutTable dataprint6 = new ParameterReportCheckoutTable(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), convertTotalFeeToString, invoiceIdTable6);
+                ParameterReportCheckoutTable dataprint6 = new ParameterReportCheckoutTable(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), TableFee6, invoiceIdTable6, convertTotalFeeToString);
                 ReportManager.getInstance().printReportPaymentTable(dataprint6);
             }
             else {
-                ParameterReportCheckout dataprint6 = new ParameterReportCheckout(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), totalFee6);
+                ParameterReportCheckout dataprint6 = new ParameterReportCheckout(formatPrintTable6, TIMESTART6.getText(), TIMEEND6.getText(), TableFee6);
                 ReportManager.getInstance().printReportPayment(dataprint6);
             }
 

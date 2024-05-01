@@ -145,6 +145,7 @@ public class ReportManager {
             parameters.put("STARTTIME", data.getSTARTTIME());
             parameters.put("ENDTIME", data.getENDTIME());
             parameters.put("TABLE_FEE", data.getTABLE_FEE());
+            parameters.put("TOTAL_BILL_FEE", data.getTOTAL_BILL_FEE());
             // Fill the report
 //            JasperPrint print = JasperFillManager.fillReport(tableBill, parameters, new JREmptyDataSource());
             JasperPrint print = JasperFillManager.fillReport(tableBill, parameters, conn);
