@@ -427,7 +427,35 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
         TotalBill = billTable1.getSaveBillPriceTable1();
         TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(billTable1.getSaveBillPriceTable1()));
     }
-    
+
+    private void updateBillReviewText() {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                "SELECT PRODNAME, PRICE, QUANTITY, TOTAL FROM invoice_details WHERE INVOICEID = ?");
+            ps.setInt(1, invoiceIdTable1);
+            ResultSet rs = ps.executeQuery();
+            StringBuilder billContent = new StringBuilder();
+
+            while (rs.next()) {
+                String prodName = rs.getString("PRODNAME");
+                double price = rs.getDouble("PRICE");
+                int quantity = rs.getInt("QUANTITY");
+                double total = rs.getDouble("TOTAL");
+
+                billContent.append(String.format("\n            %-20s %20s %10d %20s",
+                    prodName,
+                    CommonFunction.doubleFormattedView(price),
+                    quantity,
+                    CommonFunction.doubleFormattedView(total)));
+            }
+
+            BillReview.setText(billContent.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi tải thông tin hóa đơn: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -1353,117 +1381,74 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
 
     private void AddBtnTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBtnTable1MouseClicked
         if (AddBtnTable1.isEnabled()) {
-            Date currentDate = new Date();
-            if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
-                JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để thêm vào bill!");
-            }
-            else if (CommonFunction.parseInteger(PRODQTY.getText()) <= 0) {
-                JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng sản phẩm muốn bán là số lớn hơn 0!");
-            }
-            else if (AvailQty < CommonFunction.parseInteger(PRODQTY.getText())){
-                JOptionPane.showMessageDialog(this, "Trong kho không có đủ số lượng sản phẩm!");
-            }
-            else{
-                soLanBamAddTable1++;
-                int QTY = CommonFunction.parseInteger(PRODQTY.getText());
-                int PRODUCTSELL = QTY;
-                TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
-                TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
-                saveBillPriceTable1 = TotalBill;
-                // Hiển thị thông tin trong TextArea
-                if (soLanBamAddTable1 == 1) {
-                    BillReview.setText(BillReview.getText()+"\n"+"            "+PRODNAME.getText()+"             "+CommonFunction.doubleFormattedView(Uprice)+
-                        "              "+PRODUCTSELL+"                     "+CommonFunction.doubleFormattedView(TotalPrice)+"\n");
-                    
-                    try {
-                        Date currentDateFirst = new Date();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-                        PreparedStatement addInvoice = conn.prepareStatement("INSERT INTO invoices (DATE, TOTAL_BILL) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
-                        addInvoice.setString(1, dateFormat.format(currentDateFirst));
-                        addInvoice.setString(2, CommonFunction.doubleFormattedView(0));
-                        
-                        int affectedRows = addInvoice.executeUpdate();
-
-                        if (affectedRows == 0) {
-                            throw new SQLException("Thêm hóa đơn thất bại, không có bản ghi nào được tạo.");
-                        }
-                        // Lấy ID của hóa đơn vừa thêm vào
-                        ResultSet result = addInvoice.executeQuery("SELECT LAST_INSERT_ID() as ID");
-                        if (result.next()) {
-                            int currentInvoice = result.getInt("ID");
-                            invoiceIdTable1 = currentInvoice;
-                            System.out.println("currentInvoiceID: " + invoiceIdTable1);
-                            PreparedStatement addInvoiceDetail = conn.prepareStatement("INSERT INTO invoice_details (INVOICEID, PRODNAME, QUANTITY, PRICE, TOTAL) VALUES (?, ?, ?, ?, ?)");
-                            addInvoiceDetail.setInt(1, invoiceIdTable1);
-                            addInvoiceDetail.setString(2, PRODNAME.getText());
-                            addInvoiceDetail.setInt(3, Integer.parseInt(PRODQTY.getText()));
-                            addInvoiceDetail.setDouble(4, Uprice);
-                            addInvoiceDetail.setDouble(5, TotalPrice);
-                            addInvoiceDetail.executeUpdate();
-                            updateTotalBill();
-                        } else {
-                            throw new SQLException("Thêm hóa đơn thất bại, không có ID được tạo.");
-                        }
-                    
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    BillReview.setText(BillReview.getText()+"\n"+"            "+PRODNAME.getText()+"             "+
-                        CommonFunction.doubleFormattedView(Uprice)+"              "+PRODUCTSELL+"                     "+
-                        CommonFunction.doubleFormattedView(TotalPrice)+"\n");
-                    try {
-                        // Kiểm tra sản phẩm đã tồn tại trong invoice_details chưa
-                        PreparedStatement checkExistingProduct = conn.prepareStatement("SELECT QUANTITY, TOTAL FROM invoice_details WHERE INVOICEID = ? AND PRODNAME = ?");
-                        checkExistingProduct.setInt(1, invoiceIdTable1);
-                        checkExistingProduct.setString(2, PRODNAME.getText());
-                        ResultSet existingProductResult = checkExistingProduct.executeQuery();
-
-                        if (existingProductResult.next()) {
-                            // Nếu sản phẩm đã tồn tại, cập nhật số lượng và tổng giá trị
-                            int currentQty = existingProductResult.getInt("QUANTITY");
-                            double currentTotal = existingProductResult.getDouble("TOTAL");
-
-                            // Cập nhật số lượng và tổng giá trị mới
-                            int newQty = currentQty + QTY;
-                            double newTotal = roundDecimal(currentTotal + TotalPrice,2);
-
-                            // Cập nhật trong database
-                            PreparedStatement updateInvoiceDetail = conn.prepareStatement("UPDATE invoice_details SET QUANTITY = ?, TOTAL = ? WHERE INVOICEID = ? AND PRODNAME = ?");
-                            updateInvoiceDetail.setInt(1, newQty);
-                            updateInvoiceDetail.setDouble(2, newTotal);
-                            updateInvoiceDetail.setInt(3, invoiceIdTable1);
-                            updateInvoiceDetail.setString(4, PRODNAME.getText());
-                            updateInvoiceDetail.executeUpdate();
-                            updateTotalBill();
-                        } else {
-                            // Nếu sản phẩm chưa tồn tại, thêm mới vào invoice_details
-                            PreparedStatement addInvoiceDetail = conn.prepareStatement("INSERT INTO invoice_details (INVOICEID, PRODNAME, QUANTITY, PRICE, TOTAL) VALUES (?, ?, ?, ?, ?)");
-                            addInvoiceDetail.setInt(1, invoiceIdTable1);
-                            addInvoiceDetail.setString(2, PRODNAME.getText());
-                            addInvoiceDetail.setInt(3, QTY);
-                            addInvoiceDetail.setDouble(4, Uprice);
-                            addInvoiceDetail.setDouble(5, TotalPrice);
-                            addInvoiceDetail.executeUpdate();
-                            updateTotalBill();
-                        }
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-                    }
-                    
-                }
-
-                TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(TotalBill));
-                AvailQty -= PRODUCTSELL;
-
-                // Cập nhật kho hàng
-                updateStock(PRODUCTSELL);
-                checkTrueBillDetailTable1 = true;
-                saveBillTable1();
-            }
+        Date currentDate = new Date();
+        if(PRODQTY.getText().isEmpty() || PRODNAME.getText().isEmpty() ){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sản phẩm để thêm vào bill!");
         }
+        else if (CommonFunction.parseInteger(PRODQTY.getText()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng sản phẩm muốn bán là số lớn hơn 0!");
+        }
+        else if (AvailQty < CommonFunction.parseInteger(PRODQTY.getText())){
+            JOptionPane.showMessageDialog(this, "Trong kho không có đủ số lượng sản phẩm!");
+        }
+        else{
+            soLanBamAddTable1++;
+            int QTY = CommonFunction.parseInteger(PRODQTY.getText());
+            int PRODUCTSELL = QTY;
+            TotalPrice = roundDecimal(Uprice * Double.valueOf(PRODQTY.getText()),2);
+            TotalBill = roundDecimal((TotalBill + TotalPrice), 2);
+            saveBillPriceTable1 = TotalBill;
+            
+            try {
+                if (soLanBamAddTable1 == 1) {
+                    Date currentDateFirst = new Date();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+                    PreparedStatement addInvoice = conn.prepareStatement("INSERT INTO invoices (DATE, TOTAL_BILL) VALUES (?, ?)", Statement.RETURN_GENERATED_KEYS);
+                    addInvoice.setString(1, dateFormat.format(currentDateFirst));
+                    addInvoice.setString(2, CommonFunction.doubleFormattedView(0));
+                    
+                    int affectedRows = addInvoice.executeUpdate();
+                    if (affectedRows == 0) {
+                        throw new SQLException("Thêm hóa đơn thất bại, không có bản ghi nào được tạo.");
+                    }
+
+                    ResultSet result = addInvoice.getGeneratedKeys();
+                    if (result.next()) {
+                        invoiceIdTable1 = result.getInt(1);
+                        System.out.println("currentInvoiceID: " + invoiceIdTable1);
+                    } else {
+                        throw new SQLException("Thêm hóa đơn thất bại, không có ID được tạo.");
+                    }
+                }
+                
+                PreparedStatement addOrUpdateDetail = conn.prepareStatement(
+                    "INSERT INTO invoice_details (INVOICEID, PRODNAME, QUANTITY, PRICE, TOTAL) VALUES (?, ?, ?, ?, ?) " +
+                    "ON DUPLICATE KEY UPDATE QUANTITY = QUANTITY + VALUES(QUANTITY), TOTAL = TOTAL + VALUES(TOTAL)"
+                );
+                addOrUpdateDetail.setInt(1, invoiceIdTable1);
+                addOrUpdateDetail.setString(2, PRODNAME.getText());
+                addOrUpdateDetail.setInt(3, QTY);
+                addOrUpdateDetail.setDouble(4, Uprice);
+                addOrUpdateDetail.setDouble(5, TotalPrice);
+                addOrUpdateDetail.executeUpdate();
+
+                updateTotalBill();
+                updateBillReviewText();  // Cập nhật thông tin hiển thị từ cơ sở dữ liệu
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+
+            TotalBillRender.setText("TỔNG CỘNG: "+CommonFunction.doubleFormattedView(TotalBill));
+            AvailQty -= PRODUCTSELL;
+
+            // Cập nhật kho hàng
+            updateStock(PRODUCTSELL);
+            checkTrueBillDetailTable1 = true;
+            saveBillTable1();
+        }
+    }
     }//GEN-LAST:event_AddBtnTable1MouseClicked
 
     private void AddBtnTable1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnTable1ActionPerformed
