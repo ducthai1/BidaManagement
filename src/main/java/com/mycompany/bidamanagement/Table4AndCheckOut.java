@@ -60,6 +60,8 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
     private DataHolderTable6 dataHolderTable6 = DataHolderTable6.getInstanceTable6();
     private DataHolderTable7 dataHolderTable7 = DataHolderTable7.getInstanceTable7();
     private DataHolderTable8 dataHolderTable8 = DataHolderTable8.getInstanceTable8();
+    private DataHolderTable9 dataHolderTable9 = DataHolderTable9.getInstanceTable9();
+    private DataHolderTable10 dataHolderTable10 = DataHolderTable10.getInstanceTable10();
 
     public Table4AndCheckOut() {
         initComponents();
@@ -79,38 +81,32 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        if ("".equals(Name1.getText())) {
-            Name1.setText("BÀN 1");
-        }
-        
-        if ("".equals(Name2.getText())) {
-            Name2.setText("BÀN 2");
-        }
-
-        if ("".equals(Name3.getText())) {
-            Name3.setText("BÀN 3");
-        }
-
-        if ("".equals(Name4.getText())) {
-            Name4.setText("BÀN 4");
-        }
         
         if ("".equals(NameTable4.getText())) {
             NameTable4.setText("BÀN 4");
         }
 
+        if ("".equals(Name1.getText())) {
+            Name1.setText("BÀN 1");
+        }
+        if ("".equals(Name2.getText())) {
+            Name2.setText("BÀN 2");
+        }
+        if ("".equals(Name3.getText())) {
+            Name3.setText("BÀN 3");
+        }
+        if ("".equals(Name4.getText())) {
+            Name4.setText("BÀN 4");
+        }
         if ("".equals(Name5.getText())) {
             Name5.setText("BÀN 5");
         }
-
         if ("".equals(Name6.getText())) {
             Name6.setText("BÀN 6");
         }
-
         if ("".equals(Name7.getText())) {
             Name7.setText("BÀN 7");
         }
-
         if ("".equals(Name8.getText())) {
             Name8.setText("BÀN 8");
         }
@@ -300,7 +296,6 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
             Name8.setForeground(color8);
         }
     }
-
     
     public void SelectBill() {
         try {
@@ -478,6 +473,10 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
         Name7 = new javax.swing.JLabel();
         PlayTable8Btn = new javax.swing.JPanel();
         Name8 = new javax.swing.JLabel();
+        SwapNormalBtn = new javax.swing.JPanel();
+        Normal = new javax.swing.JLabel();
+        SwapVipBtn = new javax.swing.JPanel();
+        VIP = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1256,13 +1255,55 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
             .addComponent(Name8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        SwapNormalBtn.setBackground(new java.awt.Color(0, 102, 153));
+        SwapNormalBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SwapNormalBtnMouseClicked(evt);
+            }
+        });
+
+        Normal.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        Normal.setForeground(new java.awt.Color(255, 255, 255));
+        Normal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Normal.setText("THƯỜNG");
+
+        javax.swing.GroupLayout SwapNormalBtnLayout = new javax.swing.GroupLayout(SwapNormalBtn);
+        SwapNormalBtn.setLayout(SwapNormalBtnLayout);
+        SwapNormalBtnLayout.setHorizontalGroup(
+            SwapNormalBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Normal, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        SwapNormalBtnLayout.setVerticalGroup(
+            SwapNormalBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Normal, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        SwapVipBtn.setBackground(new java.awt.Color(255, 255, 255));
+        SwapVipBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SwapVipBtnMouseClicked(evt);
+            }
+        });
+
+        VIP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        VIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        VIP.setText("VIP");
+
+        javax.swing.GroupLayout SwapVipBtnLayout = new javax.swing.GroupLayout(SwapVipBtn);
+        SwapVipBtn.setLayout(SwapVipBtnLayout);
+        SwapVipBtnLayout.setHorizontalGroup(
+            SwapVipBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(VIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+        );
+        SwapVipBtnLayout.setVerticalGroup(
+            SwapVipBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(VIP, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
             .addComponent(PlayTable2Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable3Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable1Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1271,12 +1312,24 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
             .addComponent(PlayTable4Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable8Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable7Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(SwapNormalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SwapVipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SwapNormalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SwapVipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(PlayTable1Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PlayTable2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1322,6 +1375,7 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void PRODNAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRODNAMEActionPerformed
@@ -1759,6 +1813,15 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_PlayTable8BtnMouseClicked
 
+    private void SwapNormalBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SwapNormalBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SwapNormalBtnMouseClicked
+
+    private void SwapVipBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SwapVipBtnMouseClicked
+        new Table9AndCheckOut().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SwapVipBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1808,6 +1871,7 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JLabel Name7;
     private javax.swing.JLabel Name8;
     private javax.swing.JLabel NameTable4;
+    private javax.swing.JLabel Normal;
     private javax.swing.JComboBox<String> PRODCAT;
     private javax.swing.JTable PRODLIST;
     private javax.swing.JTextField PRODNAME;
@@ -1826,9 +1890,12 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JTextField SDTKH4;
     private javax.swing.JButton StartBtnTable4;
     private javax.swing.JButton StopBtnTable4;
+    private javax.swing.JPanel SwapNormalBtn;
+    private javax.swing.JPanel SwapVipBtn;
     private javax.swing.JTextField TIMEEND4;
     private javax.swing.JTextField TIMESTART4;
     private javax.swing.JLabel TotalBillRender;
+    private javax.swing.JLabel VIP;
     private javax.swing.JButton filterBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

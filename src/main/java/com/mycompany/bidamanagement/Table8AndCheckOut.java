@@ -5,29 +5,20 @@
 package com.mycompany.bidamanagement;
 
 import com.mycompany.bidamanagement.bill.ReportManager;
-import com.mycompany.bidamanagement.printModel.FieldReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
 import java.io.FileInputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Set;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import java.awt.Color;
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +26,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 public class Table8AndCheckOut extends javax.swing.JFrame {
@@ -63,14 +55,8 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
     public Table8AndCheckOut() {
         initComponents();
-        restoreInputDataTable1();
-        restoreInputDataTable2();
-        restoreInputDataTable3();
-        restoreInputDataTable4();
-        restoreInputDataTable5();
-        restoreInputDataTable6();
-        restoreInputDataTable7();
-        restoreInputDataTable8();
+        restoreInputDataTable();
+        restoreDataTable8();
         restoreBillTable8();
         try {
             ReportManager.getInstance().compileReport();
@@ -79,38 +65,13 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-        if ("".equals(Name1.getText())) {
-            Name1.setText("BÀN 1");
-        }
-        
-        if ("".equals(Name2.getText())) {
-            Name2.setText("BÀN 2");
-        }
+        JLabel[] nameFields = { Name1, Name2, Name3, Name4, Name5, Name6, Name7, Name8 };
 
-        if ("".equals(Name3.getText())) {
-            Name3.setText("BÀN 3");
+        for (int i = 0; i < nameFields.length; i++) {
+            if ("".equals(nameFields[i].getText())) {
+                nameFields[i].setText("BÀN " + (i + 1));
+            }
         }
-
-        if ("".equals(Name4.getText())) {
-            Name4.setText("BÀN 4");
-        }        
-
-        if ("".equals(Name5.getText())) {
-            Name5.setText("BÀN 5");
-        }
-
-        if ("".equals(Name6.getText())) {
-            Name6.setText("BÀN 6");
-        }
-
-        if ("".equals(Name7.getText())) {
-            Name7.setText("BÀN 7");
-        }
-
-        if ("".equals(Name8.getText())) {
-            Name8.setText("BÀN 8");
-        }
-        
         if ("".equals(NameTable8.getText())) {
             NameTable8.setText("BÀN 8");
         }
@@ -134,173 +95,6 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
             }
     }
     
-    private void restoreInputDataTable1() {
-        Name1.setText(dataHolderTable1.getInputDataName1());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable1.getInputColorDataNameTable1();
-        String colorAsString2 = dataHolderTable1.getInputColorDataName1();
-        String[] colorComponents1 = colorAsString1.split(",");
-        if (colorComponents1.length == 3) {
-            int red = Integer.parseInt(colorComponents1[0]);
-            int green = Integer.parseInt(colorComponents1[1]);
-            int blue = Integer.parseInt(colorComponents1[2]);
-            Color color1 = new Color(red, green, blue);
-            Name1.setForeground(color1);
-        }
-    }
-    
-
-    // Phương thức để khôi phục dữ liệu khi quay lại trang ban đầu
-    private void restoreInputDataTable2() {
-        Name2.setText(dataHolderTable2.getInputDataName2());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable2.getInputColorDataNameTable2();
-        String colorAsString2 = dataHolderTable2.getInputColorDataName2();
-        String[] colorComponents2 = colorAsString1.split(",");
-        if (colorComponents2.length == 3) {
-            int red = Integer.parseInt(colorComponents2[0]);
-            int green = Integer.parseInt(colorComponents2[1]);
-            int blue = Integer.parseInt(colorComponents2[2]);
-            Color color2 = new Color(red, green, blue);
-            Name2.setForeground(color2);
-        }
-    }
-    
-    private void restoreInputDataTable3() {
-        Name3.setText(dataHolderTable3.getInputDataName3());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable3.getInputColorDataNameTable3();
-        String colorAsString2 = dataHolderTable3.getInputColorDataName3();
-        String[] colorComponents3 = colorAsString1.split(",");
-        if (colorComponents3.length == 3) {
-            int red = Integer.parseInt(colorComponents3[0]);
-            int green = Integer.parseInt(colorComponents3[1]);
-            int blue = Integer.parseInt(colorComponents3[2]);
-            Color color3 = new Color(red, green, blue);
-            Name3.setForeground(color3);
-        }
-    }
-    
-    private void restoreInputDataTable4() {
-        Name4.setText(dataHolderTable4.getInputDataName4());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable4.getInputColorDataNameTable4();
-        String colorAsString2 = dataHolderTable4.getInputColorDataName4();
-        String[] colorComponents4 = colorAsString1.split(",");
-        if (colorComponents4.length == 3) {
-            int red = Integer.parseInt(colorComponents4[0]);
-            int green = Integer.parseInt(colorComponents4[1]);
-            int blue = Integer.parseInt(colorComponents4[2]);
-            Color color4 = new Color(red, green, blue);
-            Name4.setForeground(color4);
-        }
-    }
-    
-    private void restoreInputDataTable5() {
-        Name5.setText(dataHolderTable5.getInputDataName5());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable5.getInputColorDataNameTable5();
-        String colorAsString2 = dataHolderTable5.getInputColorDataName5();
-        String[] colorComponents5 = colorAsString1.split(",");
-        if (colorComponents5.length == 3) {
-            int red = Integer.parseInt(colorComponents5[0]);
-            int green = Integer.parseInt(colorComponents5[1]);
-            int blue = Integer.parseInt(colorComponents5[2]);
-            Color color5 = new Color(red, green, blue);
-            Name5.setForeground(color5);
-        }
-    }
-    
-    private void restoreInputDataTable6() {
-        Name6.setText(dataHolderTable6.getInputDataName6());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable6.getInputColorDataNameTable6();
-        String colorAsString2 = dataHolderTable6.getInputColorDataName6();
-        String[] colorComponents6 = colorAsString1.split(",");
-        if (colorComponents6.length == 3) {
-            int red = Integer.parseInt(colorComponents6[0]);
-            int green = Integer.parseInt(colorComponents6[1]);
-            int blue = Integer.parseInt(colorComponents6[2]);
-            Color color6 = new Color(red, green, blue);
-            Name6.setForeground(color6);
-        }
-    }
-    
-    private void restoreInputDataTable7() {
-        Name7.setText(dataHolderTable7.getInputDataName7());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable7.getInputColorDataNameTable7();
-        String colorAsString2 = dataHolderTable7.getInputColorDataName7();
-        String[] colorComponents7 = colorAsString1.split(",");
-        if (colorComponents7.length == 3) {
-            int red = Integer.parseInt(colorComponents7[0]);
-            int green = Integer.parseInt(colorComponents7[1]);
-            int blue = Integer.parseInt(colorComponents7[2]);
-            Color color7 = new Color(red, green, blue);
-            Name7.setForeground(color7);
-        }
-    }
-
-    private void saveInputDataTable8() {
-        dataHolderTable8.setInputDataSTARTTable8(TIMESTART8.getText());
-        dataHolderTable8.setInputDataENDTable8(TIMEEND8.getText());
-        dataHolderTable8.setInputDataNameTable8(NameTable8.getText());
-        dataHolderTable8.setInputDataName8(Name8.getText());
-        // Chuyển đổi màu sắc của Table8Name thành mã màu RGB và lưu vào DataHolder
-        Color color = NameTable8.getForeground();
-        Color color2 = Name8.getForeground();
-        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
-        dataHolderTable8.setInputColorDataNameTable8(colorAsString);
-        String colorAsString2 = String.format("%d,%d,%d", color2.getRed(), color2.getGreen(), color2.getBlue());
-        dataHolderTable8.setInputColorDataName8(colorAsString2);
-        dataHolderTable8.setStartBtnEnabledTable8(StartBtnTable8.isEnabled());
-        dataHolderTable8.setStopBtnEnabledTable8(StopBtnTable8.isEnabled());
-        dataHolderTable8.setPrintBtnEnabledTable8(PrintBtnTable8.isEnabled());
-
-        dataHolderTable8.setStartHourTable8(startHourTable8);
-        dataHolderTable8.setStartMinuteTable8(startMinuteTable8);
-        dataHolderTable8.setStartSecondTable8(startSecondTable8);
-        dataHolderTable8.setEndHourTable8(endHourTable8);
-        dataHolderTable8.setEndMinuteTable8(endMinuteTable8);
-        dataHolderTable8.setEndSecondTable8(endSecondTable8);
-        
-        dataHolderTable8.setAddBtnEnabledTable8(AddBtnTable8.isEnabled());
-
-    }
-
-    private void restoreInputDataTable8() {
-        TIMESTART8.setText(dataHolderTable8.getInputDataSTARTTable8());
-        TIMEEND8.setText(dataHolderTable8.getInputDataENDTable8());
-        NameTable8.setText(dataHolderTable8.getInputDataNameTable8());
-        Name8.setText(dataHolderTable8.getInputDataName8());
-        // Khôi phục màu sắc của NameTable từ DataHolder
-        String colorAsString1 = dataHolderTable8.getInputColorDataNameTable8();
-        String colorAsString2 = dataHolderTable8.getInputColorDataName8();
-        String[] colorComponents8 = colorAsString1.split(",");
-        if (colorComponents8.length == 3) {
-            int red = Integer.parseInt(colorComponents8[0]);
-            int green = Integer.parseInt(colorComponents8[1]);
-            int blue = Integer.parseInt(colorComponents8[2]);
-            Color color1 = new Color(red, green, blue);
-            NameTable8.setForeground(color1);
-            Name8.setForeground(color1);
-        }
-        StartBtnTable8.setEnabled(dataHolderTable8.isStartBtnEnabledTable8());
-        StopBtnTable8.setEnabled(dataHolderTable8.isStopBtnEnabledTable8());
-        PrintBtnTable8.setEnabled(dataHolderTable8.isPrintBtnEnabledTable8());
-
-        startHourTable8 = dataHolderTable8.getStartHourTable8();
-        startMinuteTable8 = dataHolderTable8.getStartMinuteTable8();
-        startSecondTable8 = dataHolderTable8.getStartSecondTable8();
-        endHourTable8 = dataHolderTable8.getEndHourTable8();
-        endMinuteTable8 = dataHolderTable8.getEndMinuteTable8();
-        endSecondTable8 = dataHolderTable8.getEndSecondTable8();
-        
-        AddBtnTable8.setEnabled(dataHolderTable8.isAddBtnEnabledTable8());
-
-    }
-
-
     public void SelectBill() {
         try {
             conn = ConnectXamppMySQL.conn();
@@ -332,12 +126,6 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
     }
     
     public static double roundDecimal(double number, int decimalPlaces) {
-        // Định dạng cho số với số lẻ giới hạn
-//        String pattern = "#." + new String(new char[decimalPlaces]).replace("\0", "#");
-//        DecimalFormat decimalFormat = new DecimalFormat(pattern);
-
-        // Làm tròn và trả về giá trị
-//        String formattedNumber = decimalFormat.format(number);
         double scale = Math.pow(10, decimalPlaces);
         return Math.round(number * scale) / scale;
     }
@@ -386,6 +174,102 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         }catch(Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    private void restoreInputDataTable() {
+        JLabel[] nameFields = { Name1, Name2, Name3, Name4, Name5, Name6, Name7, Name8 };
+        String[] dataHolderColor = {
+            dataHolderTable1.getInputColorDataNameTable1(),
+            dataHolderTable2.getInputColorDataNameTable2(),
+            dataHolderTable3.getInputColorDataNameTable3(),
+            dataHolderTable4.getInputColorDataNameTable4(),
+            dataHolderTable5.getInputColorDataNameTable5(),
+            dataHolderTable6.getInputColorDataNameTable6(),
+            dataHolderTable7.getInputColorDataNameTable7(),
+            dataHolderTable8.getInputColorDataNameTable8(),
+        };
+        String[] dataHolderName = {
+            dataHolderTable1.getInputDataName1(),
+            dataHolderTable2.getInputDataName2(),
+            dataHolderTable3.getInputDataName3(),
+            dataHolderTable4.getInputDataName4(),
+            dataHolderTable5.getInputDataName5(),
+            dataHolderTable6.getInputDataName6(),
+            dataHolderTable7.getInputDataName7(),
+            dataHolderTable8.getInputDataName8(),
+        };
+        Color color1 = null, color2 = null, color3 = null, color4 = null, color5 = null, color6 = null, color7 = null, color8 = null;
+        Color[] color = {color1, color2, color3, color4, color5, color6, color7, color8};
+        
+        for(int i = 0; i < 8; i++) {
+            nameFields[i].setText(dataHolderName[i]);
+           // Khôi phục màu sắc của NameTable từ DataHolder
+            String colorAsString = dataHolderColor[i];
+        
+            String[] colorComponents = colorAsString.split(",");
+            if (colorComponents.length == 3) {
+                int red = Integer.parseInt(colorComponents[0]);
+                int green = Integer.parseInt(colorComponents[1]);
+                int blue = Integer.parseInt(colorComponents[2]);
+                color[i] = new Color(red, green, blue);
+                nameFields[i].setForeground(color[i]);
+            }
+        }   
+    }
+
+    private void restoreDataTable8() {
+        TIMESTART8.setText(dataHolderTable8.getInputDataSTARTTable8());
+        TIMEEND8.setText(dataHolderTable8.getInputDataENDTable8());
+        NameTable8.setText(dataHolderTable8.getInputDataNameTable8());
+        Name8.setText(dataHolderTable8.getInputDataName8());
+        // Khôi phục màu sắc của NameTable từ DataHolder
+        String colorAsString1 = dataHolderTable8.getInputColorDataNameTable8();
+        String[] colorComponents8 = colorAsString1.split(",");
+        if (colorComponents8.length == 3) {
+            int red = Integer.parseInt(colorComponents8[0]);
+            int green = Integer.parseInt(colorComponents8[1]);
+            int blue = Integer.parseInt(colorComponents8[2]);
+            Color color1 = new Color(red, green, blue);
+            NameTable8.setForeground(color1);
+            Name8.setForeground(color1);
+        }
+        StartBtnTable8.setEnabled(dataHolderTable8.isStartBtnEnabledTable8());
+        StopBtnTable8.setEnabled(dataHolderTable8.isStopBtnEnabledTable8());
+        PrintBtnTable8.setEnabled(dataHolderTable8.isPrintBtnEnabledTable8());
+        startHourTable8 = dataHolderTable8.getStartHourTable8();
+        startMinuteTable8 = dataHolderTable8.getStartMinuteTable8();
+        startSecondTable8 = dataHolderTable8.getStartSecondTable8();
+        endHourTable8 = dataHolderTable8.getEndHourTable8();
+        endMinuteTable8 = dataHolderTable8.getEndMinuteTable8();
+        endSecondTable8 = dataHolderTable8.getEndSecondTable8();
+        AddBtnTable8.setEnabled(dataHolderTable8.isAddBtnEnabledTable8());
+    }
+    
+    private void saveInputDataTable8() {
+        dataHolderTable8.setInputDataSTARTTable8(TIMESTART8.getText());
+        dataHolderTable8.setInputDataENDTable8(TIMEEND8.getText());
+        dataHolderTable8.setInputDataNameTable8(NameTable8.getText());
+        dataHolderTable8.setInputDataName8(Name8.getText());
+        // Chuyển đổi màu sắc của Table8Name thành mã màu RGB và lưu vào DataHolder
+        Color color = NameTable8.getForeground();
+        Color color2 = Name8.getForeground();
+        String colorAsString = String.format("%d,%d,%d", color.getRed(), color.getGreen(), color.getBlue());
+        dataHolderTable8.setInputColorDataNameTable8(colorAsString);
+        String colorAsString2 = String.format("%d,%d,%d", color2.getRed(), color2.getGreen(), color2.getBlue());
+        dataHolderTable8.setInputColorDataName8(colorAsString2);
+        dataHolderTable8.setStartBtnEnabledTable8(StartBtnTable8.isEnabled());
+        dataHolderTable8.setStopBtnEnabledTable8(StopBtnTable8.isEnabled());
+        dataHolderTable8.setPrintBtnEnabledTable8(PrintBtnTable8.isEnabled());
+
+        dataHolderTable8.setStartHourTable8(startHourTable8);
+        dataHolderTable8.setStartMinuteTable8(startMinuteTable8);
+        dataHolderTable8.setStartSecondTable8(startSecondTable8);
+        dataHolderTable8.setEndHourTable8(endHourTable8);
+        dataHolderTable8.setEndMinuteTable8(endMinuteTable8);
+        dataHolderTable8.setEndSecondTable8(endSecondTable8);
+        
+        dataHolderTable8.setAddBtnEnabledTable8(AddBtnTable8.isEnabled());
+
     }
     
     private BillTable8 billTable8 = BillTable8.getInstanceTable8();
@@ -477,6 +361,10 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         Name7 = new javax.swing.JLabel();
         PlayTable8Btn = new javax.swing.JPanel();
         Name8 = new javax.swing.JLabel();
+        SwapNormalBtn = new javax.swing.JPanel();
+        Normal = new javax.swing.JLabel();
+        SwapVipBtn = new javax.swing.JPanel();
+        VIP = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1255,13 +1143,55 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
             .addComponent(Name8, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        SwapNormalBtn.setBackground(new java.awt.Color(0, 102, 153));
+        SwapNormalBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SwapNormalBtnMouseClicked(evt);
+            }
+        });
+
+        Normal.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        Normal.setForeground(new java.awt.Color(255, 255, 255));
+        Normal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Normal.setText("THƯỜNG");
+
+        javax.swing.GroupLayout SwapNormalBtnLayout = new javax.swing.GroupLayout(SwapNormalBtn);
+        SwapNormalBtn.setLayout(SwapNormalBtnLayout);
+        SwapNormalBtnLayout.setHorizontalGroup(
+            SwapNormalBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Normal, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        SwapNormalBtnLayout.setVerticalGroup(
+            SwapNormalBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Normal, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
+        SwapVipBtn.setBackground(new java.awt.Color(255, 255, 255));
+        SwapVipBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SwapVipBtnMouseClicked(evt);
+            }
+        });
+
+        VIP.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        VIP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        VIP.setText("VIP");
+
+        javax.swing.GroupLayout SwapVipBtnLayout = new javax.swing.GroupLayout(SwapVipBtn);
+        SwapVipBtn.setLayout(SwapVipBtnLayout);
+        SwapVipBtnLayout.setHorizontalGroup(
+            SwapVipBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(VIP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+        );
+        SwapVipBtnLayout.setVerticalGroup(
+            SwapVipBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(VIP, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
             .addComponent(PlayTable2Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable3Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable1Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1270,12 +1200,24 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
             .addComponent(PlayTable4Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable8Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(PlayTable7Btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(SwapNormalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SwapVipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(109, 109, 109)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(SwapNormalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SwapVipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(PlayTable1Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PlayTable2Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1321,6 +1263,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void PRODNAMEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRODNAMEActionPerformed
@@ -1758,6 +1701,15 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 //        this.dispose();
     }//GEN-LAST:event_PlayTable8BtnMouseClicked
 
+    private void SwapNormalBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SwapNormalBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SwapNormalBtnMouseClicked
+
+    private void SwapVipBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SwapVipBtnMouseClicked
+        new Table9AndCheckOut().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SwapVipBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1807,6 +1759,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JLabel Name7;
     private javax.swing.JLabel Name8;
     private javax.swing.JLabel NameTable8;
+    private javax.swing.JLabel Normal;
     private javax.swing.JComboBox<String> PRODCAT;
     private javax.swing.JTable PRODLIST;
     private javax.swing.JTextField PRODNAME;
@@ -1825,9 +1778,12 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JTextField SDTKH8;
     private javax.swing.JButton StartBtnTable8;
     private javax.swing.JButton StopBtnTable8;
+    private javax.swing.JPanel SwapNormalBtn;
+    private javax.swing.JPanel SwapVipBtn;
     private javax.swing.JTextField TIMEEND8;
     private javax.swing.JTextField TIMESTART8;
     private javax.swing.JLabel TotalBillRender;
+    private javax.swing.JLabel VIP;
     private javax.swing.JButton filterBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

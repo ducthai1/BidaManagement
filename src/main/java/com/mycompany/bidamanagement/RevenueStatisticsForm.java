@@ -26,37 +26,60 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
     public RevenueStatisticsForm() {
         conn = ConnectXamppMySQL.conn();
         initComponents();
-        SelectCustomer();
+        SelectDailyStatistics();
+        SelectMonthlyStatistics();
     }
 
     static Statement st = null;
     static ResultSet rs = null;
-    
-    public void SelectCustomer() {
-        try {
-            conn = ConnectXamppMySQL.conn();
-            st = conn.createStatement();
-            rs = st.executeQuery("SELECT * FROM daily_statistics ORDER BY STAT_DATE DESC");
-            DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("NGÀY");
-            model.addColumn("TỔNG THU NHẬP THEO NGÀY");
-            model.addColumn("TỔNG SỐ BILL TRONG NGÀY");
-            while (rs.next()) {
-                Object[] row = {
-                    rs.getDate("STAT_DATE"),
-                    rs.getDouble("TOTAL_INCOME"),          
-                    rs.getInt("TOTAL_INVOICES")  
-                };
-                model.addRow(row);
-            }
-            DailyIncomeTable.setModel(model);
+    public void SelectDailyStatistics() {
+    try (Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery("SELECT * FROM daily_statistics ORDER BY STAT_DATE DESC")) {
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("NGÀY");
+        model.addColumn("TỔNG THU NHẬP THEO NGÀY");
+        model.addColumn("TỔNG SỐ BILL TRONG NGÀY");
+        
+        while (rs.next()) {
+            Object[] row = {
+                rs.getDate("STAT_DATE"),
+                rs.getInt("TOTAL_INCOME"),          
+                rs.getInt("TOTAL_INVOICES")  
+            };
+            model.addRow(row);
         }
-        catch(Exception e){
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        DailyIncomeTable.setModel(model);
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
-    
+}
+
+public void SelectMonthlyStatistics() {
+    try (Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery("SELECT * FROM monthly_statistics")) {
+        
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("THÁNG");
+        model.addColumn("TỔNG THU NHẬP THEO THÁNG");
+        model.addColumn("TỔNG SỐ BILL TRONG THÁNG");
+        
+        while (rs.next()) {
+            Object[] row = {
+                rs.getString("STAT_MONTH"),
+                rs.getInt("TOTAL_INCOME"),          
+                rs.getInt("TOTAL_INVOICES")  
+            };
+            model.addRow(row);
+        }
+        MonthlyIncomeTable.setModel(model);
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage(), "Lỗi", JOptionPane.ERROR_MESSAGE);
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,9 +97,9 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         DailyIncomeTable = new javax.swing.JTable();
         jLabel11 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        MonthlyIncomeTable = new javax.swing.JTable();
         ReloadBtn = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        MonthlyIncomeTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         CusBtn = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -130,9 +153,16 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
                 "NGÀY", "TỔNG THU NHẬP THEO NGÀY", "TỔNG SỐ BILL TRONG NGÀY"
             }
         ));
+        DailyIncomeTable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        DailyIncomeTable.setEnabled(false);
         DailyIncomeTable.setRowHeight(40);
         DailyIncomeTable.setSelectionBackground(new java.awt.Color(219, 229, 238));
         DailyIncomeTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        DailyIncomeTable.setShowGrid(false);
+        DailyIncomeTable.getTableHeader().setResizingAllowed(false);
+        DailyIncomeTable.getTableHeader().setReorderingAllowed(false);
+        DailyIncomeTable.setUpdateSelectionOnSort(false);
+        DailyIncomeTable.setVerifyInputWhenFocusTarget(false);
         DailyIncomeTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DailyIncomeTableMouseClicked(evt);
@@ -145,35 +175,6 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(110, 178, 246));
         jLabel11.setText("THỐNG KÊ DOANH THU HÀNG THÁNG");
 
-        MonthlyIncomeTable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        MonthlyIncomeTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, "", null},
-                {null, null, null},
-                {null, "TÍNH NĂNG SẼ SỚM RA MẮT", null},
-                {null, "", null}
-            },
-            new String [] {
-                "THÁNG", "TỔNG THU NHẬP THEO THÁNG", "TỔNG SỐ BILL TRONG THÁNG"
-            }
-        ));
-        MonthlyIncomeTable.setEnabled(false);
-        MonthlyIncomeTable.setFocusTraversalKeysEnabled(false);
-        MonthlyIncomeTable.setFocusable(false);
-        MonthlyIncomeTable.setGridColor(new java.awt.Color(255, 255, 255));
-        MonthlyIncomeTable.setRowHeight(40);
-        MonthlyIncomeTable.setRowSelectionAllowed(false);
-        MonthlyIncomeTable.setSelectionBackground(new java.awt.Color(255, 255, 255));
-        MonthlyIncomeTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        MonthlyIncomeTable.getTableHeader().setResizingAllowed(false);
-        MonthlyIncomeTable.setUpdateSelectionOnSort(false);
-        MonthlyIncomeTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MonthlyIncomeTableMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(MonthlyIncomeTable);
-
         ReloadBtn.setBackground(new java.awt.Color(110, 178, 246));
         ReloadBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ReloadBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -185,32 +186,56 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
             }
         });
 
+        MonthlyIncomeTable.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        MonthlyIncomeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "THÁNG", "TỔNG THU NHẬP THEO THÁNG", "TỔNG SỐ BILL TRONG THÁNG"
+            }
+        ));
+        MonthlyIncomeTable.setEnabled(false);
+        MonthlyIncomeTable.setRowHeight(40);
+        MonthlyIncomeTable.setSelectionBackground(new java.awt.Color(219, 229, 238));
+        MonthlyIncomeTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        MonthlyIncomeTable.getTableHeader().setResizingAllowed(false);
+        MonthlyIncomeTable.getTableHeader().setReorderingAllowed(false);
+        MonthlyIncomeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MonthlyIncomeTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(MonthlyIncomeTable);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(176, 176, 176))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(ReloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ReloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(exitBtn)
                         .addGap(10, 10, 10))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(29, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(30, 30, 30)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(164, 164, 164))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,16 +248,13 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(exitBtn))
                     .addComponent(ReloadBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
-                .addContainerGap(266, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(554, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(16, 16, 16)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(110, 178, 246));
@@ -403,7 +425,7 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(LogoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
                 .addComponent(StatisticsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(CusBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -494,14 +516,14 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
 //        TONGCHI.setText(model.getValueAt(Myindex, 5).toString());
     }//GEN-LAST:event_DailyIncomeTableMouseClicked
 
-    private void MonthlyIncomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MonthlyIncomeTableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MonthlyIncomeTableMouseClicked
-
     private void ReloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReloadBtnMouseClicked
         new RevenueStatisticsForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ReloadBtnMouseClicked
+
+    private void MonthlyIncomeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MonthlyIncomeTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MonthlyIncomeTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -542,8 +564,6 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CatBtn;
     private javax.swing.JPanel CusBtn;
-    private javax.swing.JPanel CusBtn1;
-    private javax.swing.JPanel CusBtn2;
     private javax.swing.JTable DailyIncomeTable;
     private javax.swing.JPanel LogoutBtn;
     private javax.swing.JTable MonthlyIncomeTable;
@@ -559,10 +579,6 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
@@ -571,6 +587,6 @@ public class RevenueStatisticsForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
