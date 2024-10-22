@@ -4,7 +4,7 @@
  */
 package com.mycompany.bidamanagement;
 
-import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.bill.ReportManager55;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
 import java.io.FileInputStream;
@@ -62,7 +62,7 @@ public class Table13AndCheckOut extends javax.swing.JFrame {
         restoreDataTable13();
         restoreBillTable13();
         try {
-            ReportManager.getInstance().compileReport();
+            ReportManager55.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -1558,7 +1558,7 @@ public class Table13AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable13 = new Date();
         SimpleDateFormat datePrintTable13 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable13 = datePrintTable13.format(currentPrintTable13);
-        String TableFee13 = CommonFunction.calculateTimePlayTable(startHourTable13, startMinuteTable13, startSecondTable13, endHourTable13, endMinuteTable13, endSecondTable13);
+        String TableFee13 = CommonFunction.calculateTimePlayTablePrice55(startHourTable13, startMinuteTable13, startSecondTable13, endHourTable13, endMinuteTable13, endSecondTable13);
         Double totalFeeBill = Double.parseDouble(TableFee13) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee13 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1576,11 +1576,11 @@ public class Table13AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable13 > 0) {
                 ParameterReportCheckoutTable dataprint13 = new ParameterReportCheckoutTable(formatPrintTable13, TIMESTART13.getText(), TIMEEND13.getText(), TableFee13, invoiceIdTable13, convertTotalFeeToString);
-                ReportManager.getInstance().printReportPaymentTable(dataprint13);
+                ReportManager55.getInstance().printReportPaymentTable(dataprint13);
             }
             else {
                 ParameterReportCheckout dataprint13 = new ParameterReportCheckout(formatPrintTable13, TIMESTART13.getText(), TIMEEND13.getText(), TableFee13);
-                ReportManager.getInstance().printReportPayment(dataprint13);
+                ReportManager55.getInstance().printReportPayment(dataprint13);
             }
 
             PrintBtnTable13.setEnabled(false);

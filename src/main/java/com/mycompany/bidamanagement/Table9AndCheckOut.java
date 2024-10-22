@@ -4,7 +4,7 @@
  */
 package com.mycompany.bidamanagement;
 
-import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.bill.ReportManager55;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
 import java.io.FileInputStream;
@@ -63,7 +63,7 @@ public class Table9AndCheckOut extends javax.swing.JFrame {
         restoreDataTable9();
         restoreBillTable9();
         try {
-            ReportManager.getInstance().compileReport();
+            ReportManager55.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -1575,7 +1575,7 @@ public class Table9AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable9 = new Date();
         SimpleDateFormat datePrintTable9 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable9 = datePrintTable9.format(currentPrintTable9);
-        String TableFee9 = CommonFunction.calculateTimePlayTable(startHourTable9, startMinuteTable9, startSecondTable9, endHourTable9, endMinuteTable9, endSecondTable9);
+        String TableFee9 = CommonFunction.calculateTimePlayTablePrice55(startHourTable9, startMinuteTable9, startSecondTable9, endHourTable9, endMinuteTable9, endSecondTable9);
         Double totalFeeBill = Double.parseDouble(TableFee9) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee9 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1593,11 +1593,11 @@ public class Table9AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable9 > 0) {
                 ParameterReportCheckoutTable dataprint9 = new ParameterReportCheckoutTable(formatPrintTable9, TIMESTART9.getText(), TIMEEND9.getText(), TableFee9, invoiceIdTable9, convertTotalFeeToString);
-                ReportManager.getInstance().printReportPaymentTable(dataprint9);
+                ReportManager55.getInstance().printReportPaymentTable(dataprint9);
             }
             else {
                 ParameterReportCheckout dataprint9 = new ParameterReportCheckout(formatPrintTable9, TIMESTART9.getText(), TIMEEND9.getText(), TableFee9);
-                ReportManager.getInstance().printReportPayment(dataprint9);
+                ReportManager55.getInstance().printReportPayment(dataprint9);
             }
 
             PrintBtnTable9.setEnabled(false);

@@ -112,10 +112,10 @@ public class CommonFunction {
         return String.valueOf(roundDecimal(tableFee, 2));
     }
     
-    public static String calculateTimePlayTablePrice50(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
+    public static String calculateTimePlayTablePrice55(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
         final int SECONDS_IN_HOUR = 3600;
         final int SECONDS_IN_MINUTE = 60;
-        final double PRICE_PER_HOUR = 50.0;
+        final double PRICE_PER_HOUR = 55.0;
     
         // Kiểm tra tính hợp lệ của thời gian đầu vào
         if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 || startSecond < 0 || startSecond > 59 ||
