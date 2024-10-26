@@ -115,7 +115,7 @@ public class CommonFunction {
     public static String calculateTimePlayTablePrice55(int startHour, int startMinute, int startSecond, int endHour, int endMinute, int endSecond) {
         final int SECONDS_IN_HOUR = 3600;
         final int SECONDS_IN_MINUTE = 60;
-        final double PRICE_PER_HOUR = 55.0;
+        final double PRICE_PER_HOUR = 50.0;
     
         // Kiểm tra tính hợp lệ của thời gian đầu vào
         if (startHour < 0 || startHour > 23 || startMinute < 0 || startMinute > 59 || startSecond < 0 || startSecond > 59 ||
