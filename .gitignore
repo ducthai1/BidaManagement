@@ -11,6 +11,7 @@
 /nbdist/
 /nbproject/private/
 /out/
+/netbeans_automatic_build
 
 # Logs and generated files
 *.log
