@@ -1,0 +1,20 @@
+# Java build files
+*.class
+*.jar
+*.war
+*.ear
+
+# NetBeans-specific build directories
+/build/
+/dist/
+/nbbuild/
+/nbdist/
+/nbproject/private/
+/out/
+
+# Logs and generated files
+*.log
+
+# Other
+.DS_Store
+Thumbs.db

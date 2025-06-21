@@ -63,8 +63,7 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
     private DataHolderTable6 dataHolderTable6 = DataHolderTable6.getInstanceTable6();
     private DataHolderTable7 dataHolderTable7 = DataHolderTable7.getInstanceTable7();
     private DataHolderTable8 dataHolderTable8 = DataHolderTable8.getInstanceTable8();
-    private DataHolderTable9 dataHolderTable9 = DataHolderTable9.getInstanceTable9();
-    private DataHolderTable10 dataHolderTable10 = DataHolderTable10.getInstanceTable10();
+    private DataHolderSimpleBill dataHolderSimpleBill = DataHolderSimpleBill.getInstanceSimpleBill();
     
     public Table1AndCheckOut() {
         initComponents();
@@ -111,6 +110,9 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
         }
         if ("".equals(Name8.getText())) {
             Name8.setText("BÀN 8");
+        }
+        if ("".equals(Name9.getText())) {
+            Name9.setText("BÁN LẺ");
         }
         SelectBill();
         getCategory();
@@ -521,6 +523,8 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
         Normal = new javax.swing.JLabel();
         SwapVipBtn = new javax.swing.JPanel();
         VIP = new javax.swing.JLabel();
+        SimpleBtn = new javax.swing.JPanel();
+        Name9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1347,6 +1351,28 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
             .addComponent(VIP, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        SimpleBtn.setBackground(new java.awt.Color(255, 255, 255));
+        SimpleBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SimpleBtnMouseClicked(evt);
+            }
+        });
+
+        Name9.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        Name9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Name9.setText("BÁN LẺ");
+
+        javax.swing.GroupLayout SimpleBtnLayout = new javax.swing.GroupLayout(SimpleBtn);
+        SimpleBtn.setLayout(SimpleBtnLayout);
+        SimpleBtnLayout.setHorizontalGroup(
+            SimpleBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Name9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        SimpleBtnLayout.setVerticalGroup(
+            SimpleBtnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Name9, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -1367,6 +1393,7 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
                 .addComponent(SwapNormalBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SwapVipBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(SimpleBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1392,6 +1419,8 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
                 .addComponent(PlayTable7Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PlayTable8Btn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SimpleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1804,6 +1833,11 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_SwapVipBtnMouseClicked
 
+    private void SimpleBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SimpleBtnMouseClicked
+        new SimpleBillAndCheckOut().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SimpleBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1852,6 +1886,7 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JLabel Name6;
     private javax.swing.JLabel Name7;
     private javax.swing.JLabel Name8;
+    private javax.swing.JLabel Name9;
     private javax.swing.JLabel NameTable1;
     private javax.swing.JLabel Normal;
     private javax.swing.JComboBox<String> PRODCAT;
@@ -1870,6 +1905,7 @@ public class Table1AndCheckOut extends javax.swing.JFrame {
     private javax.swing.JButton ReloadBtn;
     private javax.swing.JButton ResetBtnTable1;
     private javax.swing.JTextField SDTKH1;
+    private javax.swing.JPanel SimpleBtn;
     private javax.swing.JButton StartBtnTable1;
     private javax.swing.JButton StopBtnTable1;
     private javax.swing.JPanel SwapNormalBtn;
