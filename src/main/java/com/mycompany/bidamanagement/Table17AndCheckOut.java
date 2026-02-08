@@ -5,6 +5,7 @@
 package com.mycompany.bidamanagement;
 
 import com.mycompany.bidamanagement.bill.ReportManager40;
+import com.mycompany.bidamanagement.bill.ReportManager45;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
 import java.io.FileInputStream;
@@ -1558,7 +1559,7 @@ public class Table17AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable17 = new Date();
         SimpleDateFormat datePrintTable17 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable17 = datePrintTable17.format(currentPrintTable17);
-        String TableFee17 = CommonFunction.calculateTimePlayTablePrice40(startHourTable17, startMinuteTable17, startSecondTable17, endHourTable17, endMinuteTable17, endSecondTable17);
+        String TableFee17 = CommonFunction.calculateTimePlayTablePrice45(startHourTable17, startMinuteTable17, startSecondTable17, endHourTable17, endMinuteTable17, endSecondTable17);
         Double totalFeeBill = Double.parseDouble(TableFee17) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee17 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1576,11 +1577,11 @@ public class Table17AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable17 > 0) {
                 ParameterReportCheckoutTable dataprint17 = new ParameterReportCheckoutTable(formatPrintTable17, TIMESTART17.getText(), TIMEEND17.getText(), TableFee17, invoiceIdTable17, convertTotalFeeToString);
-                ReportManager40.getInstance().printReportPaymentTable(dataprint17);
+                ReportManager45.getInstance().printReportPaymentTable(dataprint17);
             }
             else {
                 ParameterReportCheckout dataprint17 = new ParameterReportCheckout(formatPrintTable17, TIMESTART17.getText(), TIMEEND17.getText(), TableFee17);
-                ReportManager40.getInstance().printReportPayment(dataprint17);
+                ReportManager45.getInstance().printReportPayment(dataprint17);
             }
 
             PrintBtnTable17.setEnabled(false);

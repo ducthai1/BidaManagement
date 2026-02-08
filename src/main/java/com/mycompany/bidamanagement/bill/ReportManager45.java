@@ -32,7 +32,13 @@ public class ReportManager45 {
         return instance;
     }
 
-    private ReportManager45() {}
+    private ReportManager45() {
+        try {
+            compileReport();
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
     
     public void compileReport() throws JRException {
         try {

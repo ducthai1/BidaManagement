@@ -6,6 +6,7 @@ package com.mycompany.bidamanagement;
 
 
 import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.bill.ReportManager40;
 import com.mycompany.bidamanagement.printModel.FieldReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
@@ -1638,7 +1639,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable7 = new Date();
         SimpleDateFormat datePrintTable7 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable7 = datePrintTable7.format(currentPrintTable7);
-        String TableFee7 = CommonFunction.calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
+        String TableFee7 = CommonFunction.calculateTimePlayTablePrice40(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
         Double totalFeeBill = Double.parseDouble(TableFee7) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee7 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1656,11 +1657,11 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable7 > 0) {
                 ParameterReportCheckoutTable dataprint7 = new ParameterReportCheckoutTable(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), TableFee7, invoiceIdTable7, convertTotalFeeToString);
-                ReportManager.getInstance().printReportPaymentTable(dataprint7);
+                ReportManager40.getInstance().printReportPaymentTable(dataprint7);
             }
             else {
                 ParameterReportCheckout dataprint7 = new ParameterReportCheckout(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), TableFee7);
-                ReportManager.getInstance().printReportPayment(dataprint7);
+                ReportManager40.getInstance().printReportPayment(dataprint7);
             }
 
 

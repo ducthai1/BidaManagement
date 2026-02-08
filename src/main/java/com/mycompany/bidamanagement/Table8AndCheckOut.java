@@ -5,6 +5,7 @@
 package com.mycompany.bidamanagement;
 
 import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.bill.ReportManager40;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
 import java.io.FileInputStream;
@@ -1526,7 +1527,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable8 = new Date();
         SimpleDateFormat datePrintTable8 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable8 = datePrintTable8.format(currentPrintTable8);
-        String TableFee8 = CommonFunction.calculateTimePlayTable(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
+        String TableFee8 = CommonFunction.calculateTimePlayTablePrice40(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
         Double totalFeeBill = Double.parseDouble(TableFee8) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee8 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1544,11 +1545,11 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable8 > 0) {
                 ParameterReportCheckoutTable dataprint8 = new ParameterReportCheckoutTable(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), TableFee8, invoiceIdTable8, convertTotalFeeToString);
-                ReportManager.getInstance().printReportPaymentTable(dataprint8);
+                ReportManager40.getInstance().printReportPaymentTable(dataprint8);
             }
             else {
                 ParameterReportCheckout dataprint8 = new ParameterReportCheckout(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), TableFee8);
-                ReportManager.getInstance().printReportPayment(dataprint8);
+                ReportManager40.getInstance().printReportPayment(dataprint8);
             }
 
 
