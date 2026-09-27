@@ -71,7 +71,13 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
         for (int i = 0; i < nameFields.length; i++) {
             if ("".equals(nameFields[i].getText())) {
-                nameFields[i].setText("BÀN " + (i + 1));
+                if (i == 6) {
+                    nameFields[i].setText("TV1 Thường");
+                } else if (i == 7) {
+                    nameFields[i].setText("TV1 VIP");
+                } else {
+                    nameFields[i].setText("BÀN " + (i + 1));
+                }
             }
         }
         if ("".equals(NameTable8.getText())) {

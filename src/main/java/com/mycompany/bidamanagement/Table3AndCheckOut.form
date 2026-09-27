@@ -1313,7 +1313,7 @@
                       <Font name="Tahoma" size="16" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="B&#xc0;N 7"/>
+                    <Property name="text" type="java.lang.String" value="TV1 Th&#x1b0;&#x1edd;ng"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -1347,7 +1347,7 @@
                       <Font name="Tahoma" size="16" style="1"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="B&#xc0;N 8"/>
+                    <Property name="text" type="java.lang.String" value="TV1 VIP"/>
                   </Properties>
                 </Component>
               </SubComponents>
