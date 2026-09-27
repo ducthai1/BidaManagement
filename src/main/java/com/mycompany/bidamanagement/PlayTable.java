@@ -110,11 +110,11 @@ public class PlayTable extends javax.swing.JFrame {
         }
 
         if ("".equals(NameTable7.getText())) {
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
         }
 
         if ("".equals(NameTable8.getText())) {
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
         }
 
         
@@ -2154,7 +2154,7 @@ public class PlayTable extends javax.swing.JFrame {
         NameTable7.setBackground(new java.awt.Color(249, 249, 249));
         NameTable7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NameTable7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NameTable7.setText("BÀN 7");
+        NameTable7.setText("TV1 Thường");
         NameTable7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NameTable7MouseClicked(evt);
@@ -2682,7 +2682,7 @@ public class PlayTable extends javax.swing.JFrame {
         NameTable8.setBackground(new java.awt.Color(249, 249, 249));
         NameTable8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NameTable8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NameTable8.setText("BÀN 8");
+        NameTable8.setText("TV1 VIP");
         NameTable8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NameTable8MouseClicked(evt);
@@ -3899,7 +3899,7 @@ public class PlayTable extends javax.swing.JFrame {
         SimpleDateFormat startFormatTable7 = new SimpleDateFormat("HH:mm:ss");
         String formatStartTable7 = startFormatTable7.format(currentStartTable7);
         TIMESTART7.setText(formatStartTable7);
-        NameTable7.setText("BÀN 7 (ĐANG CHƠI)");
+        NameTable7.setText("TV1 Thường (ĐANG CHƠI)");
         NameTable7.setForeground(Color.RED);
         StartBtnTable7.setEnabled(false);
         StopBtnTable7.setEnabled(true);
@@ -3921,7 +3921,7 @@ public class PlayTable extends javax.swing.JFrame {
         SimpleDateFormat dateStopFormatTable7 = new SimpleDateFormat("HH:mm:ss");
         String formatStopTable7 = dateStopFormatTable7.format(currentStopTable7);
         TIMEEND7.setText(formatStopTable7);
-        NameTable7.setText("BÀN 7 (ĐANG TÍNH TIỀN)");
+        NameTable7.setText("TV1 Thường (ĐANG TÍNH TIỀN)");
         NameTable7.setForeground(Color.YELLOW);
         StopBtnTable7.setEnabled(false);
         PrintBtnTable7.setEnabled(true);
@@ -3960,7 +3960,7 @@ public class PlayTable extends javax.swing.JFrame {
 
             printBill(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee7);
             PrintBtnTable7.setEnabled(false);
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
             NameTable7.setForeground(Color.BLACK);
             StartBtnTable7.setEnabled(true);
             StopBtnTable7.setEnabled(false);
@@ -3984,7 +3984,7 @@ public class PlayTable extends javax.swing.JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             TIMESTART7.setText("");
             TIMEEND7.setText("");
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
             NameTable7.setForeground(Color.BLACK);
             StartBtnTable7.setEnabled(true);
             StopBtnTable7.setEnabled(false);
@@ -4015,7 +4015,7 @@ public class PlayTable extends javax.swing.JFrame {
         SimpleDateFormat startFormatTable8 = new SimpleDateFormat("HH:mm:ss");
         String formatStartTable8 = startFormatTable8.format(currentStartTable8);
         TIMESTART8.setText(formatStartTable8);
-        NameTable8.setText("BÀN 8 (ĐANG CHƠI)");
+        NameTable8.setText("TV1 VIP (ĐANG CHƠI)");
         NameTable8.setForeground(Color.RED);
         StartBtnTable8.setEnabled(false);
         StopBtnTable8.setEnabled(true);
@@ -4037,7 +4037,7 @@ public class PlayTable extends javax.swing.JFrame {
         SimpleDateFormat dateStopFormatTable8 = new SimpleDateFormat("HH:mm:ss");
         String formatStopTable8 = dateStopFormatTable8.format(currentStopTable8);
         TIMEEND8.setText(formatStopTable8);
-        NameTable8.setText("BÀN 8 (ĐANG TÍNH TIỀN)");
+        NameTable8.setText("TV1 VIP (ĐANG TÍNH TIỀN)");
         NameTable8.setForeground(Color.YELLOW);
         StopBtnTable8.setEnabled(false);
         PrintBtnTable8.setEnabled(true);
@@ -4076,7 +4076,7 @@ public class PlayTable extends javax.swing.JFrame {
 
             printBill(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee8);
             PrintBtnTable8.setEnabled(false);
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
             NameTable8.setForeground(Color.BLACK);
             StartBtnTable8.setEnabled(true);
             StopBtnTable8.setEnabled(false);
@@ -4100,7 +4100,7 @@ public class PlayTable extends javax.swing.JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             TIMESTART8.setText("");
             TIMEEND8.setText("");
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
             NameTable8.setForeground(Color.BLACK);
             StartBtnTable8.setEnabled(true);
             StopBtnTable8.setEnabled(false);

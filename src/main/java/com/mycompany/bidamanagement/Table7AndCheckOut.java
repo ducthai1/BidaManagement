@@ -104,13 +104,13 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
             Name6.setText("BÀN 6");
         }
         if ("".equals(Name7.getText())) {
-            Name7.setText("BÀN 7");
+            Name7.setText("TV1 Thường");
         }
         if ("".equals(Name8.getText())) {
-            Name8.setText("BÀN 8");
+            Name8.setText("TV1 VIP");
         }
         if ("".equals(NameTable7.getText())) {
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
         }
         if ("".equals(Name9.getText())) {
             Name9.setText("BÁN LẺ");
@@ -570,7 +570,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         NameTable7.setBackground(new java.awt.Color(249, 249, 249));
         NameTable7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NameTable7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NameTable7.setText("BÀN 7");
+        NameTable7.setText("TV1 Thường");
         NameTable7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NameTable7MouseClicked(evt);
@@ -1227,7 +1227,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
         Name7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name7.setText("BÀN 7");
+        Name7.setText("TV1 Thường");
 
         javax.swing.GroupLayout PlayTable7BtnLayout = new javax.swing.GroupLayout(PlayTable7Btn);
         PlayTable7Btn.setLayout(PlayTable7BtnLayout);
@@ -1249,7 +1249,7 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
         Name8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name8.setText("BÀN 8");
+        Name8.setText("TV1 VIP");
 
         javax.swing.GroupLayout PlayTable8BtnLayout = new javax.swing.GroupLayout(PlayTable8Btn);
         PlayTable8Btn.setLayout(PlayTable8BtnLayout);
@@ -1592,8 +1592,8 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         SimpleDateFormat startFormatTable1 = new SimpleDateFormat("HH:mm:ss");
         String formatStartTable1 = startFormatTable1.format(currentStartTable1);
         TIMESTART7.setText(formatStartTable1);
-        NameTable7.setText("BÀN 7 (ĐANG CHƠI)");
-        Name7.setText("BÀN 7 (ĐANG CHƠI)");
+        NameTable7.setText("TV1 Thường (ĐANG CHƠI)");
+        Name7.setText("TV1 Thường (ĐANG CHƠI)");
         NameTable7.setForeground(Color.RED);
         Name7.setForeground(Color.RED);
 
@@ -1618,9 +1618,9 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         SimpleDateFormat dateStopFormatTable1 = new SimpleDateFormat("HH:mm:ss");
         String formatStopTable1 = dateStopFormatTable1.format(currentStopTable1);
         TIMEEND7.setText(formatStopTable1);
-        NameTable7.setText("BÀN 7 (ĐANG TÍNH TIỀN)");
+        NameTable7.setText("TV1 Thường (ĐANG TÍNH TIỀN)");
         NameTable7.setForeground(Color.YELLOW);
-        Name7.setText("BÀN 7 (ĐANG TÍNH TIỀN)");
+        Name7.setText("TV1 Thường (ĐANG TÍNH TIỀN)");
         Name7.setForeground(Color.YELLOW);
         StopBtnTable7.setEnabled(false);
         PrintBtnTable7.setEnabled(true);
@@ -1667,9 +1667,9 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
 
 
             PrintBtnTable7.setEnabled(false);
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
             NameTable7.setForeground(Color.BLACK);
-            Name7.setText("BÀN 7");
+            Name7.setText("TV1 Thường");
             Name7.setForeground(Color.BLACK);
             StartBtnTable7.setEnabled(true);
             StopBtnTable7.setEnabled(false);
@@ -1708,9 +1708,9 @@ public class Table7AndCheckOut extends javax.swing.JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             TIMESTART7.setText("");
             TIMEEND7.setText("");
-            NameTable7.setText("BÀN 7");
+            NameTable7.setText("TV1 Thường");
             NameTable7.setForeground(Color.BLACK);
-            Name7.setText("BÀN 7");
+            Name7.setText("TV1 Thường");
             Name7.setForeground(Color.BLACK);
             StartBtnTable7.setEnabled(true);
             StopBtnTable7.setEnabled(false);

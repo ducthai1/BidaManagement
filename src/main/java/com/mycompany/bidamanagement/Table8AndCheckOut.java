@@ -75,7 +75,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
             }
         }
         if ("".equals(NameTable8.getText())) {
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
         }
         if ("".equals(Name9.getText())) {
             Name9.setText("BÁN LẺ");
@@ -457,7 +457,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         NameTable8.setBackground(new java.awt.Color(249, 249, 249));
         NameTable8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         NameTable8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        NameTable8.setText("BÀN 8");
+        NameTable8.setText("TV1 VIP");
         NameTable8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NameTable8MouseClicked(evt);
@@ -1115,7 +1115,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
         Name7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name7.setText("BÀN 7");
+        Name7.setText("TV1 Thường");
 
         javax.swing.GroupLayout PlayTable7BtnLayout = new javax.swing.GroupLayout(PlayTable7Btn);
         PlayTable7Btn.setLayout(PlayTable7BtnLayout);
@@ -1137,7 +1137,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
         Name8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name8.setText("BÀN 8");
+        Name8.setText("TV1 VIP");
 
         javax.swing.GroupLayout PlayTable8BtnLayout = new javax.swing.GroupLayout(PlayTable8Btn);
         PlayTable8Btn.setLayout(PlayTable8BtnLayout);
@@ -1480,8 +1480,8 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         SimpleDateFormat startFormatTable1 = new SimpleDateFormat("HH:mm:ss");
         String formatStartTable1 = startFormatTable1.format(currentStartTable1);
         TIMESTART8.setText(formatStartTable1);
-        NameTable8.setText("BÀN 8 (ĐANG CHƠI)");
-        Name8.setText("BÀN 8 (ĐANG CHƠI)");
+        NameTable8.setText("TV1 VIP (ĐANG CHƠI)");
+        Name8.setText("TV1 VIP (ĐANG CHƠI)");
         NameTable8.setForeground(Color.RED);
         Name8.setForeground(Color.RED);
 
@@ -1506,9 +1506,9 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         SimpleDateFormat dateStopFormatTable1 = new SimpleDateFormat("HH:mm:ss");
         String formatStopTable1 = dateStopFormatTable1.format(currentStopTable1);
         TIMEEND8.setText(formatStopTable1);
-        NameTable8.setText("BÀN 8 (ĐANG TÍNH TIỀN)");
+        NameTable8.setText("TV1 VIP (ĐANG TÍNH TIỀN)");
         NameTable8.setForeground(Color.YELLOW);
-        Name8.setText("BÀN 8 (ĐANG TÍNH TIỀN)");
+        Name8.setText("TV1 VIP (ĐANG TÍNH TIỀN)");
         Name8.setForeground(Color.YELLOW);
         StopBtnTable8.setEnabled(false);
         PrintBtnTable8.setEnabled(true);
@@ -1555,9 +1555,9 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
 
             PrintBtnTable8.setEnabled(false);
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
             NameTable8.setForeground(Color.BLACK);
-            Name8.setText("BÀN 8");
+            Name8.setText("TV1 VIP");
             Name8.setForeground(Color.BLACK);
             StartBtnTable8.setEnabled(true);
             StopBtnTable8.setEnabled(false);
@@ -1596,9 +1596,9 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         if (confirm == JOptionPane.YES_OPTION) {
             TIMESTART8.setText("");
             TIMEEND8.setText("");
-            NameTable8.setText("BÀN 8");
+            NameTable8.setText("TV1 VIP");
             NameTable8.setForeground(Color.BLACK);
-            Name8.setText("BÀN 8");
+            Name8.setText("TV1 VIP");
             Name8.setForeground(Color.BLACK);
             StartBtnTable8.setEnabled(true);
             StopBtnTable8.setEnabled(false);

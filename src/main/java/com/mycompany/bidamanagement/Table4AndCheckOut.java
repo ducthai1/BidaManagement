@@ -105,10 +105,10 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
             Name6.setText("BÀN 6");
         }
         if ("".equals(Name7.getText())) {
-            Name7.setText("BÀN 7");
+            Name7.setText("TV1 Thường");
         }
         if ("".equals(Name8.getText())) {
-            Name8.setText("BÀN 8");
+            Name8.setText("TV1 VIP");
         }
         if ("".equals(Name9.getText())) {
             Name9.setText("BÁN LẺ");
@@ -1225,7 +1225,7 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
 
         Name7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name7.setText("BÀN 7");
+        Name7.setText("TV1 Thường");
 
         javax.swing.GroupLayout PlayTable7BtnLayout = new javax.swing.GroupLayout(PlayTable7Btn);
         PlayTable7Btn.setLayout(PlayTable7BtnLayout);
@@ -1247,7 +1247,7 @@ public class Table4AndCheckOut extends javax.swing.JFrame {
 
         Name8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         Name8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Name8.setText("BÀN 8");
+        Name8.setText("TV1 VIP");
 
         javax.swing.GroupLayout PlayTable8BtnLayout = new javax.swing.GroupLayout(PlayTable8Btn);
         PlayTable8Btn.setLayout(PlayTable8BtnLayout);
