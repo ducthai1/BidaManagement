@@ -5,6 +5,8 @@
 package com.mycompany.bidamanagement;
 
 import com.mycompany.bidamanagement.bill.ReportManager;
+import com.mycompany.bidamanagement.bill.ReportManager55;
+import com.mycompany.bidamanagement.bill.ReportManager70;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import java.awt.Color;
 import java.sql.Connection;
@@ -72,6 +74,8 @@ public class PlayTable extends javax.swing.JFrame {
         restoreInputDataTable8();
         try {
             ReportManager.getInstance().compileReport();
+            ReportManager55.getInstance().compileReport();
+            ReportManager70.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -3938,7 +3942,7 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable7 = new Date();
         SimpleDateFormat datePrintTable7 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable7 = datePrintTable7.format(currentPrintTable7);
-        String totalFee7 = calculateTimePlayTable(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
+        String totalFee7 = CommonFunction.calculateTimePlayTablePrice70(startHourTable7, startMinuteTable7, startSecondTable7, endHourTable7, endMinuteTable7, endSecondTable7);
         try {
             // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
             conn = ConnectXamppMySQL.conn();
@@ -3952,7 +3956,7 @@ public class PlayTable extends javax.swing.JFrame {
             addTableBill.executeUpdate();
 
             ParameterReportCheckout dataprint7 = new ParameterReportCheckout(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee7);
-            ReportManager.getInstance().printReportPayment(dataprint7);
+            ReportManager70.getInstance().printReportPayment(dataprint7);
 
             printBill(formatPrintTable7, TIMESTART7.getText(), TIMEEND7.getText(), totalFee7);
             PrintBtnTable7.setEnabled(false);
@@ -4054,7 +4058,7 @@ public class PlayTable extends javax.swing.JFrame {
         Date currentPrintTable8 = new Date();
         SimpleDateFormat datePrintTable8 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable8 = datePrintTable8.format(currentPrintTable8);
-        String totalFee8 = calculateTimePlayTable(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
+        String totalFee8 = CommonFunction.calculateTimePlayTablePrice55(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
         try {
             // Sau khi in hóa đơn, thêm dữ liệu vào bảng tablebills
             conn = ConnectXamppMySQL.conn();
@@ -4068,7 +4072,7 @@ public class PlayTable extends javax.swing.JFrame {
             addTableBill.executeUpdate();
 
             ParameterReportCheckout dataprint8 = new ParameterReportCheckout(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee8);
-            ReportManager.getInstance().printReportPayment(dataprint8);
+            ReportManager55.getInstance().printReportPayment(dataprint8);
 
             printBill(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), totalFee8);
             PrintBtnTable8.setEnabled(false);
