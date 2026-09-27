@@ -61,7 +61,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         restoreBillTable8();
         try {
             ReportManager.getInstance().compileReport();
-            ReportManager55.getInstance().compileReport();
+            ReportManager70.getInstance().compileReport();
         }
         catch(Exception e){
             e.printStackTrace();
@@ -1534,7 +1534,7 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
         Date currentPrintTable8 = new Date();
         SimpleDateFormat datePrintTable8 = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         String formatPrintTable8 = datePrintTable8.format(currentPrintTable8);
-        String TableFee8 = CommonFunction.calculateTimePlayTablePrice55(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
+        String TableFee8 = CommonFunction.calculateTimePlayTablePrice70(startHourTable8, startMinuteTable8, startSecondTable8, endHourTable8, endMinuteTable8, endSecondTable8);
         Double totalFeeBill = Double.parseDouble(TableFee8) + TotalBill;
         String convertTotalFeeToString = CommonFunction.doubleFormattedView(totalFeeBill);
         System.out.println("totalfee: "+TableFee8 + " savePrice: " + TotalBill +" totalBill: "+ convertTotalFeeToString);
@@ -1552,11 +1552,11 @@ public class Table8AndCheckOut extends javax.swing.JFrame {
 
             if(soLanBamAddTable8 > 0) {
                 ParameterReportCheckoutTable dataprint8 = new ParameterReportCheckoutTable(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), TableFee8, invoiceIdTable8, convertTotalFeeToString);
-                ReportManager55.getInstance().printReportPaymentTable(dataprint8);
+                ReportManager70.getInstance().printReportPaymentTable(dataprint8);
             }
             else {
                 ParameterReportCheckout dataprint8 = new ParameterReportCheckout(formatPrintTable8, TIMESTART8.getText(), TIMEEND8.getText(), TableFee8);
-                ReportManager55.getInstance().printReportPayment(dataprint8);
+                ReportManager70.getInstance().printReportPayment(dataprint8);
             }
 
 
