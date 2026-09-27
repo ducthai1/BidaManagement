@@ -6,7 +6,7 @@ package com.mycompany.bidamanagement;
 
 
 import com.mycompany.bidamanagement.bill.ReportManager;
-import com.mycompany.bidamanagement.bill.ReportManager70;
+import com.mycompany.bidamanagement.bill.ReportManager55;
 import com.mycompany.bidamanagement.printModel.FieldReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckout;
 import com.mycompany.bidamanagement.printModel.ParameterReportCheckoutTable;
